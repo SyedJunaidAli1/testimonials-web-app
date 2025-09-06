@@ -11,51 +11,78 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { forgotPassword } from "@/server/users";
 import Link from "next/link";
+import { resetPassword } from "@/server/users";
+import { useSearchParams } from "next/navigation";
 
-export function ForgotPassForm({
+export function ResetPassForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
+  if (!token) {
+    return (
+      <div className="text-center text-red-500">
+        No token provided. Please request a password reset.
+      </div>
+    );
+  }
 
   const handleSubmit = async (e: React.FocusEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
+    const newPassword = formData.get("newpassword") as string;
+    const password = formData.get("confirmpassword") as string;
+
+    if (newPassword !== password) {
+      setError("Passwords do not match");
+      return;
+    }
 
     try {
-      await forgotPassword(email);
+      await resetPassword(password, token);
     } catch (error: any) {
-      console.error("Lonin failed", error);
+      console.error("Reset Password Failed", error);
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Forgot Password</CardTitle>
-          <CardDescription>Please Enter you email below</CardDescription>
+          <CardTitle className="text-xl">Reset Password</CardTitle>
+          <CardDescription>Please Enter you new Password below</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-6">
               <div className="grid gap-6">
                 <div className="grid gap-3">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">New Password</Label>
                   <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="m@example.com"
+                    id="newpassword"
+                    name="newpassword"
+                    type="password"
+                    placeholder="New Password"
+                    required
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="email">Confirm Password</Label>
+                  <Input
+                    id="confirmpassword"
+                    name="confirmpassword"
+                    type="password"
+                    placeholder="Confirm password"
                     required
                   />
                 </div>

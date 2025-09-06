@@ -13,7 +13,6 @@ export const signUp = async (name: string, email: string, password: string) => {
     }
 }
 
-
 export const signin = async (email: string, password: string) => {
     try {
         const res = await auth.api.signInEmail({
@@ -29,11 +28,26 @@ export const signin = async (email: string, password: string) => {
 export const forgotPassword = async (email: string) => {
     try {
         const res = await auth.api.requestPasswordReset({
-            body: { email }
+            body: {
+                email,
+                redirectTo: "http://localhost:3000/reset-password",
+            }
         });
-
+        return { success: true, message: "Forgot Password" }
     } catch (error: any) {
         console.error(error)
-        throw new Error
+        throw new Error(error.message)
+    }
+}
+
+export const resetPassword = async (password: string, token: string) => {
+    try {
+        const res = await auth.api.resetPassword({
+            body: { newPassword: password, token, }
+        });
+        return { success: true, message: "Password Reset" };
+    } catch (error: any) {
+        console.error(error)
+        throw new Error(error.message)
     }
 }

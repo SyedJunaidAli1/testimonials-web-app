@@ -4,4 +4,12 @@
 - [x] theme Toggle addded
 - [x] login and signin page made
 - [x] forgot-password page
-- [] reset-password page
+- [x] reset-password page
+- [] verify email fnc
+- [] dashboard 
+- [] nav top 
+- [] main ui
+- [] footer 
+- [] about
+- [] term
+- [] policy
