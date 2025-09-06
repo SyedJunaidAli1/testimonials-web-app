@@ -130,3 +130,5 @@ export const testimonials = pgTable("testimonials", {
         .$onUpdate(() => new Date())
         .notNull(),
 });
+
+export const schema = { user, verification, account, spaces, testimonials, session }

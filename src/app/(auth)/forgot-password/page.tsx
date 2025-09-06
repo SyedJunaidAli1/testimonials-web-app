@@ -1,5 +1,5 @@
 import { GalleryVerticalEnd } from "lucide-react";
-import { SignupForm } from "@/components/signup-form";
+import { ForgotPassForm } from "@/components/forgotpass-form";
 
 export default function Page() {
   return (
@@ -11,7 +11,7 @@ export default function Page() {
           </div>
           Testimonial
         </a>
-        <SignupForm />
+        <ForgotPassForm />
       </div>
     </div>
   );
