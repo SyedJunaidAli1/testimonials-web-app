@@ -7,6 +7,7 @@
 - [x] reset-password page
 - [] verify email fnc
 - [] dashboard 
+- [] wall of love
 - [] nav top 
 - [] main ui
 - [] footer 
