@@ -66,8 +66,7 @@ export const spaces = pgTable("spaces", {
     userId: text("user_id")
         .notNull()
         .references(() => user.id, { onDelete: "cascade" }),
-    name: text("name").notNull(),
-    description: text("description"),
+    spacename: text("spacename").notNull(),
     isShared: boolean("is_shared").default(false),
     spaceLogo: text("spacelogo"),
     headerTitle: text("header_title"),
@@ -84,11 +83,13 @@ export const spaces = pgTable("spaces", {
     collectName: boolean("collect_name").default(true),
     collectEmail: boolean("collect_email").default(true),
     collectAddress: boolean("collect_address").default(false),
+    collectTittle: boolean("collect_title").default(false),
+    collectSocialLink: boolean("collect_social_link").default(false),
     collectStar: boolean("collect_star").default(false),
 
     // Branding
+    customThemeColor: text("custom_theme_color"),
     customBtnColor: text("custom_btn_color"),
-
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
         .defaultNow()
