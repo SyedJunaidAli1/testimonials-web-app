@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createSpaces } from "@/server/spaces";
 import { useRouter } from "next/navigation";
-import { Plus, GripVertical, Trash } from "lucide-react";
+import { Plus, GripVertical, Trash, ImageDown } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
   Accordion,
@@ -20,6 +20,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 export default function CreateSpaceDialog() {
   // Text inputs
@@ -42,7 +43,9 @@ export default function CreateSpaceDialog() {
   const [collectAddress, setCollectAddress] = useState(false);
   const [collectStar, setCollectStar] = useState(true);
   const [customThemeColor, setCustomThemeColor] = useState(false);
-
+  const [spaceLogo, setSpaceLogo] = useState<string | null>(null);
+  const [isSquare, setIsSquare] = useState(false);
+  const [themeColor, setThemeColor] = useState("#34D399"); // emerald default
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -51,6 +54,27 @@ export default function CreateSpaceDialog() {
       setQuestions([...questions, ""]);
     }
   };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
+      setSpaceLogo(previewUrl);
+
+      // TODO: later handle actual upload to Cloudinary or storage here
+    }
+  };
+
+  const predefinedColors = [
+    "#F87171", // red
+    "#60A5FA", // blue
+    "#34D399", // emerald
+    "#FBBF24", // amber
+    "#A78BFA", // violet
+    "#F472B6", // pink
+    "#000000", // black
+    "#FFFFFF", // white
+  ];
 
   const handleRemoveQuestion = (index: number) => {
     setQuestions(questions.filter((_, i) => i !== index));
@@ -68,7 +92,7 @@ export default function CreateSpaceDialog() {
     startTransition(async () => {
       try {
         await createSpaces({
-          name: spacename,
+          spacename,
           customMessage,
           headerTitle,
           question1: questions[0] || "",
@@ -80,8 +104,8 @@ export default function CreateSpaceDialog() {
           collectEmail,
           collectAddress,
           collectStar,
-          customBtnColor: "#000", // placeholder for now
-          spaceLogo: "",
+          customBtnColor: themeColor, // placeholder for now
+          spaceLogo: "", // TODO: replace with actual uploaded URL
           isShared: false,
         });
 
@@ -122,6 +146,75 @@ export default function CreateSpaceDialog() {
             onChange={(e) => setSpacename(e.target.value)}
             required
           />
+
+          {/* Space Logo Upload */}
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium">Space Logo</label>
+
+            <div
+              className={`relative w-24 h-24 border flex items-center justify-center overflow-hidden ${
+                isSquare ? "rounded-md" : "rounded-full"
+              }`}
+            >
+              {spaceLogo ? (
+                <Image
+                  src={spaceLogo}
+                  alt="Space logo"
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <Image
+                  src="/image-holder.png"
+                  height={50}
+                  width={50}
+                  alt="no logo"
+                />
+              )}
+            </div>
+
+            <div className="flex gap-2 mt-2">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => document.getElementById("logo-upload")?.click()}
+              >
+                {spaceLogo ? "Change" : "Upload"} Logo
+              </Button>
+              {spaceLogo && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => setSpaceLogo(null)}
+                >
+                  Remove
+                </Button>
+              )}
+            </div>
+
+            <input
+              id="logo-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+
+            {/* Shape toggle */}
+            <div className="flex items-center gap-2 mt-2">
+              <input
+                type="checkbox"
+                id="square-check"
+                checked={isSquare}
+                onChange={(e) => setIsSquare(e.target.checked)}
+                className="h-4 w-4"
+              />
+              <label htmlFor="square-check" className="text-sm">
+                Use square logo
+              </label>
+            </div>
+          </div>
+
           <Input
             placeholder="Header title"
             value={headerTitle}
@@ -233,9 +326,41 @@ export default function CreateSpaceDialog() {
             </p>
           </div>
 
-          <div>
-            <p>Custom button color</p>
-            <Button>color</Button>
+          {/* Theme Color Picker */}
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium">Theme Color</label>
+
+            {/* Predefined colors */}
+            <div className="flex flex-wrap gap-2">
+              {predefinedColors.map((color) => (
+                <button
+                  key={color}
+                  type="button"
+                  onClick={() => setThemeColor(color)}
+                  className={`h-8 w-8 rounded-md border-2 ${
+                    themeColor === color ? "border-black" : "border-transparent"
+                  }`}
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
+
+            {/* Custom color input */}
+            <div className="flex items-center gap-2">
+              <Input
+                type="color"
+                value={themeColor}
+                onChange={(e) => setThemeColor(e.target.value)}
+                className="w-16 h-10 p-0 border"
+              />
+              <Input
+                type="text"
+                placeholder="#000000"
+                value={themeColor}
+                onChange={(e) => setThemeColor(e.target.value)}
+                className="w-28"
+              />
+            </div>
           </div>
 
           <Button
