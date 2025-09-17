@@ -3,40 +3,76 @@ import { db } from "@/db/drizzle"
 import { spaces } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
+import cloudinary from "./cloudinary"
 
-type createSpacesInput = {
-    spacename: string;
-    description: string;
-    isShared: boolean;
-    spaceLogo: string;
-    headerTitle: string;
-    customMessage: string;
-    question1: string;
-    question2: string;
-    question3: string;
-    question4: string;
-    question5: string;
-    collectName: boolean;
-    collectEmail: boolean;
-    collectAddress: boolean;
-    collectStar: boolean;
-    customBtnColor: string;
-}
+export const createSpaces = async (formData: FormData) => {
+    const requestheaders = await headers();
+    const session = await auth.api.getSession({ headers: requestheaders });
 
-export const createSpaces = async (input: createSpacesInput) => {
-
-    const requestheaders = await headers()
-    const session = await auth.api.getSession({ headers: requestheaders })
-
-    if (!session || !session.user || !session.user.id) {
-        throw new Error("unauthorized")
+    if (!session?.user?.id) {
+        throw new Error("unauthorized");
     }
-    if (!input.spacename?.trim()) {
-        throw new Error("Space name is required")
+
+    // Get text inputs
+    const spacename = formData.get("spacename") as string;
+    if (!spacename?.trim()) throw new Error("Space name is required");
+
+    const customMessage = formData.get("customMessage") as string;
+    const headerTitle = formData.get("headerTitle") as string;
+    const customBtnColor = formData.get("customBtnColor") as string;
+    const isShared = formData.get("isShared") === "true";
+    const question1 = formData.get("question1") as string;
+    const question2 = formData.get("question2") as string;
+    const question3 = formData.get("question3") as string;
+    const question4 = formData.get("question4") as string;
+    const question5 = formData.get("question5") as string;
+    const collectName = formData.get("collectName") === "true";
+    const collectEmail = formData.get("collectEmail") === "true";
+    const collectSocialLink = formData.get("collectSocialLink") === "true";
+    const collectAddress = formData.get("collectAddress") === "true";
+    const collectStar = formData.get("collectStar") === "true";
+    const collectTitle = formData.get("collectTitle") === "true";
+    const customThemeColor = formData.get("customThemeColor") as string;
+
+    // Get file
+    let logoUrl = "";
+    const file = formData.get("spaceLogo") as File | null;
+
+    if (file) {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        const upload = await new Promise((resolve, reject) => {
+            cloudinary.uploader
+                .upload_stream({ folder: "spaces" }, (err, result) => {
+                    if (err) reject(err);
+                    else resolve(result);
+                })
+                .end(buffer);
+        });
+
+        logoUrl = upload.secure_url;
     }
+
     await db.insert(spaces).values({
         userId: session.user.id,
-        ...input,
-    })
-
-}  
+        spacename,
+        customMessage,
+        headerTitle,
+        customBtnColor,
+        isShared,
+        spaceLogo: logoUrl,
+        question1,
+        question2,
+        question3,
+        question4,
+        question5,
+        collectName,
+        collectEmail,
+        collectSocialLink,
+        collectAddress,
+        collectStar,
+        collectTitle,
+        customThemeColor,
+    });
+};

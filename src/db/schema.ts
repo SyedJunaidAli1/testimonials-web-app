@@ -83,7 +83,7 @@ export const spaces = pgTable("spaces", {
     collectName: boolean("collect_name").default(true),
     collectEmail: boolean("collect_email").default(true),
     collectAddress: boolean("collect_address").default(false),
-    collectTittle: boolean("collect_title").default(false),
+    collectTitle: boolean("collect_title").default(false),
     collectSocialLink: boolean("collect_social_link").default(false),
     collectStar: boolean("collect_star").default(false),
 
