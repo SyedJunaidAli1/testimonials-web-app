@@ -3,6 +3,7 @@ import { db } from "@/db/drizzle"
 import { spaces } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
+import { eq } from "drizzle-orm";
 import cloudinary from "./cloudinary"
 
 export const createSpaces = async (formData: FormData) => {
@@ -76,3 +77,19 @@ export const createSpaces = async (formData: FormData) => {
         customThemeColor,
     });
 };
+
+
+export const getSpaces = async () => {
+    const requestheaders = await headers()
+    const session = await auth.api.getSession({ headers: requestheaders })
+    if (!session?.user.id) {
+        throw new Error("Unauthorized")
+    }
+
+    const allSpaces = await db
+        .select()
+        .from(spaces)
+        .where(eq(spaces.userId, session.user.id))
+
+    return allSpaces
+} 

@@ -5,9 +5,11 @@
 - [x] login and signin page made
 - [x] forgot-password page
 - [x] reset-password page
-- [] Create Space set cloudinary for space logo storage
+- [x] Create Space set cloudinary for space logo storage
+- [x] tanstack Query added
+- [] set limit for space logo and add error state
 - [] Create Space preview part remain
-- [] Create Space test remmains
+- [x] Create Space test remmains
 - [] create space space logo square field in DB?
 - [] verify email fnc
 - [] dashboard 

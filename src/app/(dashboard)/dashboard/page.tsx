@@ -1,14 +1,32 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import { FileText, FolderOpen, Search } from "lucide-react";
+import { Ellipsis, Files, FileText, FolderOpen, Link, Lock, Pen, Rows4, Search, TriangleAlert } from "lucide-react";
 import CreateSpaceDialog from "@/app/components/CreateSpaceDialog";
+import { useQuery } from "@tanstack/react-query";
+import { getSpaces } from "@/server/spaces";
+import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Page = () => {
-  const spaces = [
-    { id: 1, name: "Todothat", used: 0 },
-    { id: 2, name: "textbehhindimage", used: 0 },
-    { id: 3, name: "3", used: 0 },
-    { id: 4, name: "4", used: 0 },
-  ];
+  const {
+    data: spaces,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["spaces"],
+    queryFn: async () => {
+      return await getSpaces();
+    },
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Something went wrong</p>;
+
   return (
     <>
       <main className="flex flex-col h-screen items-center pt-20">
@@ -37,6 +55,7 @@ const Page = () => {
             </div>
           </div>
         </section>
+
         <section className="w-full max-w-5xl mt-10">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold text-left py-4">Spaces</h2>
@@ -49,18 +68,66 @@ const Page = () => {
             </div>
           </div>
           {/* 3-column grid that stays responsive */}
-          <ul className="mt-6 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-6 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 bg-gray-400">
             {/* Example item – duplicate / map this <li> for every record you fetch */}
-            {spaces.map((s) => (
+            {spaces?.map((s: any) => (
               <li
                 key={s.id}
                 className="bg-primary w-80 h-30 px-4 py-4 rounded-lg list-none"
               >
-                <div className="flex justify-between">
-                  <p className="text-left text-lg font-semibold">{s.name}</p>
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-2 items-center">
+                    <Image
+                      width={45}
+                      height={45}
+                      alt="spacelogo"
+                      src={s.spaceLogo}
+                    />
+                    <p className="text-lg font-semibold">{s.spacename}</p>
+                  </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className="p-1 rounded-sm hover:bg-purple-800">
+                        <Ellipsis size={26} />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem
+                        onClick={() => console.log("Edit", s.id)}
+                      >
+                      <Rows4 />Manage testimonials
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => console.log("Edit", s.id)}
+                      >
+                       <Link />Get the Link
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => console.log("Edit", s.id)}
+                      >
+                       <Pen /> Edit the Space
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => console.log("Edit", s.id)}
+                      >
+                       <Files />Duplicate the Space
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => console.log("Edit", s.id)}
+                      >
+                       <Lock />Disable the Space
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => console.log("Delete", s.id)}
+                        className="hover:bg-red-600"
+                      >
+                       <TriangleAlert /> Delete the Space
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
-                <div className="flex gap-2 items-center mt-4 text-left">
-                  <p className="text-2xl">{s.used}</p>
+                <div className="flex items-center mt-2 text-left">
+                  <p className="text-2xl">{s.used ?? 0}</p>
                 </div>
               </li>
             ))}
