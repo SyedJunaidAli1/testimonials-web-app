@@ -1,5 +1,5 @@
 "use client";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +21,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export default function CreateSpaceDialog() {
   // Text inputs
@@ -46,9 +48,30 @@ export default function CreateSpaceDialog() {
   const [spaceLogo, setSpaceLogo] = useState<string | null>(null);
   const [isSquare, setIsSquare] = useState(false);
   const [themeColor, setThemeColor] = useState("#34D399"); // emerald default
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState(null);
-  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: async (fd: FormData) => {
+      await createSpaces(fd);
+    },
+    onSuccess: () => {
+      // reset
+      setSpacename("");
+      setCustomMessage("");
+      setHeaderTitle("");
+      setQuestions([]);
+      setCollectName(true);
+      setCollectEmail(true);
+      setCollectAddress(false);
+      toast.success("Space created Succesfully");
+      queryClient.invalidateQueries({ queryKey: ["spaces"] });
+    },
+    onError: (err: any) => {
+      console.error("Failed to create space:", err);
+      toast.error("something went wrong");
+    },
+  });
 
   const handleAddQuestion = () => {
     if (questions.length < 5) {
@@ -88,52 +111,35 @@ export default function CreateSpaceDialog() {
   const handleSubmit = () => {
     if (!spacename.trim()) return;
 
-    startTransition(async () => {
-      try {
-        const fd = new FormData();
+    const fd = new FormData();
 
-        fd.append("spacename", spacename);
-        fd.append("customMessage", customMessage);
-        fd.append("headerTitle", headerTitle);
-        fd.append("customBtnColor", themeColor);
-        fd.append("isShared", "false");
+    fd.append("spacename", spacename);
+    fd.append("customMessage", customMessage);
+    fd.append("headerTitle", headerTitle);
+    fd.append("customBtnColor", themeColor);
+    fd.append("isShared", "false");
 
-        // append questions
-        questions.forEach((q, i) => fd.append(`question${i + 1}`, q));
+    // append questions
+    questions.forEach((q, i) => fd.append(`question${i + 1}`, q));
 
-        // append toggles
-        fd.append("collectName", String(collectName));
-        fd.append("collectEmail", String(collectEmail));
-        fd.append("collectAddress", String(collectAddress));
-        fd.append("collectStar", String(collectStar));
-        fd.append("collectSocialLink", String(collectSocialLink));
-        fd.append("collectTitle", String(collectTitle));
-        fd.append("customThemeColor", String(customThemeColor));
+    // append toggles
+    fd.append("collectName", String(collectName));
+    fd.append("collectEmail", String(collectEmail));
+    fd.append("collectAddress", String(collectAddress));
+    fd.append("collectStar", String(collectStar));
+    fd.append("collectSocialLink", String(collectSocialLink));
+    fd.append("collectTitle", String(collectTitle));
+    fd.append("customThemeColor", String(customThemeColor));
 
-        // append file
-        const fileInput = document.getElementById(
-          "logo-upload"
-        ) as HTMLInputElement;
-        if (fileInput?.files?.[0]) {
-          fd.append("spaceLogo", fileInput.files[0]);
-        }
+    // append file
+    const fileInput = document.getElementById(
+      "logo-upload"
+    ) as HTMLInputElement;
+    if (fileInput?.files?.[0]) {
+      fd.append("spaceLogo", fileInput.files[0]);
+    }
 
-        await createSpaces(fd);
-
-        // reset
-        setSpacename("");
-        setCustomMessage("");
-        setHeaderTitle("");
-        setQuestions([]);
-        setCollectName(true);
-        setCollectEmail(true);
-        setCollectAddress(false);
-        // router.refresh();
-      } catch (err: any) {
-        console.error("Failed to create space:", err);
-        setError(err);
-      }
-    });
+    mutation.mutate(fd);
   };
 
   return (
@@ -149,10 +155,16 @@ export default function CreateSpaceDialog() {
         </DialogHeader>
 
         <div className="flex flex-col gap-4">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-            {error && (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+            className="flex flex-col gap-2"
+          >
+            {mutation.isError && (
               <p className="text-sm text-red-500">
-                {error || "Something went wrong"}
+                {mutation.error?.message || "Something went wrong"}
               </p>
             )}
             <Input
@@ -385,8 +397,12 @@ export default function CreateSpaceDialog() {
               </div>
             </div>
 
-            <Button type="submit" className=" w-full">
-              {isPending ? "Creating..." : "Create"}
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={mutation.isPending}
+            >
+              {mutation.isPending ? "Creating..." : "Create"}
             </Button>
           </form>
         </div>
