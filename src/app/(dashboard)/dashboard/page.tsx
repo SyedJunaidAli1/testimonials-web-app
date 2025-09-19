@@ -1,9 +1,20 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Ellipsis, Files, FileText, FolderOpen, Link, Lock, Pen, Rows4, Search, TriangleAlert } from "lucide-react";
+import {
+  Ellipsis,
+  Files,
+  FileText,
+  FolderOpen,
+  Link,
+  Lock,
+  Pen,
+  Rows4,
+  Search,
+  TriangleAlert,
+} from "lucide-react";
 import CreateSpaceDialog from "@/app/components/CreateSpaceDialog";
-import { useQuery } from "@tanstack/react-query";
-import { getSpaces } from "@/server/spaces";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteSpaces, getSpaces } from "@/server/spaces";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -11,6 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 const Page = () => {
   const {
@@ -21,6 +33,18 @@ const Page = () => {
     queryKey: ["spaces"],
     queryFn: async () => {
       return await getSpaces();
+    },
+  });
+
+  const queryClient = useQueryClient();
+  const { mutate: removeSpace } = useMutation({
+    mutationFn: async (id: string) => await deleteSpaces(id),
+    onSuccess: () => {
+      toast.success("Space deleted");
+      queryClient.invalidateQueries({ queryKey: ["spaces"] });
+    },
+    onError: (err: any) => {
+      toast.error(err.message || "Failed to delete space");
     },
   });
 
@@ -95,33 +119,37 @@ const Page = () => {
                       <DropdownMenuItem
                         onClick={() => console.log("Edit", s.id)}
                       >
-                      <Rows4 />Manage testimonials
+                        <Rows4 />
+                        Manage testimonials
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => console.log("Edit", s.id)}
                       >
-                       <Link />Get the Link
+                        <Link />
+                        Get the Link
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => console.log("Edit", s.id)}
                       >
-                       <Pen /> Edit the Space
+                        <Pen /> Edit the Space
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => console.log("Edit", s.id)}
                       >
-                       <Files />Duplicate the Space
+                        <Files />
+                        Duplicate the Space
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => console.log("Edit", s.id)}
                       >
-                       <Lock />Disable the Space
+                        <Lock />
+                        Disable the Space
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => console.log("Delete", s.id)}
+                        onClick={() => removeSpace(s.id)}
                         className="hover:bg-red-600"
                       >
-                       <TriangleAlert /> Delete the Space
+                        <TriangleAlert /> Delete the Space
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

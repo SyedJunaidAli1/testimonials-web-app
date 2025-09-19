@@ -47,6 +47,7 @@ export default function CreateSpaceDialog() {
   const [isSquare, setIsSquare] = useState(false);
   const [themeColor, setThemeColor] = useState("#34D399"); // emerald default
   const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleAddQuestion = () => {
@@ -127,9 +128,10 @@ export default function CreateSpaceDialog() {
         setCollectName(true);
         setCollectEmail(true);
         setCollectAddress(false);
-        router.refresh();
-      } catch (error) {
-        console.error("Failed to create space:", error);
+        // router.refresh();
+      } catch (err: any) {
+        console.error("Failed to create space:", err);
+        setError(err);
       }
     });
   };
@@ -148,6 +150,11 @@ export default function CreateSpaceDialog() {
 
         <div className="flex flex-col gap-4">
           <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+            {error && (
+              <p className="text-sm text-red-500">
+                {error || "Something went wrong"}
+              </p>
+            )}
             <Input
               placeholder="Space name"
               value={spacename}

@@ -3,7 +3,7 @@ import { db } from "@/db/drizzle"
 import { spaces } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import cloudinary from "./cloudinary"
 
 export const createSpaces = async (formData: FormData) => {
@@ -92,4 +92,29 @@ export const getSpaces = async () => {
         .where(eq(spaces.userId, session.user.id))
 
     return allSpaces
-} 
+}
+
+export const deleteSpaces = async (id: string) => {
+    const requestHeaders = await headers();
+    const session = await auth.api.getSession({ headers: requestHeaders });
+
+    if (!session?.user.id) {
+        throw new Error("Unauthorized");
+    }
+
+    const space = await db
+        .select()
+        .from(spaces)
+        .where(and(eq(spaces.id, id), eq(spaces.userId, session.user.id)))
+        .limit(1)
+
+    if (!space.length) {
+        throw new Error("space not found or not owned by user")
+    }
+
+    await db
+        .delete(spaces)
+        .where(and(eq(spaces.id, id), eq(spaces.userId, session.user.id)))
+
+    return { success: true };
+};
