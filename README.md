@@ -7,8 +7,8 @@
 - [x] reset-password page
 - [x] Create Space set cloudinary for space logo storage
 - [x] tanstack Query added
-- [x] set add spaece sucess & error toast
-- [] set limit for space logo 
+- [x] set add spaece success & error toast
+- [x] set limit for space logo 
 - [] setup space three dot dropdown fnc
 - [] Create Space preview part remain
 - [x] Create Space test remmains

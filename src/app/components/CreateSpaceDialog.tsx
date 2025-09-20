@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createSpaces } from "@/server/spaces";
-import { useRouter } from "next/navigation";
 import { Plus, GripVertical, Trash } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -81,10 +80,17 @@ export default function CreateSpaceDialog() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setSpaceLogo(previewUrl);
+    if (!file) return;
+
+    const maxSize = 2 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+      toast.error("Logo must be less then 2MB");
+      return;
     }
+
+    const previewUrl = URL.createObjectURL(file);
+    setSpaceLogo(previewUrl);
   };
 
   const predefinedColors = [
