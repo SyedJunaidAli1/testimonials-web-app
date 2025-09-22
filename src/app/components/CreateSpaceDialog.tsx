@@ -22,6 +22,7 @@ import {
 import Image from "next/image";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { TestimonialsPreview } from "./testimonialsPreview";
 
 export default function CreateSpaceDialog() {
   // Text inputs
@@ -155,12 +156,12 @@ export default function CreateSpaceDialog() {
           <Plus /> Create a new space
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-lg">
-        <DialogHeader>
-          <DialogTitle>Create Space</DialogTitle>
-        </DialogHeader>
-
+      <DialogContent className="flex justify-center gap-2 min-w-4xl max-h-[90vh] overflow-y-auto">
+        {/* left side */}
         <div className="flex flex-col gap-4">
+          <DialogHeader>
+            <DialogTitle>Create Space</DialogTitle>
+          </DialogHeader>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -411,6 +412,20 @@ export default function CreateSpaceDialog() {
               {mutation.isPending ? "Creating..." : "Create"}
             </Button>
           </form>
+        </div>
+
+        {/* Right side */}
+        <div className="flex flex-col gap-2 bg-muted rounded-lg p-4 border-2">
+          <p className="border-2 bg-primary rounded-lg px-2 py-1 text-center">
+            Live Preview - Testimonials Page
+          </p>
+          <TestimonialsPreview
+            customMessage={customMessage}
+            headerTitle={headerTitle}
+            questions={questions}
+            spaceLogo={spaceLogo}
+            themeColor={themeColor}
+          />
         </div>
       </DialogContent>
     </Dialog>

@@ -9,7 +9,13 @@
 - [x] tanstack Query added
 - [x] set add spaece success & error toast
 - [x] set limit for space logo 
-- [] setup space three dot dropdown fnc
+- [x] setup space three dot dropdown fnc
+- [] make space three dot dropdown options fnc
+- [x] make space preview for create spaces
+- [] make add scroll bar for testi preview 
+- [] testimonials preview theme button set it for black and white
+- [] Change color picker with shadcn component
+- [] create space when add or remove question it triggers create fnc and it not let us add all the other fields
 - [] Create Space preview part remain
 - [x] Create Space test remmains
 - [] create space space logo square field in DB?
