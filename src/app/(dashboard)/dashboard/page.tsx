@@ -23,6 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { PulseLoader } from "react-spinners";
 
 const Page = () => {
   const {
@@ -48,7 +49,12 @@ const Page = () => {
     },
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <PulseLoader color="#8e51ff" size={30} />
+      </div>
+    );
   if (error) return <p>Something went wrong</p>;
 
   return (
