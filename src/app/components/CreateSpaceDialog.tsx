@@ -23,6 +23,16 @@ import Image from "next/image";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { TestimonialsPreview } from "./testimonialsPreview";
+import {
+  ColorPicker,
+  ColorPickerAlpha,
+  ColorPickerEyeDropper,
+  ColorPickerFormat,
+  ColorPickerHue,
+  ColorPickerOutput,
+  ColorPickerSelection,
+} from "@/components/ui/shadcn-io/color-picker";
+import Color from "color";
 
 export default function CreateSpaceDialog() {
   // Text inputs
@@ -47,7 +57,7 @@ export default function CreateSpaceDialog() {
   const [theme, setTheme] = useState("light");
   const [spaceLogo, setSpaceLogo] = useState<string | null>(null);
   const [isSquare, setIsSquare] = useState(false);
-  const [themeColor, setThemeColor] = useState("#34D399"); // emerald default
+  const [themeColor, setThemeColor] = useState("#8e51ff"); // primary default
 
   const queryClient = useQueryClient();
 
@@ -96,17 +106,6 @@ export default function CreateSpaceDialog() {
     const previewUrl = URL.createObjectURL(file);
     setSpaceLogo(previewUrl);
   };
-
-  const predefinedColors = [
-    "#F87171", // red
-    "#60A5FA", // blue
-    "#34D399", // emerald
-    "#FBBF24", // amber
-    "#A78BFA", // violet
-    "#F472B6", // pink
-    "#000000", // black
-    "#FFFFFF", // white
-  ];
 
   const handleRemoveQuestion = (index: number) => {
     setQuestions(questions.filter((_, i) => i !== index));
@@ -183,7 +182,6 @@ export default function CreateSpaceDialog() {
               onChange={(e) => setSpacename(e.target.value)}
               required
             />
-
             {/* Space Logo Upload */}
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium">Space Logo</label>
@@ -253,7 +251,6 @@ export default function CreateSpaceDialog() {
                 </label>
               </div>
             </div>
-
             <Input
               placeholder="Header title"
               value={headerTitle}
@@ -266,7 +263,6 @@ export default function CreateSpaceDialog() {
               onChange={(e) => setCustomMessage(e.target.value)}
               required
             />
-
             {/* Dynamic Questions */}
             <div className="flex flex-col gap-3">
               <p className="text-sm font-medium">Questions</p>
@@ -305,7 +301,6 @@ export default function CreateSpaceDialog() {
                 </Button>
               )}
             </div>
-
             {/* Toggles */}
             <div className="flex flex-row items-center justify-center gap-2">
               <Accordion type="single" collapsible className="w-full">
@@ -369,44 +364,38 @@ export default function CreateSpaceDialog() {
             </div>
 
             {/* Theme Color Picker */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Theme Color</label>
-
-              {/* Predefined colors */}
-              <div className="flex flex-wrap gap-2">
-                {predefinedColors.map((color) => (
-                  <button
-                    key={color}
-                    type="button"
-                    onClick={() => setThemeColor(color)}
-                    className={`h-8 w-8 rounded-md border-2 ${
-                      themeColor === color
-                        ? "border-black"
-                        : "border-transparent"
-                    }`}
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
+            <ColorPicker
+              onChange={(color) => {
+                try {
+                  if (Array.isArray(color)) {
+                    // Convert RGBA array to hex
+                    const [r, g, b, a = 1] = color;
+                    const colorObj = Color.rgb(r, g, b, a);
+                    setThemeColor(colorObj.hex());
+                  } else {
+                    // Handle other formats
+                    const colorObj = Color(color);
+                    setThemeColor(colorObj.hex());
+                  }
+                } catch (error) {
+                  console.error("Color conversion error:", error);
+                }
+              }}
+              className="max-w-sm h-70 rounded-md border bg-background p-4 shadow-sm"
+            >
+              <ColorPickerSelection />
+              <div className="flex items-center gap-4">
+                <ColorPickerEyeDropper />
+                <div className="grid w-full gap-1">
+                  <ColorPickerHue />
+                  <ColorPickerAlpha />
+                </div>
               </div>
-
-              {/* Custom color input */}
               <div className="flex items-center gap-2">
-                <Input
-                  type="color"
-                  value={themeColor}
-                  onChange={(e) => setThemeColor(e.target.value)}
-                  className="w-16 h-10 p-0 border"
-                />
-                <Input
-                  type="text"
-                  placeholder="#000000"
-                  value={themeColor}
-                  onChange={(e) => setThemeColor(e.target.value)}
-                  className="w-28"
-                />
+                <ColorPickerOutput />
+                <ColorPickerFormat />
               </div>
-            </div>
-
+            </ColorPicker>
             <Button
               type="submit"
               className="w-full"

@@ -14,7 +14,7 @@
 - [x] make space preview for create spaces
 - [x] make add scroll bar for testi preview 
 - [x] testimonials preview theme button set it for black and white
-- [] Change color picker with shadcn component
+- [x] Change color picker with shadcn component
 - [] create space when add or remove question it triggers create fnc and it not let us add all the other fields
 - [] Create Space preview part remain
 - [x] Create Space test remmains
