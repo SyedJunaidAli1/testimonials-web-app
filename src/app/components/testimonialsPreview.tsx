@@ -9,15 +9,21 @@ export function TestimonialsPreview({
   questions,
   spaceLogo,
   themeColor,
+  theme,
 }: {
   customMessage: string;
   headerTitle: string;
   questions: string[];
   spaceLogo: string | null;
   themeColor: string;
+  theme: string;
 }) {
   return (
-    <div className="rounded-lg p-4 w-full">
+    <div
+      className={`p-4 rounded-lg min-h-[300px] w-full ${
+        theme === "dark" ? "bg-black" : "bg-white"
+      }`}
+    >
       {/* Logo */}
       <div className="flex items-center gap-2 mb-4">
         {spaceLogo ? (

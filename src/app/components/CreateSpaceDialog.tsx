@@ -44,7 +44,7 @@ export default function CreateSpaceDialog() {
   const [collectSocialLink, setCollectSocialLink] = useState(false);
   const [collectAddress, setCollectAddress] = useState(false);
   const [collectStar, setCollectStar] = useState(true);
-  const [customThemeColor, setCustomThemeColor] = useState(false);
+  const [theme, setTheme] = useState("light");
   const [spaceLogo, setSpaceLogo] = useState<string | null>(null);
   const [isSquare, setIsSquare] = useState(false);
   const [themeColor, setThemeColor] = useState("#34D399"); // emerald default
@@ -78,6 +78,9 @@ export default function CreateSpaceDialog() {
       setQuestions([...questions, ""]);
     }
   };
+
+  const handleThemeToggle = (checked: boolean) =>
+    setTheme(checked ? "dark" : "light");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -136,7 +139,7 @@ export default function CreateSpaceDialog() {
     fd.append("collectStar", String(collectStar));
     fd.append("collectSocialLink", String(collectSocialLink));
     fd.append("collectTitle", String(collectTitle));
-    fd.append("customThemeColor", String(customThemeColor));
+    fd.append("theme", theme);
 
     // append file
     const fileInput = document.getElementById(
@@ -359,8 +362,8 @@ export default function CreateSpaceDialog() {
               <p className="flex flex-col gap-2">
                 Choose theme
                 <Switch
-                  checked={customThemeColor}
-                  onCheckedChange={setCustomThemeColor}
+                  checked={theme === "dark"}
+                  onCheckedChange={handleThemeToggle}
                 />
               </p>
             </div>
@@ -425,6 +428,7 @@ export default function CreateSpaceDialog() {
             questions={questions}
             spaceLogo={spaceLogo}
             themeColor={themeColor}
+            theme={theme}
           />
         </div>
       </DialogContent>

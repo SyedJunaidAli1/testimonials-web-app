@@ -12,8 +12,8 @@
 - [x] setup space three dot dropdown fnc
 - [] make space three dot dropdown options fnc
 - [x] make space preview for create spaces
-- [] make add scroll bar for testi preview 
-- [] testimonials preview theme button set it for black and white
+- [x] make add scroll bar for testi preview 
+- [x] testimonials preview theme button set it for black and white
 - [] Change color picker with shadcn component
 - [] create space when add or remove question it triggers create fnc and it not let us add all the other fields
 - [] Create Space preview part remain

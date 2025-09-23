@@ -33,7 +33,7 @@ export const createSpaces = async (formData: FormData) => {
     const collectAddress = formData.get("collectAddress") === "true";
     const collectStar = formData.get("collectStar") === "true";
     const collectTitle = formData.get("collectTitle") === "true";
-    const customThemeColor = formData.get("customThemeColor") as string;
+    const theme = formData.get("theme") as string;
 
     // Get file
     let logoUrl = "";
@@ -74,7 +74,7 @@ export const createSpaces = async (formData: FormData) => {
         collectAddress,
         collectStar,
         collectTitle,
-        customThemeColor,
+        theme,
     });
 };
 

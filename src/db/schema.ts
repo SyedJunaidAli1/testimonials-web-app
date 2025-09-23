@@ -88,7 +88,7 @@ export const spaces = pgTable("spaces", {
     collectStar: boolean("collect_star").default(false),
 
     // Branding
-    customThemeColor: text("custom_theme_color"),
+    theme: text("theme").notNull().default("light"),
     customBtnColor: text("custom_btn_color"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
