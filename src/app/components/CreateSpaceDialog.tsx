@@ -66,14 +66,6 @@ export default function CreateSpaceDialog() {
       await createSpaces(fd);
     },
     onSuccess: () => {
-      // reset
-      setSpacename("");
-      setCustomMessage("");
-      setHeaderTitle("");
-      setQuestions([]);
-      setCollectName(true);
-      setCollectEmail(true);
-      setCollectAddress(false);
       toast.success("Space created Succesfully");
       queryClient.invalidateQueries({ queryKey: ["spaces"] });
     },
@@ -118,7 +110,16 @@ export default function CreateSpaceDialog() {
   };
 
   const handleSubmit = () => {
-    if (!spacename.trim()) return;
+    if (!spacename.trim() || !headerTitle.trim() || !customMessage.trim()) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+
+    const hasEmptyQuestions = questions.some((q) => !q.trim());
+    if (hasEmptyQuestions) {
+      toast.error("Please fill all questions or remove empty ones");
+      return;
+    }
 
     const fd = new FormData();
 
