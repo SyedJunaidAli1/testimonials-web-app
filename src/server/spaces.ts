@@ -3,7 +3,7 @@ import { db } from "@/db/drizzle"
 import { spaces } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
-import { eq, and } from "drizzle-orm";
+import { eq, and, } from "drizzle-orm";
 import cloudinary from "./cloudinary"
 
 export const createSpaces = async (formData: FormData) => {
@@ -118,3 +118,25 @@ export const deleteSpaces = async (id: string) => {
 
     return { success: true };
 };
+
+export const duplicateSpace = async (spaceId: string) => {
+    const space = await db.query.spaces.findFirst({
+        where: (s, { eq }) => eq(s.id, spaceId)
+    })
+
+    if (!space) {
+        throw new Error("Space not found")
+    }
+
+    const { id, createdAt, updatedAt, ...rest } = space;
+
+    const newSpace = await db
+        .insert(spaces)
+        .values({
+            ...rest,
+            spacename: `${space.spacename}`
+        }).returning()
+
+    return newSpace[0]
+
+}

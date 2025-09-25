@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import CreateSpaceDialog from "@/app/components/CreateSpaceDialog";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteSpaces, getSpaces } from "@/server/spaces";
+import { deleteSpaces, duplicateSpace, getSpaces } from "@/server/spaces";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -38,6 +38,7 @@ const Page = () => {
   });
 
   const queryClient = useQueryClient();
+
   const { mutate: removeSpace } = useMutation({
     mutationFn: async (id: string) => await deleteSpaces(id),
     onSuccess: () => {
@@ -46,6 +47,19 @@ const Page = () => {
     },
     onError: (err: any) => {
       toast.error(err.message || "Failed to delete space");
+    },
+  });
+
+  const { mutate: copySpace } = useMutation({
+    mutationFn: async (spaceId: string) => {
+      return await duplicateSpace(spaceId);
+    },
+    onSuccess: () => {
+      toast.success("Space duplicated successfully");
+      queryClient.invalidateQueries({ queryKey: ["spaces"] });
+    },
+    onError: (err: any) => {
+      toast.error(err.message || "Failed to duplicate space");
     },
   });
 
@@ -139,9 +153,7 @@ const Page = () => {
                       >
                         <Pen /> Edit the Space
                       </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => console.log("Edit", s.id)}
-                      >
+                      <DropdownMenuItem onClick={() => copySpace(s.id)}>
                         <Files />
                         Duplicate the Space
                       </DropdownMenuItem>
@@ -151,10 +163,7 @@ const Page = () => {
                         <Lock />
                         Disable the Space
                       </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => removeSpace(s.id)}
-                        className="hover:bg-red-600"
-                      >
+                      <DropdownMenuItem onClick={() => removeSpace(s.id)}>
                         <TriangleAlert /> Delete the Space
                       </DropdownMenuItem>
                     </DropdownMenuContent>
