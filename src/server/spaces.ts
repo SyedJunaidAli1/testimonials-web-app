@@ -120,6 +120,13 @@ export const deleteSpaces = async (id: string) => {
 };
 
 export const duplicateSpace = async (spaceId: string) => {
+    const requestHeaders = await headers();
+    const session = await auth.api.getSession({ headers: requestHeaders });
+
+    if (!session?.user.id) {
+        throw new Error("Unauthorized");
+    }
+
     const space = await db.query.spaces.findFirst({
         where: (s, { eq }) => eq(s.id, spaceId)
     })
@@ -139,4 +146,15 @@ export const duplicateSpace = async (spaceId: string) => {
 
     return newSpace[0]
 
+}
+
+export const getSpaceById = async (spaceId: string) => {
+    if (!spaceId) throw new Error("Missing space id")
+
+    const [Space] = await db
+        .select()
+        .from(spaces)
+        .where(eq(spaces.id, spaceId))
+
+    return Space || null
 }

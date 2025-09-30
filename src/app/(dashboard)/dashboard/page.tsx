@@ -7,7 +7,6 @@ import {
   FolderOpen,
   Link,
   Lock,
-  Pen,
   Rows4,
   Search,
   TriangleAlert,
@@ -147,11 +146,6 @@ const Page = () => {
                       >
                         <Link />
                         Get the Link
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => console.log("Edit", s.id)}
-                      >
-                        <Pen /> Edit the Space
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => copySpace(s.id)}>
                         <Files />

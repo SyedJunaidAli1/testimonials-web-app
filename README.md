@@ -20,7 +20,7 @@
 - [x] Create Space test remmains
 - [] create space space logo square field in DB?
 - [] verify email fnc
-- [] dashboard 
+- [x] dashboard 
 - [] wall of love
 - [] nav top 
 - [] main ui
