@@ -19,6 +19,8 @@
 - [x] Create Space preview part remain
 - [x] Create Space test remmains
 - [] create space space logo square field in DB?
+- [] testimonials dialoge for submiting testis to db
+- [] 
 - [] verify email fnc
 - [x] dashboard 
 - [] wall of love
