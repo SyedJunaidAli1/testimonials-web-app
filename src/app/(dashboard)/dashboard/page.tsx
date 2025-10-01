@@ -142,7 +142,11 @@ const Page = () => {
                         Manage testimonials
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => console.log("Edit", s.id)}
+                        onClick={() => {
+                          const url = `${window.location.origin}/t/${s.id}`;
+                          navigator.clipboard.writeText(url);
+                          toast.success("✅ Link copied to clipboard!");
+                        }}
                       >
                         <Link />
                         Get the Link
