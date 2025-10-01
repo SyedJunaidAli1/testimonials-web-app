@@ -38,21 +38,46 @@ export default function Page({
   if (error || !space) return <p>Space not found</p>;
 
   return (
-    <main className="flex flex-col items-center h-screen w-full justify-center">
-      <Image src={space.spaceLogo} width={50} height={50} alt="space logo" />
-      <h1 className="text-5xl font-bold">{space.spacename}</h1>
-      <p>{space.customMessage}</p>
-      <section className="flex flex-col gap-2 mb-18">
-        <p className="text-xl text-left font-semibold">QUESTIONS</p>
-        <ul>
-          <li>{space.question1}</li>
-          <li>{space.question2}</li>
-          <li>{space.question3}</li>
-          <li>{space.question4}</li>
-          <li>{space.question5}</li>
+    <main
+      className={`flex flex-col items-center h-screen w-full ${
+        space.theme === "dark"
+          ? "bg-black text-secondary-foreground"
+          : "bg-white text-secondary"
+      }`}
+    >
+      {space.spaceLogo && (
+        <Image
+          src={space.spaceLogo}
+          width={100}
+          height={100}
+          alt="space logo"
+          className="mt-30"
+        />
+      )}
+      <h1
+        className="text-5xl font-bold mt-16"
+        style={{ color: space.customBtnColor }}
+      >
+        {space.headerTitle}
+      </h1>
+      <p className=" text-md mt-6">{space.customMessage}</p>
+      <section className="flex text-left mt-6 flex-col gap-2 mb-14">
+        <p className="text-xl font-semibold">QUESTIONS</p>
+        <ul className="list-disc ml-6">
+          {[
+            space.question1,
+            space.question2,
+            space.question3,
+            space.question4,
+            space.question5,
+          ]
+            .filter(Boolean)
+            .map((q, i) => (
+              <li key={i}>{q}</li>
+            ))}
         </ul>
       </section>
-      <Button className="w-64">
+      <Button className="w-64" style={{ background: space.customBtnColor }}>
         <Pen />
         Send in text
       </Button>
