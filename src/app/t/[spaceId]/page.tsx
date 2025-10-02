@@ -88,6 +88,9 @@ export default function Page({
         collectName={space.collectName}
         collectEmail={space.collectEmail}
         collectTitle={space.collectTitle}
+        collectStar={space.collectStar}
+        collectAddress={space.collectAddress}
+        collectSocialLink={space.collectSocialLink}
       />
     </main>
   );

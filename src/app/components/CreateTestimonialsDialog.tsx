@@ -24,15 +24,30 @@ interface CreateTestimonialsProps {
   question4: string;
   question5: string;
   customMessage: string;
-  collectName: string;
-  collectEmail: string;
-  collectTitle: string;
+  collectName: boolean;
+  collectEmail: boolean;
+  collectTitle: boolean;
+  collectStar: boolean;
+  collectAddress: boolean;
+  collectSocialLink: boolean;
 }
 
 export default function CreateTestimonialsDialog({
   spaceId,
   customBtnColor,
   spaceLogo,
+  customMessage,
+  collectEmail,
+  collectName,
+  collectStar,
+  collectTitle,
+  collectAddress,
+  collectSocialLink,
+  question1,
+  question2,
+  question3,
+  question4,
+  question5,
 }: CreateTestimonialsProps) {
   const [loading, setLoading] = useState(false);
 
@@ -70,37 +85,81 @@ export default function CreateTestimonialsDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-left gap-4 pace-y-4 mt-4"
-        >
-          <div>
-            <img src={spaceLogo} width={45} height={45} alt="space logo" />
-          </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {spaceLogo && (
+            <div>
+              <img src={spaceLogo} width={45} height={45} alt="space logo" />
+            </div>
+          )}
 
-          <div>
-            <ul className="list-disc ml-6">
-              <li></li>
-            </ul>
-          </div>
+          {(question1 || []).length > 0 && (
+            <div>
+              <Label>Questions</Label>
+              <ul className="list-disc ml-6">
+                {[question1, question2, question3, question4, question5]
+                  .filter(Boolean)
+                  .map((q, i) => (
+                    <li key={i}>{q}</li>
+                  ))}
+              </ul>
+            </div>
+          )}
 
-          <div>
-            <Label htmlFor="message">Message</Label>
-            <Textarea
-              id="message"
-              name="message"
-              placeholder="Your testimonial..."
-              required
-            />
-          </div>
+          {collectStar && (
+            <div>
+              <Label>Rating (stars)</Label>
+              <Input type="number" min="1" max="5" name="stars" required />
+            </div>
+          )}
+          {customMessage && (
+            <div>
+              <Label>Message</Label>
+              <Textarea
+                name="message"
+                placeholder="Type your message here."
+                required
+              />
+            </div>
+          )}
 
-          <div>
-            <Label htmlFor="name">Your Name</Label>
-            <Input id="name" name="name" placeholder="John Doe" required />
-          </div>
+          {collectName && (
+            <div>
+              <Label>Your Name</Label>
+              <Input type="text" name="name" required />
+            </div>
+          )}
 
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Submitting..." : "Submit"}
+          {collectAddress && (
+            <div>
+              <Label>Address</Label>
+              <Input type="text" name="address" />
+            </div>
+          )}
+
+          {collectEmail && (
+            <div>
+              <Label>Email</Label>
+              <Input type="email" name="email" />
+            </div>
+          )}
+
+          {collectTitle && (
+            <div>
+              <Label>Title</Label>
+              <Input type="text" name="title" />
+            </div>
+          )}
+
+          {collectSocialLink && (
+            <div>
+              <Label>Social Link</Label>
+              <Input type="url" name="social" />
+            </div>
+          )}
+
+          {/* Your message textarea */}
+          <Button type="submit" disabled={loading}>
+            Submit
           </Button>
         </form>
       </DialogContent>
