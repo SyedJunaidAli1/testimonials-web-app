@@ -1,11 +1,9 @@
-"use client"; // if you want client component behavior
-
-import { Button } from "@/components/ui/button";
+"use client";
+import CreateTestimonialsDialog from "@/app/components/CreateTestimonialsDialog";
 import { getSpaceById } from "@/server/spaces";
 import { useQuery } from "@tanstack/react-query";
-import { Pen } from "lucide-react";
 import Image from "next/image";
-import { use } from "react"; // only if params is a Promise in this Next.js version
+import { use } from "react";
 import { PulseLoader } from "react-spinners";
 
 export default function Page({
@@ -77,10 +75,20 @@ export default function Page({
             ))}
         </ul>
       </section>
-      <Button className="w-64" style={{ background: space.customBtnColor }}>
-        <Pen />
-        Send in text
-      </Button>
+      <CreateTestimonialsDialog
+        spaceId={space.id}
+        customBtnColor={space.customBtnColor}
+        spaceLogo={space.spaceLogo}
+        question1={space.question1}
+        question2={space.question2}
+        question3={space.question3}
+        question4={space.question4}
+        question5={space.question5}
+        customMessage={space.customMessage}
+        collectName={space.collectName}
+        collectEmail={space.collectEmail}
+        collectTitle={space.collectTitle}
+      />
     </main>
   );
 }
