@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Pen } from "lucide-react";
+import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 
 interface CreateTestimonialsProps {
   spaceId: string;
@@ -50,6 +51,7 @@ export default function CreateTestimonialsDialog({
   question5,
 }: CreateTestimonialsProps) {
   const [loading, setLoading] = useState(false);
+  const [stars, setStars] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,10 +60,11 @@ export default function CreateTestimonialsDialog({
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name") as string;
     const message = formData.get("message") as string;
+    const stars = formData.get("stars"); // "1" | "2" | ... | "5"
 
     try {
       // server action will go here
-      console.log({ spaceId, name, message });
+      console.log({ spaceId, name, message, stars });
       // await createTestimonial({ spaceId, name, message });
     } catch (err) {
       console.error(err);
@@ -85,14 +88,16 @@ export default function CreateTestimonialsDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="space-y-4 px-2 py-4">
           {spaceLogo && (
             <div>
               <img src={spaceLogo} width={45} height={45} alt="space logo" />
             </div>
           )}
 
-          {(question1 || []).length > 0 && (
+          {[question1, question2, question3, question4, question5].some(
+            Boolean
+          ) && (
             <div>
               <Label>Questions</Label>
               <ul className="list-disc ml-6">
@@ -106,11 +111,17 @@ export default function CreateTestimonialsDialog({
           )}
 
           {collectStar && (
-            <div>
-              <Label>Rating (stars)</Label>
-              <Input type="number" min="1" max="5" name="stars" required />
+            <div className="flex flex-col items-start gap-2">
+              <Label>Rating</Label>
+              <Rating defaultValue={3} onValueChange={setStars}>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <RatingButton key={index} className="text-yellow-500" />
+                ))}
+              </Rating>
+              <input type="hidden" name="stars" value={stars ?? ""} />
             </div>
           )}
+
           {customMessage && (
             <div>
               <Label>Message</Label>

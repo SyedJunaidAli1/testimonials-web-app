@@ -59,7 +59,7 @@ export default function Page({
         {space.headerTitle}
       </h1>
       <p className=" text-md mt-6">{space.customMessage}</p>
-      <section className="flex text-left mt-6 flex-col gap-2 mb-14">
+      <section className="flex text-left mt-6 flex-col gap-2 mb-10 px-4 py-2">
         <p className="text-xl font-semibold">QUESTIONS</p>
         <ul className="list-disc ml-6">
           {[

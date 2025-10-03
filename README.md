@@ -20,7 +20,7 @@
 - [x] Create Space test remmains
 - [] create space space logo square field in DB?
 - [x] testimonials dialoge for submiting testis to db
-- [] change star for createtestidialog
+- [x] change star for createtestidialog
 - [] verify email fnc
 - [x] dashboard 
 - [] wall of love
