@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Pen } from "lucide-react";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface CreateTestimonialsProps {
   spaceId: string;
@@ -167,6 +168,17 @@ export default function CreateTestimonialsDialog({
               <Input type="url" name="social" />
             </div>
           )}
+
+          <div className="flex items-start gap-3">
+            <Checkbox id="terms-2" defaultChecked />
+            <div className="grid gap-2">
+              <Label htmlFor="terms-2">Approved</Label>
+              <p className="text-muted-foreground text-sm">
+                By clicking this checkbox, you agree to use this testimonial
+                across social channels and other marketing efforts
+              </p>
+            </div>
+          </div>
 
           {/* Your message textarea */}
           <Button type="submit" disabled={loading}>

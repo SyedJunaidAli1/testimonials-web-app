@@ -103,24 +103,19 @@ export const testimonials = pgTable("testimonials", {
         .notNull()
         .references(() => spaces.id, { onDelete: "cascade" }),
 
-    // Author
-    authorName: text("author_name").notNull(),
-    authorEmail: text("author_email"),
-
-    // Content
-    messageText: text("message_text").notNull(),
-    category: text("category"),
-
     // Approval / Sharing
     isApproved: boolean("is_approved").default(false),
     isShared: boolean("is_shared").default(false),
 
     // Owner response
-    responseText: text("response_text"),
-    responseName: text("response_name"),
-    responseEmail: text("response_email"),
-    responseImage: text("response_image"),
     responseStars: integer("response_stars"),
+    responseMessage: text("response_message"),
+    responseName: text("response_name"),
+    responseAddress: text("response_address"),
+    responseEmail: text("response_email"),
+    responseTitle: text("response_title"),
+    responseSocialLink: text("response_sociallink"),
+
 
     // Optional Q&A
     question: text("question"),
