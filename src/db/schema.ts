@@ -117,9 +117,6 @@ export const testimonials = pgTable("testimonials", {
     responseSocialLink: text("response_sociallink"),
 
 
-    // Optional Q&A
-    question: text("question"),
-
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
         .defaultNow()

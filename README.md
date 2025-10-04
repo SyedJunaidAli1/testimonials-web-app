@@ -8,11 +8,11 @@
 - [x] Create Space set cloudinary for space logo storage
 - [x] tanstack Query added
 - [x] set add spaece success & error toast
-- [x] set limit for space logo 
+- [x] set limit for space logo
 - [x] setup space three dot dropdown fnc
 - [] make space three dot dropdown options fnc
 - [x] make space preview for create spaces
-- [x] make add scroll bar for testi preview 
+- [x] make add scroll bar for testi preview
 - [x] testimonials preview theme button set it for black and white
 - [x] Change color picker with shadcn component
 - [x] createspace when add or remove question it triggers create fnc and it not let us add all the other fields(temp fix for now)
@@ -21,12 +21,14 @@
 - [] create space space logo square field in DB?
 - [x] testimonials dialoge for submiting testis to db
 - [x] change star for createtestidialog
+- [x] server action for testimonials creations
+- [] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc
-- [x] dashboard 
+- [x] dashboard
 - [] wall of love
-- [] nav top 
+- [] nav top
 - [] main ui
-- [] footer 
+- [] footer
 - [] about
 - [] term
 - [] policy

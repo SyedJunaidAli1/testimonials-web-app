@@ -15,6 +15,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Pen } from "lucide-react";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { createTestimonial } from "@/server/testimonials";
+import { toast } from "sonner";
 
 interface CreateTestimonialsProps {
   spaceId: string;
@@ -59,16 +62,23 @@ export default function CreateTestimonialsDialog({
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    const name = formData.get("name") as string;
-    const message = formData.get("message") as string;
-    const stars = formData.get("stars"); // "1" | "2" | ... | "5"
 
     try {
-      // server action will go here
-      console.log({ spaceId, name, message, stars });
-      // await createTestimonial({ spaceId, name, message });
+      await createTestimonial({
+        spaceId,
+        message: formData.get("message") as string,
+        stars: formData.get("stars"),
+        name: formData.get("name") as string,
+        email: formData.get("email") as string,
+        address: formData.get("address") as string,
+        title: formData.get("title") as string,
+        socialLink: formData.get("socialLink") as string,
+        isApproved: formData.get("isApproved") === "on",
+      });
+      toast.success("✅ Testimonail submitted!");
     } catch (err) {
       console.error(err);
+      toast.error("❌ Failed to submit testimonial.");
     } finally {
       setLoading(false);
     }
@@ -92,7 +102,10 @@ export default function CreateTestimonialsDialog({
         <form onSubmit={handleSubmit} className="space-y-4 px-2 py-4">
           {spaceLogo && (
             <div>
-              <img src={spaceLogo} width={45} height={45} alt="space logo" />
+              <Avatar>
+                <AvatarImage src={spaceLogo} alt="spacelogo" />
+                <AvatarFallback>sl</AvatarFallback>
+              </Avatar>
             </div>
           )}
 
@@ -165,14 +178,14 @@ export default function CreateTestimonialsDialog({
           {collectSocialLink && (
             <div>
               <Label>Social Link</Label>
-              <Input type="url" name="social" />
+              <Input type="url" name="socialLink" />
             </div>
           )}
 
           <div className="flex items-start gap-3">
-            <Checkbox id="terms-2" defaultChecked />
+            <Checkbox id="isApproved" defaultChecked />
             <div className="grid gap-2">
-              <Label htmlFor="terms-2">Approved</Label>
+              <Label htmlFor="isApproved">Approved</Label>
               <p className="text-muted-foreground text-sm">
                 By clicking this checkbox, you agree to use this testimonial
                 across social channels and other marketing efforts
