@@ -78,7 +78,6 @@ export const createSpaces = async (formData: FormData) => {
     });
 };
 
-
 export const getSpaces = async () => {
     const requestheaders = await headers()
     const session = await auth.api.getSession({ headers: requestheaders })

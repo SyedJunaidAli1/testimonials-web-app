@@ -55,7 +55,7 @@ export default function CreateTestimonialsDialog({
   question5,
 }: CreateTestimonialsProps) {
   const [loading, setLoading] = useState(false);
-  const [stars, setStars] = useState<number | null>(null);
+  const [stars, setStars] = useState<number | null>(3);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
