@@ -56,6 +56,7 @@ export default function CreateTestimonialsDialog({
 }: CreateTestimonialsProps) {
   const [loading, setLoading] = useState(false);
   const [stars, setStars] = useState<number | null>(3);
+  const [approved, setApproved] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -73,7 +74,7 @@ export default function CreateTestimonialsDialog({
         address: formData.get("address") as string,
         title: formData.get("title") as string,
         socialLink: formData.get("socialLink") as string,
-        isApproved: formData.get("isApproved") === "on",
+        isApproved: approved,
       });
       toast.success("✅ Testimonail submitted!");
     } catch (err) {
@@ -108,7 +109,6 @@ export default function CreateTestimonialsDialog({
               </Avatar>
             </div>
           )}
-
           {[question1, question2, question3, question4, question5].some(
             Boolean
           ) && (
@@ -123,7 +123,6 @@ export default function CreateTestimonialsDialog({
               </ul>
             </div>
           )}
-
           {collectStar && (
             <div className="flex flex-col items-start gap-2">
               <Label>Rating</Label>
@@ -135,7 +134,6 @@ export default function CreateTestimonialsDialog({
               <input type="hidden" name="stars" value={stars ?? ""} />
             </div>
           )}
-
           {customMessage && (
             <div>
               <Label>Message</Label>
@@ -146,35 +144,30 @@ export default function CreateTestimonialsDialog({
               />
             </div>
           )}
-
           {collectName && (
             <div>
               <Label>Your Name</Label>
               <Input type="text" name="name" required />
             </div>
           )}
-
           {collectAddress && (
             <div>
               <Label>Address</Label>
               <Input type="text" name="address" />
             </div>
           )}
-
           {collectEmail && (
             <div>
               <Label>Email</Label>
               <Input type="email" name="email" />
             </div>
           )}
-
           {collectTitle && (
             <div>
               <Label>Title</Label>
               <Input type="text" name="title" />
             </div>
           )}
-
           {collectSocialLink && (
             <div>
               <Label>Social Link</Label>
@@ -183,7 +176,12 @@ export default function CreateTestimonialsDialog({
           )}
 
           <div className="flex items-start gap-3">
-            <Checkbox id="isApproved" defaultChecked />
+            <Checkbox
+              id="isApproved"
+              checked={approved}
+              onCheckedChange={(val) => setApproved(!!val)}
+              defaultChecked
+            />
             <div className="grid gap-2">
               <Label htmlFor="isApproved">Approved</Label>
               <p className="text-muted-foreground text-sm">
@@ -193,8 +191,12 @@ export default function CreateTestimonialsDialog({
             </div>
           </div>
 
-          {/* Your message textarea */}
-          <Button type="submit" disabled={loading}>
+          <Button
+            type="submit"
+            variant="outline"
+            className="w-full"
+            disabled={loading}
+          >
             Submit
           </Button>
         </form>

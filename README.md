@@ -24,7 +24,7 @@
 - [x] server action for testimonials creations
 - [] server action for testimonials creations add image for pfp
 - [] slug for testimonals
-- [] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
+- [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc
 - [x] dashboard
 - [] wall of love

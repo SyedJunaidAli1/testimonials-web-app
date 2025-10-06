@@ -39,8 +39,8 @@ export default function Page({
     <main
       className={`flex flex-col items-center h-screen w-full ${
         space.theme === "dark"
-          ? "bg-black text-secondary-foreground"
-          : "bg-white text-secondary"
+          ? "bg-black text-white"
+          : "bg-white text-black"
       }`}
     >
       {space.spaceLogo && (
@@ -91,6 +91,7 @@ export default function Page({
         collectStar={space.collectStar}
         collectAddress={space.collectAddress}
         collectSocialLink={space.collectSocialLink}
+        theme={space.theme}
       />
     </main>
   );
