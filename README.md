@@ -19,6 +19,7 @@
 - [x] Create Space preview part remain
 - [x] Create Space test remmains
 - [] create space space logo square field in DB?
+- [] manage space pannel for all testimonials
 - [x] testimonials dialoge for submiting testis to db
 - [x] change star for createtestidialog
 - [x] server action for testimonials creations
