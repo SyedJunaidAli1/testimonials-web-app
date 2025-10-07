@@ -22,7 +22,7 @@
 - [x] testimonials dialoge for submiting testis to db
 - [x] change star for createtestidialog
 - [x] server action for testimonials creations
-- [] server action for testimonials creations add image for pfp
+- [x] server action for testimonials creations add image for pfp
 - [] slug for testimonals
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc

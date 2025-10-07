@@ -10,9 +10,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { Pen } from "lucide-react";
+import { Pen, Trash, Upload } from "lucide-react";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -41,7 +41,6 @@ export default function CreateTestimonialsDialog({
   spaceId,
   customBtnColor,
   spaceLogo,
-  customMessage,
   collectEmail,
   collectName,
   collectStar,
@@ -57,6 +56,9 @@ export default function CreateTestimonialsDialog({
   const [loading, setLoading] = useState(false);
   const [stars, setStars] = useState<number | null>(3);
   const [approved, setApproved] = useState(true);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,24 +66,35 @@ export default function CreateTestimonialsDialog({
 
     const formData = new FormData(e.currentTarget);
 
+    // ✅ append the image file
+    if (imageFile) {
+      formData.append("photo", imageFile);
+    }
+    formData.append("spaceId", spaceId);
+    formData.append("isApproved", approved.toString());
+
     try {
-      await createTestimonial({
-        spaceId,
-        message: formData.get("message") as string,
-        stars: formData.get("stars"),
-        name: formData.get("name") as string,
-        email: formData.get("email") as string,
-        address: formData.get("address") as string,
-        title: formData.get("title") as string,
-        socialLink: formData.get("socialLink") as string,
-        isApproved: approved,
-      });
-      toast.success("✅ Testimonail submitted!");
+      await createTestimonial(formData);
+      toast.success("✅ Testimonial submitted!");
     } catch (err) {
       console.error(err);
       toast.error("❌ Failed to submit testimonial.");
     } finally {
       setLoading(false);
+    }
+  };
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file); // ✅ now defined
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -134,16 +147,16 @@ export default function CreateTestimonialsDialog({
               <input type="hidden" name="stars" value={stars ?? ""} />
             </div>
           )}
-          {customMessage && (
-            <div>
-              <Label>Message</Label>
-              <Textarea
-                name="message"
-                placeholder="Type your message here."
-                required
-              />
-            </div>
-          )}
+
+          <div>
+            <Label>Message</Label>
+            <Textarea
+              name="message"
+              placeholder="Type your message here."
+              required
+            />
+          </div>
+
           {collectName && (
             <div>
               <Label>Your Name</Label>
@@ -174,6 +187,59 @@ export default function CreateTestimonialsDialog({
               <Input type="url" name="socialLink" />
             </div>
           )}
+
+          {/* image upload  */}
+          <div className="flex flex-col gap-3">
+            <Label>Upload Your Photo</Label>
+            {imagePreview ? (
+              <div className="flex items-center gap-4">
+                <div className="relative w-16 h-16 rounded-full overflow-hidden border">
+                  <Avatar className="w-full h-full">
+                    <AvatarImage
+                      src={imagePreview}
+                      alt="preview"
+                      className="object-cover w-full h-full"
+                    />
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    <Upload className="w-4 h-4 mr-1" /> Change
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    onClick={handleRemoveImage}
+                  >
+                    <Trash className="w-4 h-4 mr-1" /> Delete
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Upload className="w-4 h-4 mr-1" /> Upload Photo
+              </Button>
+            )}
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              name="image"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+            />
+          </div>
 
           <div className="flex items-start gap-3">
             <Checkbox
