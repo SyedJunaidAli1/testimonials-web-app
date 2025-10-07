@@ -1,23 +1,8 @@
 "use server"
-
 import { db } from "@/db/drizzle"
 import { testimonials } from "@/db/schema"
 import { revalidatePath } from "next/cache"
 import cloudinary from "./cloudinary"
-
-
-interface createTestimonialInput {
-    spaceId: string,
-    message: string,
-    stars?: number,
-    name?: string
-    address?: string,
-    email?: string,
-    title?: string,
-    socialLink?: string,
-    isApproved: boolean
-    image?: string
-}
 
 export async function createTestimonial(formData: FormData) {
     try {
