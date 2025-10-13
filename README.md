@@ -24,7 +24,7 @@
 - [x] change star for createtestidialog
 - [x] server action for testimonials creations
 - [x] server action for testimonials creations add image for pfp
-- [] Manage page for spaces
+- [] Manage space page
 - [] slug for testimonals
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc

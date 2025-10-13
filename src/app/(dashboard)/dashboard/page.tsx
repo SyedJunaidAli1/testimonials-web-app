@@ -143,7 +143,7 @@ const Page = () => {
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => {
-                          const url = `${window.location.origin}/t/${s.id}`;
+                          const url = `${window.location.origin}/testimonial/${s.id}`;
                           navigator.clipboard.writeText(url);
                           toast.success("✅ Link copied to clipboard!");
                         }}
