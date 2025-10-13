@@ -1,34 +1,34 @@
 "use client";
 import CreateTestimonialsDialog from "@/app/components/CreateTestimonialsDialog";
-import { getSpaceById } from "@/server/spaces";
+import { Spinner } from "@/components/ui/spinner";
+import { getSpaceBySlug } from "@/server/spaces";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { use } from "react";
-import { PulseLoader } from "react-spinners";
 
 export default function Page({
   params,
 }: {
-  params: Promise<{ spaceId: string }>;
+  params: Promise<{ slug: string }>;
 }) {
   // Unwrap the params Promise
-  const { spaceId } = use(params);
+  const { slug } = use(params);
 
   const {
     data: space,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["spaces", spaceId],
+    queryKey: ["spaces", slug],
     queryFn: async () => {
-      return await getSpaceById(spaceId);
+      return await getSpaceBySlug(slug);
     },
   });
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
-        <PulseLoader color="#8e51ff" size={30} />
+        <Spinner className="size-10 text-primary" />
       </div>
     );
   }
@@ -38,9 +38,7 @@ export default function Page({
   return (
     <main
       className={`flex flex-col items-center h-screen w-full ${
-        space.theme === "dark"
-          ? "bg-black text-white"
-          : "bg-white text-black"
+        space.theme === "dark" ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
       {space.spaceLogo && (

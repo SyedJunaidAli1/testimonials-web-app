@@ -67,6 +67,7 @@ export const spaces = pgTable("spaces", {
         .notNull()
         .references(() => user.id, { onDelete: "cascade" }),
     spacename: text("spacename").notNull(),
+    slug: text("slug").notNull(),
     isShared: boolean("is_shared").default(false),
     spaceLogo: text("spacelogo"),
     headerTitle: text("header_title"),

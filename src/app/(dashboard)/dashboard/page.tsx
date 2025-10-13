@@ -22,7 +22,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
-import { PulseLoader } from "react-spinners";
+import { Spinner } from "@/components/ui/spinner";
+
 
 const Page = () => {
   const {
@@ -65,7 +66,7 @@ const Page = () => {
   if (isLoading)
     return (
       <div className="flex items-center justify-center h-screen w-screen">
-        <PulseLoader color="#8e51ff" size={30} />
+        <Spinner className="size-10 text-primary" />
       </div>
     );
   if (error) return <p>Something went wrong</p>;
@@ -143,7 +144,7 @@ const Page = () => {
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => {
-                          const url = `${window.location.origin}/testimonial/${s.id}`;
+                          const url = `${window.location.origin}/testimonial/${s.slug}`;
                           navigator.clipboard.writeText(url);
                           toast.success("✅ Link copied to clipboard!");
                         }}

@@ -1,30 +1,29 @@
 "use client";
-
+import { Spinner } from "@/components/ui/spinner";
 import { getTestimonials } from "@/server/testimonials";
 import { useQuery } from "@tanstack/react-query";
 import { use } from "react";
-import { PulseLoader } from "react-spinners";
 
-export default function BlogPostPage({
+export default function Page({
   params,
 }: {
-  params: Promise<{ spaceId: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { spaceId } = use(params);
+  const { slug } = use(params);
 
   const {
     data: testimonials,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["testimonials", spaceId],
-    queryFn: async () => await getTestimonials(spaceId),
+    queryKey: ["testimonials", slug],
+    queryFn: async () => await getTestimonials(slug),
   });
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
-        <PulseLoader color="#8e51ff" size={30} />
+        <Spinner className="size-10 text-primary" />
       </div>
     );
   }

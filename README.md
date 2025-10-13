@@ -24,8 +24,12 @@
 - [x] change star for createtestidialog
 - [x] server action for testimonials creations
 - [x] server action for testimonials creations add image for pfp
-- [] Manage space page
-- [] slug for testimonals
+- [x] Manage space page
+- [] repalce react spinner with shad spinner
+- [] Manage space page ui changes to make it look better
+- [x] slug for testimonals
+- [] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
+- [] append unique ID if duplicate slugs possible for slug
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc
 - [x] dashboard

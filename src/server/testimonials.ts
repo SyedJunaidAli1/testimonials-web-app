@@ -50,6 +50,6 @@ export async function createTestimonial(formData: FormData) {
     }
 }
 
-export async function getTestimonials(spaceId: string) {
-    return await db.select().from(testimonials).where(eq(testimonials.spaceId, spaceId))
+export async function getTestimonials(slug: string) {
+    return await db.select().from(testimonials).where(eq(testimonials.slug, slug))
 }

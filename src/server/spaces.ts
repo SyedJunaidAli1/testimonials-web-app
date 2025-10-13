@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import { eq, and, } from "drizzle-orm";
 import cloudinary from "./cloudinary"
+import slugify from "slugify";
 
 export const createSpaces = async (formData: FormData) => {
     const requestheaders = await headers();
@@ -55,6 +56,8 @@ export const createSpaces = async (formData: FormData) => {
         logoUrl = upload.secure_url;
     }
 
+    const slug = slugify(spacename, { lower: true, strict: true })
+
     await db.insert(spaces).values({
         userId: session.user.id,
         spacename,
@@ -75,6 +78,7 @@ export const createSpaces = async (formData: FormData) => {
         collectStar,
         collectTitle,
         theme,
+        slug,
     });
 };
 
@@ -147,13 +151,13 @@ export const duplicateSpace = async (spaceId: string) => {
 
 }
 
-export const getSpaceById = async (spaceId: string) => {
-    if (!spaceId) throw new Error("Missing space id")
+export const getSpaceBySlug = async (slug: string) => {
+    if (!slug) throw new Error("Missing slug")
 
     const [Space] = await db
         .select()
         .from(spaces)
-        .where(eq(spaces.id, spaceId))
+        .where(eq(spaces.slug, slug))
 
     return Space || null
 }
