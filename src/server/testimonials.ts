@@ -3,6 +3,7 @@ import { db } from "@/db/drizzle"
 import { testimonials } from "@/db/schema"
 import { revalidatePath } from "next/cache"
 import cloudinary from "./cloudinary"
+import { eq } from "drizzle-orm"
 
 export async function createTestimonial(formData: FormData) {
     try {
@@ -47,4 +48,8 @@ export async function createTestimonial(formData: FormData) {
         console.error("❌ Failed to create testimonial:", error);
         throw new Error("Failed to create testimonial");
     }
+}
+
+export async function getTestimonials(spaceId: string) {
+    return await db.select().from(testimonials).where(eq(testimonials.spaceId, spaceId))
 }
