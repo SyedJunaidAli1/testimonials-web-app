@@ -5,7 +5,7 @@ import {
   Files,
   FileText,
   FolderOpen,
-  Link,
+  Link as LinkIcon,
   Lock,
   Rows4,
   Search,
@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
-
+import Link from "next/link";
 
 const Page = () => {
   const {
@@ -120,15 +120,17 @@ const Page = () => {
                 className="bg-primary w-80 h-30 px-4 py-4 rounded-lg list-none"
               >
                 <div className="flex justify-between items-center">
-                  <div className="flex gap-2 items-center">
-                    <Image
-                      width={45}
-                      height={45}
-                      alt="spacelogo"
-                      src={s.spaceLogo}
-                    />
-                    <p className="text-lg font-semibold">{s.spacename}</p>
-                  </div>
+                  <Link href={`/products/${s.slug}`}>
+                    <div className="flex gap-2 items-center">
+                      <Image
+                        width={45}
+                        height={45}
+                        alt="spacelogo"
+                        src={s.spaceLogo}
+                      />
+                      <p className="text-lg font-semibold">{s.spacename}</p>
+                    </div>
+                  </Link>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className="p-1 rounded-sm hover:bg-purple-800">
@@ -136,12 +138,12 @@ const Page = () => {
                       </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem
-                        onClick={() => console.log("Edit", s.id)}
-                      >
-                        <Rows4 />
-                        Manage testimonials
-                      </DropdownMenuItem>
+                      <Link href={`/products/${s.slug}`}>
+                        <DropdownMenuItem>
+                          <Rows4 />
+                          Manage testimonials
+                        </DropdownMenuItem>
+                      </Link>
                       <DropdownMenuItem
                         onClick={() => {
                           const url = `${window.location.origin}/testimonial/${s.slug}`;
@@ -149,7 +151,7 @@ const Page = () => {
                           toast.success("✅ Link copied to clipboard!");
                         }}
                       >
-                        <Link />
+                        <LinkIcon />
                         Get the Link
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => copySpace(s.id)}>

@@ -19,17 +19,16 @@
 - [x] Create Space preview part remain
 - [x] Create Space test remmains
 - [] create space space logo square field in DB?
-- [] manage space pannel for all testimonials
 - [x] testimonials dialoge for submiting testis to db
 - [x] change star for createtestidialog
 - [x] server action for testimonials creations
 - [x] server action for testimonials creations add image for pfp
 - [x] Manage space page
-- [] repalce react spinner with shad spinner
-- [] Manage space page ui changes to make it look better
+- [x] repalce react spinner with shad spinner
+- [] Product page ui changes to make it look better
 - [x] slug for testimonals
-- [] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
-- [] append unique ID if duplicate slugs possible for slug
+- [x] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
+- [] append unique ID if duplicate slugs
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc
 - [x] dashboard
