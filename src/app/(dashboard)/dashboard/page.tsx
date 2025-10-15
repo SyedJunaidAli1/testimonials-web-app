@@ -26,6 +26,7 @@ import { Spinner } from "@/components/ui/spinner";
 import Link from "next/link";
 
 const Page = () => {
+  
   const {
     data: spaces,
     isLoading,
