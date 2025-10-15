@@ -25,10 +25,12 @@
 - [x] server action for testimonials creations add image for pfp
 - [x] Manage space page
 - [x] repalce react spinner with shad spinner
-- [] Product page ui changes to make it look better
+- [x] Product page ui changes to make it look better
 - [x] slug for testimonals
 - [x] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
 - [] append unique ID if duplicate slugs
+- [] product page ui for all tabs with empty and with data to be made
+- [] widget integration for embed on other sites
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc
 - [x] dashboard
