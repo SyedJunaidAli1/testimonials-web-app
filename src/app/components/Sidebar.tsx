@@ -20,6 +20,7 @@ import {
   Pen,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 const Sidebar = () => {
@@ -32,6 +33,7 @@ const Sidebar = () => {
   } = useQuery({
     queryKey: ["spaces", slug],
     queryFn: async () => await getSpaceBySlug(slug as string),
+    enabled: !!slug, // ✅ only run when slug is defined
   });
 
   if (spaceLoading) {
@@ -72,10 +74,12 @@ const Sidebar = () => {
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className=" py-2 space-y-2 font-medium text-lg">
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <Inbox size={20} className="text-primary" />
-                        All
-                      </li>
+                      <Link href={`/products/${slug}/all`}>
+                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
+                          <Inbox size={20} className="text-primary" />
+                          All
+                        </li>
+                      </Link>
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                         <MessageSquareText size={20} className="text-primary" />
                         Text
