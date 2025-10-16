@@ -30,6 +30,8 @@
 - [x] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
 - [] append unique ID if duplicate slugs
 - [] product page ui for all tabs with empty and with data to be made
+- [] product page ui for all tabs routes and ui to be made
+- [] product page liked testimonials with schema changes and ui for like and unlike filter it on its tab
 - [] widget integration for embed on other sites
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc
