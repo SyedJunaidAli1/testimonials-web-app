@@ -22,6 +22,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import SingleTestimonialDialog from "./SingleTestimonialDialog";
 
 const Sidebar = () => {
   const { slug } = useParams();
@@ -80,17 +81,15 @@ const Sidebar = () => {
                           All
                         </li>
                       </Link>
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <MessageSquareText size={20} className="text-primary" />
-                        Text
-                      </li>
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <MessageCircleHeart
-                          size={20}
-                          className="text-primary"
-                        />
-                        Liked
-                      </li>
+                      <Link href={`/products/${slug}/liked`}>
+                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
+                          <MessageCircleHeart
+                            size={20}
+                            className="text-primary"
+                          />
+                          Liked
+                        </li>
+                      </Link>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
@@ -108,8 +107,7 @@ const Sidebar = () => {
                         Wall of Love
                       </li>
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <Code size={20} className="text-primary" />
-                        Single testimonial
+                        <SingleTestimonialDialog />
                       </li>
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                         <BookImage size={20} className="text-primary" />

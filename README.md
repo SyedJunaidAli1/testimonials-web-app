@@ -32,6 +32,8 @@
 - [] product page ui for all tabs with empty and with data to be made
 - [] product page ui for all tabs routes and ui to be made
 - [] product page liked testimonials with schema changes and ui for like and unlike filter it on its tab
+- [x] product page ui (all,liked, request testimonials, route has been made)
+- [x] product page ui (Single tetimonial dialog made but need chande of placeholder pic)
 - [] widget integration for embed on other sites
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [] verify email fnc
