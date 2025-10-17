@@ -1,9 +1,36 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  ButtonGroup,
+  ButtonGroupSeparator,
+} from "@/components/ui/button-group";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Spinner } from "@/components/ui/spinner";
 import { getTestimonials } from "@/server/testimonials";
 import { useQuery } from "@tanstack/react-query";
-import { Inbox, MessageSquareText } from "lucide-react";
+import {
+  AlertTriangleIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  CopyIcon,
+  Download,
+  Inbox,
+  MessageSquareText,
+  Share2,
+  ShareIcon,
+  Trash,
+  TrashIcon,
+  UserRoundXIcon,
+} from "lucide-react";
+
 import { use } from "react";
 
 const page = ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -79,14 +106,73 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
                 </p>
 
                 {t.responseSocialLink && (
-                  <a
-                    href={t.responseSocialLink}
-                    target="_blank"
-                    className="text-blue-500 text-sm mt-2 inline-block"
-                  >
-                    View Profile
-                  </a>
+                  <p className="text-blue-500 text-sm mt-2 inline-block">
+                    {t.responseSocialLink}
+                  </p>
                 )}
+
+                <ButtonGroup>
+                  <Button variant="outline">
+                    <Share2 />
+                    share
+                  </Button>
+                  <ButtonGroupSeparator />
+                  <Button variant="outline">
+                    <Download />
+                    Download
+                  </Button>
+                  <ButtonGroupSeparator />
+                  <Button variant="outline">
+                    <Trash />
+                    Delete
+                  </Button>
+                  <ButtonGroupSeparator />
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" className="!pl-2">
+                        <ChevronDownIcon />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      align="end"
+                      className="[--radius:1rem]"
+                    >
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem>
+                          copy text to clipboard
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <CheckIcon />
+                          Mark as Read
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <AlertTriangleIcon />
+                          Report Conversation
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <UserRoundXIcon />
+                          Block User
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <ShareIcon />
+                          Share Conversation
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <CopyIcon />
+                          Copy Conversation
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem variant="destructive">
+                          <TrashIcon />
+                          Delete Conversation
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </ButtonGroup>
               </div>
             ))}
           </div>
