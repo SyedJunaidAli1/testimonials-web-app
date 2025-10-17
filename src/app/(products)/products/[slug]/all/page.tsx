@@ -1,10 +1,9 @@
 "use client";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Spinner } from "@/components/ui/spinner";
 import { getTestimonials } from "@/server/testimonials";
 import { useQuery } from "@tanstack/react-query";
-import { MessageSquareText } from "lucide-react";
+import { Inbox, MessageSquareText } from "lucide-react";
 import { use } from "react";
 
 const page = ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -47,9 +46,10 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
 
         {/* Testimonials */}
         {!testimonials || testimonials.length === 0 ? (
-          <p className="text-center text-gray-500 mt-10">
-            No testimonials found.
-          </p>
+          <section className="flex flex-col items-center justify-center px-2 py-6">
+            <Inbox size={50} className="" />
+            <p className="text-gray-500 mt-6">No testimonials found yet</p>
+          </section>
         ) : (
           <div className="max-w-3xl mx-auto grid gap-6">
             {testimonials.map((t) => (

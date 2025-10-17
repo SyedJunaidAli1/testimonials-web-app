@@ -127,10 +127,12 @@ const Sidebar = () => {
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className=" py-2 space-y-2 font-medium text-lg">
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <ArrowBigRight size={20} className="text-primary" />
-                        Request testimonials
-                      </li>
+                      <Link href={`/products/${slug}/request-testimonials`}>
+                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
+                          <ArrowBigRight size={20} className="text-primary" />
+                          Request testimonials
+                        </li>
+                      </Link>
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                         <Heart size={20} className="text-primary" />
                         Wall of Love
