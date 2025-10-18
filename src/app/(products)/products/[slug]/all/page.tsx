@@ -2,10 +2,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
-  ButtonGroup,
-  ButtonGroupSeparator,
-} from "@/components/ui/button-group";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -15,8 +11,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 import { Spinner } from "@/components/ui/spinner";
-import { getTestimonials } from "@/server/testimonials";
-import { useQuery } from "@tanstack/react-query";
+import { getTestimonials, likeTestimonials } from "@/server/testimonials";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowBigRight,
   ChevronDownIcon,
@@ -30,12 +26,11 @@ import {
   Share2,
   TrashIcon,
 } from "lucide-react";
+import { use, useEffect, useState } from "react";
+import { toast } from "sonner";
 
-import { use, useState } from "react";
-
-const page = ({ params }: { params: Promise<{ slug: string }> }) => {
+const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
-  const [liked, setLiked] = useState(false);
 
   const {
     data: testimonials,
@@ -44,6 +39,27 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
   } = useQuery({
     queryKey: ["testimonials", slug],
     queryFn: async () => await getTestimonials(slug),
+  });
+
+  const queryClient = useQueryClient();
+
+  const likeMutation = useMutation({
+    mutationFn: async ({ id, Liked }: { id: string; Liked: boolean }) =>
+     await likeTestimonials(id, Liked),
+    onMutate: async ({ id, Liked }) => {
+      await queryClient.cancelQueries(["testimonials", slug]);
+
+      const previousData = queryClient.getQueryData(["testimonials", slug]);
+
+      queryClient.setQueryData(["testimonials", slug], (oldData: any) =>
+        oldData.map((t: any) => (t.id === id ? { ...t, Liked } : t))
+      );
+
+      return { previousData };
+    },
+    onError: (err, variables, context) => {
+      queryClient.setQueryData(["testimonials", slug], context?.previousData);
+    },
   });
 
   if (testimonialsLoading) {
@@ -140,22 +156,22 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
                   <div className="flex gap-2 flex-wrap items-center">
                     {/* ❤️ Like button */}
                     <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setLiked(!liked)}
-                      className="transition"
+                      variant={"ghost"}
+                      onClick={() =>
+                        likeMutation.mutate({ id: t.id, Liked: !t.Liked })
+                      }
                     >
                       <Heart
-                        className={`w-4 h-4 mr-2 ${
-                          liked
+                        className={
+                          t.Liked
                             ? "fill-red-500 text-red-500"
                             : "text-muted-foreground"
-                        }`}
+                        }
                       />
-                      {liked ? "Liked" : "Like"}
+                      {t.Liked ? "Liked" : "Like"}
                     </Button>
                   </div>
-                  
+
                   <div className="flex gap-2 flex-wrap">
                     <Button variant="secondary" size="sm">
                       <Gift className="w-4 h-4 mr-2" />
@@ -212,4 +228,4 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 };
 
-export default page;
+export default Page;

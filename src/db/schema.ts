@@ -117,6 +117,7 @@ export const testimonials = pgTable("testimonials", {
     responseTitle: text("response_title"),
     responseSocialLink: text("response_sociallink"),
     imageUrl: text("image_url"),
+    Liked: boolean('liked').default(false),
 
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")

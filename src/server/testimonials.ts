@@ -70,3 +70,16 @@ export async function getTestimonials(slug: string) {
         .from(testimonials)
         .where(eq(testimonials.spaceId, spaceId));
 }
+
+export async function likeTestimonials(id: string, Liked: boolean) {
+    try {
+        await db
+            .update(testimonials)
+            .set({ Liked })
+            .where(eq(testimonials.id, id))
+        return { success: true }
+    } catch (error) {
+        console.error("Failed to toggle like", error)
+        return { success: false, error: 'Database update failed' }
+    }
+}
