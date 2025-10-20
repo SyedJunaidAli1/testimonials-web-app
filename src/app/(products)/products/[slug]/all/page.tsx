@@ -26,8 +26,7 @@ import {
   Share2,
   TrashIcon,
 } from "lucide-react";
-import { use, useEffect, useState } from "react";
-import { toast } from "sonner";
+import { use } from "react";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -45,7 +44,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const likeMutation = useMutation({
     mutationFn: async ({ id, Liked }: { id: string; Liked: boolean }) =>
-     await likeTestimonials(id, Liked),
+      await likeTestimonials(id, Liked),
     onMutate: async ({ id, Liked }) => {
       await queryClient.cancelQueries(["testimonials", slug]);
 
