@@ -212,12 +212,23 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="[--radius:1rem]">
                     <DropdownMenuGroup>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={async () => {
+                          const Text = t.responseMessage ?? "";
+
+                          if (!Text) {
+                            toast.error("No text to copy");
+                          }
+                          navigator.clipboard.writeText(Text);
+
+                          toast.success("✅ Text Copied to Clipboard");
+                        }}
+                      >
                         <Clipboard className="mr-2 h-4 w-4" /> Copy text
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <ArrowBigRight className="mr-2 h-4 w-4" /> Message{" "}
-                        {t.responseName}
+                        <ArrowBigRight className="mr-2 h-4 w-4" />
+                        Message {t.responseName}
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <Files className="mr-2 h-4 w-4" /> Duplicate to other
