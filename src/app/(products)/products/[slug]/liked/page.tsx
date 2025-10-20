@@ -1,3 +1,4 @@
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +10,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
+import { Spinner } from "@/components/ui/spinner";
+import { getLikedTestimonials, likeTestimonials } from "@/server/testimonials";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowBigRight,
   ChevronDownIcon,
@@ -17,13 +21,61 @@ import {
   Files,
   Gift,
   Heart,
+  Inbox,
   MessageSquareText,
   Share2,
   TrashIcon,
 } from "lucide-react";
-import React from "react";
+import React, { use } from "react";
 
-const page = () => {
+const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = use(params);
+
+  const {
+    data: testimonials,
+    isLoading: testimonialsLoading,
+    error: testimonialsError,
+  } = useQuery({
+    queryKey: ["testimonials", slug],
+    queryFn: async () => await getLikedTestimonials(slug),
+  });
+
+  const queryClient = useQueryClient();
+
+  const likeMutation = useMutation({
+    mutationFn: async ({ id, Liked }: { id: string; Liked: boolean }) =>
+      await likeTestimonials(id, Liked),
+    onMutate: async ({ id, Liked }) => {
+      await queryClient.cancelQueries(["testimonials", slug]);
+
+      const previousData = queryClient.getQueryData(["testimonials", slug]);
+
+      queryClient.setQueryData(["testimonials", slug], (oldData: any) =>
+        oldData.map((t: any) => (t.id === id ? { ...t, Liked } : t))
+      );
+
+      return { previousData };
+    },
+    onError: (err, variables, context) => {
+      queryClient.setQueryData(["testimonials", slug], context?.previousData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["testimonials", slug] });
+    },
+  });
+
+  if (testimonialsLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <Spinner className="size-10 text-primary" />
+      </div>
+    );
+  }
+
+  if (testimonialsError) {
+    return <p>Something went wrong while fetching data...</p>;
+  }
+
   return (
     <section className="flex-1 p-8">
       <header className="flex justify-between items-center border-b pb-4 mb-6">
@@ -172,4 +224,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

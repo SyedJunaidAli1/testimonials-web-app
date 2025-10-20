@@ -3,7 +3,7 @@ import { db } from "@/db/drizzle"
 import { spaces, testimonials } from "@/db/schema"
 import { revalidatePath } from "next/cache"
 import cloudinary from "./cloudinary"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 
 export async function createTestimonial(formData: FormData) {
     try {
@@ -48,6 +48,27 @@ export async function createTestimonial(formData: FormData) {
         console.error("❌ Failed to create testimonial:", error);
         throw new Error("Failed to create testimonial");
     }
+}
+
+export async function getLikedTestimonials(slug: string) {
+    // Step 1: find the space by slug
+    const space = await db
+        .select({ id: spaces.id })
+        .from(spaces)
+        .where(eq(spaces.slug, slug))
+        .limit(1);
+
+    if (!space.length) {
+        throw new Error("Space not found");
+    }
+
+    // Step 2: fetch testimonials for that space
+    const spaceId = space[0].id;
+
+    return await db
+        .select()
+        .from(testimonials)
+        .where(and(eq(testimonials.spaceId, spaceId), eq(testimonials.Liked, true)));
 }
 
 export async function getTestimonials(slug: string) {
