@@ -11,7 +11,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 import { Spinner } from "@/components/ui/spinner";
-import { getLikedTestimonials, likeTestimonials } from "@/server/testimonials";
+import {
+  deleteTestimonials,
+  getLikedTestimonials,
+  likeTestimonials,
+} from "@/server/testimonials";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowBigRight,
@@ -27,6 +31,7 @@ import {
   TrashIcon,
 } from "lucide-react";
 import React, { use } from "react";
+import { toast } from "sonner";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -64,6 +69,18 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
     },
   });
 
+  const { mutate: deleteMutation } = useMutation({
+    mutationFn: async ({ id }: { id: string }) => await deleteTestimonials(id),
+    onSuccess: () => {
+      toast.success("Testimonial deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["testimonials", slug] });
+    },
+    onError: (err) => {
+      toast.error("Testimonial delete failed");
+      console.error(err.message);
+    },
+  });
+
   if (testimonialsLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
@@ -92,7 +109,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
       {!testimonials || testimonials.length === 0 ? (
         <section className="flex flex-col items-center justify-center px-2 py-6">
           <Inbox size={50} className="" />
-          <p className="text-gray-500 mt-6">No testimonials found yet</p>
+          <p className="text-gray-500 mt-6">No Liked testimonials found</p>
         </section>
       ) : (
         <div className="max-w-4xl mx-auto grid gap-6">
@@ -209,7 +226,10 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                      <DropdownMenuItem variant="destructive">
+                      <DropdownMenuItem
+                        variant="destructive"
+                        onClick={() => deleteMutation({ id: t.id })}
+                      >
                         <TrashIcon className="mr-2 h-4 w-4" /> Delete
                       </DropdownMenuItem>
                     </DropdownMenuGroup>

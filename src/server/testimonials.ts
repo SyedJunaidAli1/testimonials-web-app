@@ -71,6 +71,14 @@ export async function getLikedTestimonials(slug: string) {
         .where(and(eq(testimonials.spaceId, spaceId), eq(testimonials.Liked, true)));
 }
 
+export async function deleteTestimonials(id: string) {
+
+    await db
+        .delete(testimonials)
+        .where(eq(testimonials.id, id))
+    return { success: true }
+}
+
 export async function getTestimonials(slug: string) {
     // Step 1: find the space by slug
     const space = await db
