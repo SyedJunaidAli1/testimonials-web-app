@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import React, { use } from "react";
 import { toast } from "sonner";
+import jsPDF from "jspdf";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -80,6 +81,27 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
       console.error(err.message);
     },
   });
+
+  const downloadSingleTestimonialPDF = (t: any) => {
+    const doc = new jsPDF();
+
+    let startY = 20;
+    doc.setFontSize(14);
+    doc.text(`Name: ${t.responseName}`, 10, startY);
+    if (t.responseStars) {
+      doc.text(`Rating: ${t.responseStars} / 5`, 10, startY + 7);
+    }
+    doc.text(`Title: ${t.responseTitle}`, 10, startY + 14);
+    doc.text(`Message: ${t.responseMessage}`, 10, startY + 21);
+
+    if (t.responseEmail) doc.text(`Email: ${t.responseEmail}`, 10, startY + 28);
+    if (t.responseAddress)
+      doc.text(`Address: ${t.responseAddress}`, 10, startY + 35);
+    if (t.responseSocialLink)
+      doc.text(`Social: ${t.responseSocialLink}`, 10, startY + 42);
+
+    doc.save(`${t.responseName || "testimonial"}.pdf`);
+  };
 
   if (testimonialsLoading) {
     return (
@@ -198,7 +220,11 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                     <Share2 className="w-4 h-4 mr-2" />
                     Share
                   </Button>
-                  <Button variant="secondary" size="sm">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => downloadSingleTestimonialPDF(t)}
+                  >
                     <Download className="w-4 h-4 mr-2" />
                     Download
                   </Button>
