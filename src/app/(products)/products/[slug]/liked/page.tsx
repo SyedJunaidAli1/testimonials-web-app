@@ -33,6 +33,7 @@ import {
 import React, { use } from "react";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
+import { SendTextDialog } from "@/app/components/SendEmailDialog";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -87,18 +88,22 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
 
     let startY = 20;
     doc.setFontSize(14);
-    doc.text(`Name: ${t.responseName}`, 10, startY);
-    if (t.responseStars) {
-      doc.text(`Rating: ${t.responseStars} / 5`, 10, startY + 7);
-    }
-    doc.text(`Title: ${t.responseTitle}`, 10, startY + 14);
-    doc.text(`Message: ${t.responseMessage}`, 10, startY + 21);
+    doc.text(`Reviewer name: ${t.responseName}`, 15, startY);
 
-    if (t.responseEmail) doc.text(`Email: ${t.responseEmail}`, 10, startY + 28);
+    if (t.responseEmail)
+      doc.text(`Reviewer email: ${t.responseEmail}`, 15, startY + 28);
+
+    if (t.responseStars) {
+      doc.text(`Rating: ${t.responseStars} / 5`, 15, startY + 7);
+    }
+
+    doc.text(`Text testimonial: ${t.responseMessage}`, 15, startY + 21);
+    doc.text(`Title: ${t.responseTitle}`, 15, startY + 14);
+
     if (t.responseAddress)
-      doc.text(`Address: ${t.responseAddress}`, 10, startY + 35);
+      doc.text(`Address: ${t.responseAddress}`, 15, startY + 35);
     if (t.responseSocialLink)
-      doc.text(`Social: ${t.responseSocialLink}`, 10, startY + 42);
+      doc.text(`Social: ${t.responseSocialLink}`, 15, startY + 42);
 
     doc.save(`${t.responseName || "testimonial"}.pdf`);
   };
@@ -252,10 +257,19 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                       >
                         <Clipboard className="mr-2 h-4 w-4" /> Copy text
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <ArrowBigRight className="mr-2 h-4 w-4" />
-                        Message {t.responseName}
+                      <DropdownMenuItem
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                      >
+                        <SendTextDialog
+                          testimonialId={t.id}
+                          recipientEmail={t.responseEmail}
+                          user={t.responseName}
+                        />
                       </DropdownMenuItem>
+
                       <DropdownMenuItem>
                         <Files className="mr-2 h-4 w-4" /> Duplicate to other
                         space

@@ -1,4 +1,5 @@
 "use client";
+import { SendTextDialog } from "@/app/components/SendEmailDialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +18,7 @@ import {
   likeTestimonials,
 } from "@/server/testimonials";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import jsPDF from "jspdf";
 import {
   ArrowBigRight,
   ChevronDownIcon,
@@ -77,6 +79,31 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
       console.error(err.message);
     },
   });
+
+  const downloadSingleTestimonialPDF = (t: any) => {
+    const doc = new jsPDF();
+
+    let startY = 20;
+    doc.setFontSize(14);
+    doc.text(`Reviewer name: ${t.responseName}`, 15, startY);
+
+    if (t.responseEmail)
+      doc.text(`Reviewer email: ${t.responseEmail}`, 15, startY + 28);
+
+    if (t.responseStars) {
+      doc.text(`Rating: ${t.responseStars} / 5`, 15, startY + 7);
+    }
+
+    doc.text(`Text testimonial: ${t.responseMessage}`, 15, startY + 21);
+    doc.text(`Title: ${t.responseTitle}`, 15, startY + 14);
+
+    if (t.responseAddress)
+      doc.text(`Address: ${t.responseAddress}`, 15, startY + 35);
+    if (t.responseSocialLink)
+      doc.text(`Social: ${t.responseSocialLink}`, 15, startY + 42);
+
+    doc.save(`${t.responseName || "testimonial"}.pdf`);
+  };
 
   if (testimonialsLoading) {
     return (
@@ -197,7 +224,11 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                       <Share2 className="w-4 h-4 mr-2" />
                       Share
                     </Button>
-                    <Button variant="secondary" size="sm">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => downloadSingleTestimonialPDF(t)}
+                    >
                       <Download className="w-4 h-4 mr-2" />
                       Download
                     </Button>
@@ -228,9 +259,17 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                         >
                           <Clipboard className="mr-2 h-4 w-4" /> Copy text
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <ArrowBigRight className="mr-2 h-4 w-4" />
-                          Message {t.responseName}
+                        <DropdownMenuItem
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }}
+                        >
+                          <SendTextDialog
+                            testimonialId={t.id}
+                            recipientEmail={t.responseEmail}
+                            user={t.responseName}
+                          />
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <Files className="mr-2 h-4 w-4" /> Duplicate to other

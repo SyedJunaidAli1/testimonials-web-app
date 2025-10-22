@@ -126,4 +126,16 @@ export const testimonials = pgTable("testimonials", {
         .notNull(),
 });
 
-export const schema = { user, verification, account, spaces, testimonials, session }
+
+export const sentEmails = pgTable("sentemails", {
+    id: uuid("id").defaultRandom().primaryKey(),
+    testimonialId: uuid("testimonial_id")
+        .references(() => testimonials.id, { onDelete: "cascade" }),
+    subject: text("subject").notNull(),
+    content: text("content").notNull(),
+    recipientEmail: text("recipient_email").notNull(),
+    sentAt: timestamp("sent_at").defaultNow().notNull(),
+});
+
+
+export const schema = { user, verification, account, spaces, testimonials, session, sentEmails }
