@@ -31,6 +31,7 @@
 - [] append unique ID if duplicate slugs
 - [] product page ui for all tabs with empty and with data to be made
 - [] product page ui for all tabs routes and ui to be made
+- [] product page ui download pdf added for liked (need some improvement and add for all)
 - [] product page liked testimonials with schema changes and ui for like and unlike filter it on its tab
 - [x] product page ui (all,liked, request testimonials, route has been made)
 - [x] product page ui (Single tetimonial dialog made but need chande of placeholder pic)
