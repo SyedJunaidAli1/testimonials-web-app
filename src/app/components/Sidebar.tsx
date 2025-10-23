@@ -15,6 +15,7 @@ import {
   Code,
   Heart,
   Inbox,
+  Mail,
   MessageCircleHeart,
   MessageSquareText,
   Pen,
@@ -88,6 +89,15 @@ const Sidebar = () => {
                             className="text-primary"
                           />
                           Liked
+                        </li>
+                      </Link>
+                      <Link href={`/products/${slug}/emails`}>
+                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
+                          <Mail
+                            size={20}
+                            className="text-primary"
+                          />
+                          Emails
                         </li>
                       </Link>
                     </ul>
