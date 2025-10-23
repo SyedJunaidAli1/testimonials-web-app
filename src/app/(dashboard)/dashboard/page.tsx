@@ -133,7 +133,7 @@ const Page = () => {
                   </Link>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <button className="p-1 rounded-sm hover:bg-purple-800">
+                      <button className="p-1 rounded-sm hover:bg-blue-800">
                         <Ellipsis size={26} />
                       </button>
                     </DropdownMenuTrigger>

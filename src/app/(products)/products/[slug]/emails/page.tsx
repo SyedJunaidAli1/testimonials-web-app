@@ -53,7 +53,7 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
         </header>
       </section>
 
-      <div className=" space-y-6">
+      <div>
         {!sentEmails || sentEmails.length === 0 ? (
           <section className="flex flex-col items-center justify-center px-2 py-6">
             <Inbox size={50} className="" />
