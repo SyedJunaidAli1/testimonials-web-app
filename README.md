@@ -37,6 +37,7 @@
 - [x] product page ui (Single tetimonial dialog made but need chande of placeholder pic)
 - [] widget integration for embed on other sites
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
+- [] sent email to user when testi is created
 - [] verify email fnc
 - [x] dashboard
 - [] wall of love

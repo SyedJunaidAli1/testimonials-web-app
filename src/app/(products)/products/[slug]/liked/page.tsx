@@ -18,7 +18,6 @@ import {
 } from "@/server/testimonials";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  ArrowBigRight,
   ChevronDownIcon,
   Clipboard,
   Download,

@@ -7,23 +7,23 @@ import Link from "next/link";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
-  const testimonialLink = `http://localhost:3000/testimonial/${slug}`;
+  const wallOfLove = `http://localhost:3000/testimonial/${slug}/wall-of-love`;
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(testimonialLink);
+    await navigator.clipboard.writeText(wallOfLove);
     toast.success("Link is copied to clipboard");
   };
 
   return (
     <section>
-      <h2 className="font-bold text-3xl leading-12">Request Testimonials</h2>
+      <h2 className="font-bold text-3xl leading-12">Wall of Love</h2>
       <p className="font-medium text-gray-400 mb-4">
-        Share this link with your clients or customers to request testimonials
+        View and share your Wall of Love
       </p>
 
       <div className="bg-muted border border-border px-4 py-6 rounded-md flex flex-col gap-3">
         <span className="font-medium">On our hosted page</span>
-        <p className="text-gray-500 break-all">{testimonialLink}</p>
+        <p className="text-gray-500 break-all">{wallOfLove}</p>
 
         <div className="flex gap-2">
           <Button variant="outline" onClick={handleCopy}>
@@ -32,11 +32,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
           </Button>
 
           <Button variant="default" asChild>
-            <Link
-              href={testimonialLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={wallOfLove} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="size-4 mr-2" />
               View page
             </Link>

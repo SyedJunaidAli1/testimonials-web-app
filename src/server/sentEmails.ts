@@ -1,5 +1,4 @@
 "use server";
-
 import { db } from "@/db/drizzle";
 import { sentEmails } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";

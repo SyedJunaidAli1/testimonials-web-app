@@ -20,7 +20,6 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import jsPDF from "jspdf";
 import {
-  ArrowBigRight,
   ChevronDownIcon,
   Clipboard,
   Download,
