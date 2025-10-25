@@ -29,15 +29,17 @@
 - [x] slug for testimonals
 - [x] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
 - [] append unique ID if duplicate slugs
-- [] product page ui for all tabs with empty and with data to be made
-- [] product page ui for all tabs routes and ui to be made
+- [x] product page ui for all tabs with empty and with data to be made
+- [x] product page ui for all tabs routes and ui to be made
 - [x] product page ui download pdf added for liked (need some improvement and add for all)
-- [] product page liked testimonials with schema changes and ui for like and unlike filter it on its tab
+- [x] product page liked testimonials with schema changes and ui for like and unlike filter it on its tab
 - [x] product page ui (all,liked, request testimonials, route has been made)
 - [x] product page ui (Single tetimonial dialog made but need chande of placeholder pic)
 - [] widget integration for embed on other sites
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
+- [x] tranfer space feature created
 - [] sent email to user when testi is created
+- [] toast for sigin and signup forgot pass and reset
 - [] verify email fnc
 - [x] dashboard
 - [] wall of love

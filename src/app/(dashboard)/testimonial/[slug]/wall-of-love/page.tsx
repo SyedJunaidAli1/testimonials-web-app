@@ -42,7 +42,7 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
   return (
     <main>
       <section className="flex flex-col items-center justify-center gap-4 px-2 py-8">
-        <h2 className="text-6xl font-bold">
+        <h2 className="text-6xl font-bold text-center">
           Wall of love for {space?.spacename}
         </h2>
         <div className="flex flex-col items-center justify-center">

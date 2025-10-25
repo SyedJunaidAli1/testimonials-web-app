@@ -12,18 +12,18 @@ import { useQuery } from "@tanstack/react-query";
 import {
   ArrowBigRight,
   BookImage,
-  Code,
+  Hand,
   Heart,
   Inbox,
   Mail,
   MessageCircleHeart,
-  MessageSquareText,
   Pen,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import SingleTestimonialDialog from "./SingleTestimonialDialog";
+import { TransferSpaceDialog } from "./TransferSpaceDialog";
 
 const Sidebar = () => {
   const { slug } = useParams();
@@ -75,7 +75,7 @@ const Sidebar = () => {
                     Inbox
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className=" py-2 space-y-2 font-medium text-lg">
+                    <ul className=" py-2 space-y-2 font-medium text-md">
                       <Link href={`/products/${slug}/all`}>
                         <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                           <Inbox size={20} className="text-primary" />
@@ -108,7 +108,7 @@ const Sidebar = () => {
                     Embed Widgets
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className=" py-2 space-y-2 font-medium text-lg">
+                    <ul className=" py-2 space-y-2 font-medium text-md">
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                         <Heart size={20} className="text-primary" />
                         Wall of Love
@@ -131,7 +131,7 @@ const Sidebar = () => {
                     Pages
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className=" py-2 space-y-2 font-medium text-lg">
+                    <ul className=" py-2 space-y-2 font-medium text-md">
                       <Link href={`/products/${slug}/request-testimonials`}>
                         <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                           <ArrowBigRight size={20} className="text-primary" />
@@ -155,21 +155,16 @@ const Sidebar = () => {
                     Space settings
                   </AccordionTrigger>
                   <AccordionContent>
-                    <ul className=" py-2 space-y-2 font-medium text-lg">
+                    <ul className="py-2 space-y-2 font-medium text-md">
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <Inbox size={20} className="text-primary" />
-                        All
+                        <Hand size={20} className="text-primary" />
+                        Reorder in Wall of Love
                       </li>
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <MessageSquareText size={20} className="text-primary" />
-                        Text
-                      </li>
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <MessageCircleHeart
-                          size={20}
-                          className="text-primary"
+                        <TransferSpaceDialog
+                          spaceId={space?.id}
+                          userId={space?.userId}
                         />
-                        Liked
                       </li>
                     </ul>
                   </AccordionContent>

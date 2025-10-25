@@ -1,6 +1,6 @@
 'use server'
 import { db } from "@/db/drizzle"
-import { spaces } from "@/db/schema"
+import { spaces, user } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import { eq, and, } from "drizzle-orm";
@@ -160,4 +160,33 @@ export const getSpaceBySlug = async (slug: string) => {
         .where(eq(spaces.slug, slug))
 
     return Space || null
+}
+
+export const transferSpaceAction = async ({ spaceId, targetEmail, userId }: { spaceId: string, targetEmail: string, userId: string }) => {
+
+    const [targetUser] = await db
+        .select()
+        .from(user)
+        .where(eq(user.email, targetEmail))
+
+    if (!targetUser) {
+        return { success: false, message: "No user found with that email." }
+    }
+
+    const [space] = await db
+        .select()
+        .from(spaces)
+        .where(eq(spaces.id, spaceId))
+
+    if (!space) return { success: false, message: "Space not found" }
+    if (space.userId !== userId) {
+        return { success: false, message: "You don't own this space." }
+    }
+
+    await db
+        .update(spaces)
+        .set({ userId: targetUser.id })
+        .where(eq(spaces.id, spaceId))
+
+    return { success: true, message: "Space transferred successfully" }
 }
