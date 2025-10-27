@@ -62,7 +62,7 @@ export function TransferSpaceDialog({
         <Label>Email</Label>
         <Input
           type="email"
-          placeholder="user@example.com"
+          placeholder="email@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

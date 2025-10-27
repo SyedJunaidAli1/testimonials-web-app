@@ -1,4 +1,5 @@
 "use client";
+import { DuplicateTestimonialDialog } from "@/app/components/DuplicateToOtherSpace";
 import { SendTextDialog } from "@/app/components/SendEmailDialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -270,9 +271,13 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                             user={t.responseName}
                           />
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Files className="mr-2 h-4 w-4" /> Duplicate to other
-                          space
+                        <DropdownMenuItem
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }}
+                        >
+                          <DuplicateTestimonialDialog testimonialId={t.id} />
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />

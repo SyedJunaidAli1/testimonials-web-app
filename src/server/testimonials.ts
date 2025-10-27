@@ -112,3 +112,30 @@ export async function likeTestimonials(id: string, Liked: boolean) {
         return { success: false, error: 'Database update failed' }
     }
 }
+
+export async function duplicateTestimonialToOtherSpace({ testimonialId, targetSpaceId }: { testimonialId: string, targetSpaceId: string }) {
+    try {
+        const [original] = await db
+            .select()
+            .from(testimonials)
+            .where(eq(testimonials.id, testimonialId))
+
+        if (!original) {
+            return { success: false, message: "Original testimonial not found" }
+        }
+
+        await db.insert(testimonials).values({
+            ...original,
+            id: crypto.randomUUID(),
+            spaceId: targetSpaceId,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        })
+
+        return { success: true, message: "Testimonial duplicated sucessfully" }
+    } catch (error) {
+        console.error(error)
+        return { success: false, message: "Error duplicating testimonial" }
+
+    }
+}

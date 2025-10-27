@@ -21,7 +21,6 @@ import {
   ChevronDownIcon,
   Clipboard,
   Download,
-  Files,
   Gift,
   Heart,
   Inbox,
@@ -29,10 +28,11 @@ import {
   Share2,
   TrashIcon,
 } from "lucide-react";
-import React, { use } from "react";
+import { use } from "react";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import { SendTextDialog } from "@/app/components/SendEmailDialog";
+import { DuplicateTestimonialDialog } from "@/app/components/DuplicateToOtherSpace";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -269,9 +269,13 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                         />
                       </DropdownMenuItem>
 
-                      <DropdownMenuItem>
-                        <Files className="mr-2 h-4 w-4" /> Duplicate to other
-                        space
+                      <DropdownMenuItem
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                      >
+                        <DuplicateTestimonialDialog testimonialId={t.id} />
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
