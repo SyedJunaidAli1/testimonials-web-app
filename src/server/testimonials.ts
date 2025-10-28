@@ -3,7 +3,9 @@ import { db } from "@/db/drizzle"
 import { spaces, testimonials } from "@/db/schema"
 import { revalidatePath } from "next/cache"
 import cloudinary from "./cloudinary"
-import { and, eq } from "drizzle-orm"
+import { and, count, eq } from "drizzle-orm"
+import { headers } from "next/headers"
+import { auth } from "@/lib/auth"
 
 export async function createTestimonial(formData: FormData) {
     try {
@@ -138,4 +140,20 @@ export async function duplicateTestimonialToOtherSpace({ testimonialId, targetSp
         return { success: false, message: "Error duplicating testimonial" }
 
     }
+}
+
+export const getTestimonialsCount = async () => {
+    const requestheaders = await headers()
+    const session = await auth.api.getSession({ headers: requestheaders })
+    if (!session?.user.id) {
+        throw new Error("Unauthorized")
+    }
+
+    const result = await db
+        .select({ count: count() })
+        .from(testimonials)
+        .innerJoin(spaces, eq(testimonials.spaceId, spaces.id))
+        .where(eq(spaces.userId, session.user.id))
+
+    return result[0].count;
 }

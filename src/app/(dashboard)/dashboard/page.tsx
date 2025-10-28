@@ -24,12 +24,13 @@ import {
 import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
 import Link from "next/link";
+import { getTestimonialsCount } from "@/server/testimonials";
 
 const Page = () => {
   const {
     data: spaces,
-    isLoading,
-    error,
+    isLoading: spacesLoading,
+    error: spacesError,
   } = useQuery({
     queryKey: ["spaces"],
     queryFn: async () => {
@@ -37,6 +38,16 @@ const Page = () => {
     },
   });
 
+  const {
+    data: testimonialCount,
+    isLoading: testimonialCountLoading,
+    error: testimonialCountError,
+  } = useQuery({
+    queryKey: ["testimonialCount"],
+    queryFn: getTestimonialsCount,
+  });
+
+  const totalSpaces = spaces?.length ?? 0;
   const queryClient = useQueryClient();
 
   const { mutate: removeSpace } = useMutation({
@@ -63,13 +74,14 @@ const Page = () => {
     },
   });
 
-  if (isLoading)
+  if (spacesLoading || testimonialCountLoading)
     return (
       <div className="flex items-center justify-center h-screen w-screen">
         <Spinner className="size-10 text-primary" />
       </div>
     );
-  if (error) return <p>Something went wrong</p>;
+
+  if (spacesError || testimonialCountError) return <p>Something went wrong</p>;
 
   return (
     <>
@@ -83,7 +95,7 @@ const Page = () => {
                 <FileText />
               </div>
               <div className="flex gap-2 items-center mt-4 text-left">
-                <p className="text-2xl ">0 /</p>
+                <p className="text-2xl ">{testimonialCount} /</p>
                 <span className="font-semibold text-3xl">∞</span>
               </div>
             </div>
@@ -93,7 +105,7 @@ const Page = () => {
                 <FolderOpen />
               </div>
               <div className="flex gap-2 items-center mt-4 text-left">
-                <p className="text-2xl ">0 /</p>
+                <p className="text-2xl ">{totalSpaces} /</p>
                 <span className="font-semibold text-3xl">∞</span>
               </div>
             </div>
