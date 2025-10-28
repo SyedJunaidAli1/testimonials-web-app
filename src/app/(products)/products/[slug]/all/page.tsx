@@ -105,6 +105,8 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
     doc.save(`${t.responseName || "testimonial"}.pdf`);
   };
 
+  const testiCount = testimonials?.length ?? 0;
+  
   if (testimonialsLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
@@ -126,7 +128,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
             <MessageSquareText className="text-primary" />
             <div>
               <p className="font-medium">Text credits</p>
-              <span className="text-primary">58</span>
+              <span className="text-primary">{testiCount}</span>
             </div>
           </div>
         </header>

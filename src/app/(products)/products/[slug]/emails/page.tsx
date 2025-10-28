@@ -3,7 +3,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { getSentEmailsForTestimonial } from "@/server/sentEmails";
 import { getTestimonials } from "@/server/testimonials";
 import { useQuery } from "@tanstack/react-query";
-import { Inbox, MessageSquareText } from "lucide-react";
+import { Inbox, Mails } from "lucide-react";
 import { use } from "react";
 
 const page = ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -26,6 +26,8 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
     enabled: !!testimonialId,
   });
 
+  const emailCount = sentEmails?.length ?? 0;
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
@@ -44,10 +46,10 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
       <section className="flex-1 p-8">
         <header className="flex justify-between items-center border-b pb-4 mb-6">
           <div className="flex gap-3 items-center">
-            <MessageSquareText className="text-primary" />
+            <Mails className="text-primary" />
             <div>
-              <p className="font-medium">Text credits</p>
-              <span className="text-primary">58</span>
+              <p className="font-medium">Emails Sent</p>
+              <span className="text-primary">{emailCount}</span>
             </div>
           </div>
         </header>

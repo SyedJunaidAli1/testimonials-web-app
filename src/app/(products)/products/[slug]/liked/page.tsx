@@ -48,6 +48,8 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const queryClient = useQueryClient();
 
+  const testiCount = testimonials?.length ?? 0;
+
   const likeMutation = useMutation({
     mutationFn: async ({ id, Liked }: { id: string; Liked: boolean }) =>
       await likeTestimonials(id, Liked),
@@ -126,7 +128,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
           <MessageSquareText className="text-primary" />
           <div>
             <p className="font-medium">Text credits</p>
-            <span className="text-primary">58</span>
+            <span className="text-primary">{testiCount}</span>
           </div>
         </div>
       </header>
