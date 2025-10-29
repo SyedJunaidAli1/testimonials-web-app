@@ -13,11 +13,12 @@ export const signUp = async (name: string, email: string, password: string) => {
     }
 }
 
-export const signin = async (email: string, password: string) => {
+export const logIn = async (email: string, password: string) => {
     try {
         const res = await auth.api.signInEmail({
-            body: { email, password }
+            body: { email, password, }
         })
+
         return { res }
     } catch (error) {
         console.error("Signin user failed:", error);

@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { forgotPassword } from "@/server/users";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export function ForgotPassForm({
   className,
@@ -36,6 +37,7 @@ export function ForgotPassForm({
       setError(error.message);
     } finally {
       setLoading(false);
+      toast.success("Email sent please change you Password");
     }
   };
   return (

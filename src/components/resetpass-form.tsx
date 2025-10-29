@@ -14,6 +14,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { resetPassword } from "@/server/users";
 import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 
 export function ResetPassForm({
   className,
@@ -52,6 +53,7 @@ export function ResetPassForm({
       setError(error.message);
     } finally {
       setLoading(false);
+      toast.success("Password Changed Successfully");
     }
   };
 
@@ -95,9 +97,9 @@ export function ResetPassForm({
                 </Button>
               </div>
               <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link href="/signup" className="underline underline-offset-4">
-                  Sign up
+                have an account?{" "}
+                <Link href="/login" className="underline underline-offset-4">
+                  Login
                 </Link>
               </div>
             </div>
