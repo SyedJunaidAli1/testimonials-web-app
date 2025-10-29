@@ -32,12 +32,11 @@ export function ForgotPassForm({
 
     try {
       await forgotPassword(email);
+      toast.success("Email sent please change you Password");
     } catch (error: any) {
-      console.error("Lonin failed", error);
       setError(error.message);
     } finally {
       setLoading(false);
-      toast.success("Email sent please change you Password");
     }
   };
   return (

@@ -48,12 +48,11 @@ export function ResetPassForm({
 
     try {
       await resetPassword(password, token);
+      toast.success("Password Changed Successfully");
     } catch (error: any) {
-      console.error("Reset Password Failed", error);
       setError(error.message);
     } finally {
       setLoading(false);
-      toast.success("Password Changed Successfully");
     }
   };
 

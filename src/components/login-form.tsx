@@ -14,7 +14,6 @@ import { useState } from "react";
 import { logIn } from "@/server/users";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 export function LoginForm({
   className,
@@ -33,12 +32,11 @@ export function LoginForm({
     const password = formData.get("password") as string;
     try {
       await logIn(email, password);
+      router.push("/dashboard");
     } catch (error: any) {
-      console.error("Lonin failed", error);
-      toast.error(error);
+      setError(error.message);
     } finally {
       setLoading(false);
-      // router.push("/dashboard");
     }
   };
   return (

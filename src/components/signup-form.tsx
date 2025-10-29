@@ -33,12 +33,11 @@ export function SignupForm({
     const password = formData.get("password") as string;
     try {
       await signUp(name, email, password);
+      router.push("/dashboard");
     } catch (error: any) {
-      console.error("Signup failed", error);
       setError(error.message);
     } finally {
       setLoading(false);
-      router.push("/dashboard");
     }
   };
 
