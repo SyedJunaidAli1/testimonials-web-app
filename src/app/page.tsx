@@ -2,13 +2,15 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Nav from "./components/Nav";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 export default function Home() {
   return (
     <>
-      <div className="">
+      <main>
         <Nav />
-        <main className="flex flex-col items-center justify-center mt-20">
+        <section className="flex flex-col items-center justify-center mt-20">
           <h1 className="text-4xl text-center w-160 font-semibold leading-12">
             Collect testimonials in minutes & use them to show your customer{" "}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -31,8 +33,13 @@ export default function Home() {
               It's 100% free to start. No credit card required!
             </p>
           </div>
-        </main>
-      </div>
+
+          <div className="relative flex justify-center max-w-6xl mx-auto mt-16 mb-12 rounded-lg overflow-hidden">
+            <Image src="/mvp.jpg" width={800} height={800} alt="mvp" />
+            <BorderBeam duration={8} size={100} className="absolute top-0 left-0 h-full"  />
+          </div>
+        </section>
+      </main>
     </>
   );
 }
