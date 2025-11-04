@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { LinkIcon, List, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { use } from "react";
+import { InfiniteSlider } from "../../../../../../components/motion-primitives/infinite-slider";
 
 const page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -64,100 +65,108 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
             <List size={60} className="text-muted-foreground" />
           </section>
         ) : (
-          <section
-            className="
-        grid 
-        grid-cols-1 
-        sm:grid-cols-2 
-        lg:grid-cols-3 
-        xl:grid-cols-4 
-        gap-6
-        
-      "
-          >
-            {testimonials.map((t) => (
-              <div
-                key={t.id}
+          <div className="flex flex-col gap-10">
+            <InfiniteSlider speedOnHover={25} speed={75} gap={24}>
+              <section
                 className="
-            border rounded-xl shadow-sm 
-            bg-card hover:shadow-md 
-            transition-all duration-200 
-            p-5 flex flex-col justify-between
-            hover:-translate-y-1
-          "
+        grid
+        grid-cols-1
+        sm:grid-cols-2
+        lg:grid-cols-3
+        xl:grid-cols-4
+        gap-6
+      "
               >
-                {/* Header Section */}
-                <div className="flex items-center gap-3 mb-4">
-                  <Avatar className="w-12 h-12">
-                    <AvatarImage src={t.imageUrl || ""} alt={t.responseName} />
-                    <AvatarFallback>
-                      {t.responseName?.[0]?.toUpperCase() || "U"}
-                    </AvatarFallback>
-                  </Avatar>
+                {testimonials.map((t) => (
+                  <div
+                    key={t.id}
+                    className="
+            border rounded shadow-sm
+            bg-card hover:shadow-md
+            transition-all duration-200
+            p-4 flex flex-col items-center
+            hover:-translate-y-1
+            max-w-64
+          "
+                  >
+                    {/* Header Section */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <Avatar className="w-12 h-12">
+                        <AvatarImage
+                          src={t.imageUrl || ""}
+                          alt={t.responseName}
+                        />
+                        <AvatarFallback>
+                          {t.responseName?.[0]?.toUpperCase() || "U"}
+                        </AvatarFallback>
+                      </Avatar>
 
-                  <div className="flex flex-col">
-                    <h3 className="font-semibold text-lg">
-                      {t.responseName || "Anonymous"}
-                    </h3>
-                    {t.responseTitle && (
-                      <p className="text-sm text-muted-foreground">
-                        {t.responseTitle}
-                      </p>
-                    )}
+                      <div className="flex flex-col">
+                        <h3 className="font-semibold text-lg">
+                          {t.responseName || "Anonymous"}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Message */}
+                    <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+                      {t.responseMessage || "No message provided."}
+                    </p>
                   </div>
-                </div>
+                ))}
+              </section>
+            </InfiniteSlider>
+            <InfiniteSlider speedOnHover={25} speed={75} gap={24} reverse>
+              <section
+                className="
+        grid
+        grid-cols-1
+        sm:grid-cols-2
+        lg:grid-cols-3
+        xl:grid-cols-4
+        gap-6
+      "
+              >
+                {testimonials.map((t) => (
+                  <div
+                    key={t.id}
+                    className="
+            border rounded shadow-sm
+            bg-card hover:shadow-md
+            transition-all duration-200
+            p-4 flex flex-col items-center
+            hover:-translate-y-1
+            max-w-64
+          "
+                  >
+                    {/* Header Section */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <Avatar className="w-12 h-12">
+                        <AvatarImage
+                          src={t.imageUrl || ""}
+                          alt={t.responseName}
+                        />
+                        <AvatarFallback>
+                          {t.responseName?.[0]?.toUpperCase() || "U"}
+                        </AvatarFallback>
+                      </Avatar>
 
-                {/* Message */}
-                <p className="text-sm leading-relaxed text-foreground/80 mb-4">
-                  {t.responseMessage || "No message provided."}
-                </p>
+                      <div className="flex flex-col">
+                        <h3 className="font-semibold text-lg">
+                          {t.responseName || "Anonymous"}
+                        </h3>
+                      </div>
+                    </div>
 
-                {/* Contact Info */}
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  {t.responseEmail && (
-                    <div className="flex items-center gap-2">
-                      <Mail size={15} /> <span>{t.responseEmail}</span>
-                    </div>
-                  )}
-                  {t.responseAddress && (
-                    <div className="flex items-center gap-2">
-                      <MapPin size={15} /> <span>{t.responseAddress}</span>
-                    </div>
-                  )}
-                  {t.responseSocialLink && (
-                    <div className="flex items-center gap-2">
-                      <LinkIcon size={15} />
-                      <Link
-                        href={t.responseSocialLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline text-primary"
-                      >
-                        {t.responseSocialLink}
-                      </Link>
-                    </div>
-                  )}
-                </div>
-
-                {/* Footer */}
-                <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-                  {t.responseStars && (
-                    <div className="flex flex-col items-center gap-3">
-                      <Rating defaultValue={t.responseStars} readOnly>
-                        {Array.from({ length: 5 }).map((_, index) => (
-                          <RatingButton
-                            className="text-yellow-500"
-                            key={index}
-                          />
-                        ))}
-                      </Rating>
-                    </div>
-                  )}
-                  <span>{new Date(t.createdAt).toLocaleDateString()}</span>
-                </div>
-              </div>
-            ))}
-          </section>
+                    {/* Message */}
+                    <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+                      {t.responseMessage || "No message provided."}
+                    </p>
+                  </div>
+                ))}
+              </section>
+            </InfiniteSlider>
+          </div>
         )}
       </section>
     </main>

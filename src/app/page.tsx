@@ -35,8 +35,18 @@ export default function Home() {
           </div>
 
           <div className="relative flex justify-center max-w-6xl mx-auto mt-16 mb-12 rounded-lg overflow-hidden">
-            <Image src="/mvp.jpg" width={800} height={800} alt="mvp" />
-            <BorderBeam duration={8} size={100} className="absolute top-0 left-0 h-full"  />
+            <Image
+              src="/mvp.jpg"
+              width={1000}
+              height={800}
+              alt="mvp"
+              className="border-2"
+            />
+            <BorderBeam
+              duration={8}
+              size={100}
+              className="absolute top-0 left-0 h-full"
+            />
           </div>
         </section>
       </main>
