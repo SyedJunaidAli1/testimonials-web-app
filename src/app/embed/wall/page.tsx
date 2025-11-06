@@ -1,26 +1,32 @@
-import { getTestimonials } from "@/server/testimonials";
-import { useQuery } from "@tanstack/react-query";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { testimonialData } from "@/server/testimonials";
 
-export default async function WallEmbed({
-  searchParams,
-}: {
-  searchParams: { spaceId: string };
+export default async function WallEmbed(props: {
+  searchParams: Promise<{ spaceId: string }>;
 }) {
-  const slug = searchParams.slug;
+  const { spaceId } = await props.searchParams;
 
-  const { data: testimonials } = useQuery({
-    queryKey: ["testimonials", slug],
-    queryFn: async () => await ,
-  });
+  const testimonials = await testimonialData(spaceId);
 
   return (
-    <div className="p-4 bg-white dark:bg-gray-900 text-black dark:text-white">
-      <h2 className="text-xl font-bold mb-4">Wall of Love ❤️</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {testimonials.map((t) => (
-          <div key={t.id} className="border rounded-lg p-4 shadow-sm">
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4 text-center">Wall of Love ❤️</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {testimonials?.map((t: any) => (
+          <div
+            key={t.id}
+            className="flex flex-col gap-2 items-center justify-center text-center border rounded-lg p-4 shadow-sm hover:border-amber-200 transition-all duration-200"
+          >
+            <section className="flex items-center gap-2">
+              <Avatar>
+                <AvatarImage
+                  src={t.imageUrl}
+                  alt={t.responseName}
+                ></AvatarImage>
+              </Avatar>
+              <span className="text-sm font-semibold">{t.responseName}</span>
+            </section>
             <p>{t.responseMessage}</p>
-            <p className="text-sm mt-2 font-semibold">— {t.responseName}</p>
           </div>
         ))}
       </div>

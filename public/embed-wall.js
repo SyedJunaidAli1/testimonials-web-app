@@ -1,9 +1,9 @@
 (function () {
   const script = document.currentScript;
-  const slug = script.getAttribute("data-slug");
+  const spaceId = script.getAttribute("data-space-id");
 
-  if (!slug) {
-    console.error("❌ Missing data-slug attribute in embed script");
+  if (!spaceId) {
+    console.error("❌ Missing data-space-id attribute in embed script");
     return;
   }
 
@@ -14,7 +14,7 @@
   document.body.appendChild(container);
 
   const iframe = document.createElement("iframe");
-  iframe.src = `http://localhost:3000/embed/wall?slug=${slug}`;
+  iframe.src = `http://localhost:3000/embed/wall?spaceId=${spaceId}`;
   iframe.style.width = "100%";
   iframe.style.height = "600px";
   iframe.style.border = "none";

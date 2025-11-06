@@ -158,3 +158,12 @@ export async function getTestimonialsCount() {
 
   return result[0].count;
 }
+
+export async function testimonialData(spaceId: string) {
+  const testimonialsData = await db
+    .select()
+    .from(testimonials)
+    .where(eq(testimonials.spaceId, spaceId));
+
+  return testimonialsData;
+}
