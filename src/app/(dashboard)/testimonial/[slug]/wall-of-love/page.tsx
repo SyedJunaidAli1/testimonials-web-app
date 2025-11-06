@@ -66,7 +66,7 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
           </section>
         ) : (
           <div className="flex flex-col gap-10">
-            <InfiniteSlider speedOnHover={25} speed={75} gap={24}>
+            <InfiniteSlider speedOnHover={25} gap={16}>
               <section
                 className="
         grid
@@ -116,7 +116,7 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
                 ))}
               </section>
             </InfiniteSlider>
-            <InfiniteSlider speedOnHover={25} speed={75} gap={24} reverse>
+            <InfiniteSlider speedOnHover={25} gap={16} reverse>
               <section
                 className="
         grid
