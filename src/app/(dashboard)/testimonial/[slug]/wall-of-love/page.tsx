@@ -1,15 +1,15 @@
 "use client";
+import EmblaCarousel from "@/app/Emlba/EmblaCarousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
 import { Spinner } from "@/components/ui/spinner";
 import { getSpaceBySlug } from "@/server/spaces";
 import { getLikedTestimonials } from "@/server/testimonials";
 import { useQuery } from "@tanstack/react-query";
-import { LinkIcon, List, Mail, MapPin } from "lucide-react";
+import { EmblaOptionsType } from "embla-carousel";
+import { List } from "lucide-react";
 import Link from "next/link";
 import { use } from "react";
-import { InfiniteSlider } from "../../../../../../components/motion-primitives/infinite-slider";
 
 const page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -40,6 +40,8 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
     return <p>Something went wrong while fetching data...</p>;
   }
 
+  const OPTIONS: EmblaOptionsType = { loop: true };
+  const SLIDES = [1, 2, 3, 4, 5];
   return (
     <main>
       <section className="flex flex-col items-center justify-center gap-4 px-2 py-8">
@@ -66,106 +68,39 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
           </section>
         ) : (
           <div className="flex flex-col gap-10">
-            <InfiniteSlider speedOnHover={25} gap={16}>
-              <section
-                className="
-        grid
-        grid-cols-1
-        sm:grid-cols-2
-        lg:grid-cols-3
-        xl:grid-cols-4
-        gap-6
-      "
-              >
-                {testimonials.map((t) => (
-                  <div
-                    key={t.id}
-                    className="
-            border rounded shadow-sm
-            bg-card hover:shadow-md
-            transition-all duration-200
-            p-4 flex flex-col items-center
-            hover:-translate-y-1
-            max-w-64
-          "
-                  >
-                    {/* Header Section */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <Avatar className="w-12 h-12">
-                        <AvatarImage
-                          src={t.imageUrl || ""}
-                          alt={t.responseName}
-                        />
-                        <AvatarFallback>
-                          {t.responseName?.[0]?.toUpperCase() || "U"}
-                        </AvatarFallback>
-                      </Avatar>
+            <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {testimonials.map((t) => (
+                <div
+                  key={t.id}
+                  className="border rounded shadow-sm bg-card hover:shadow-md transition-all duration-200 p-4 flex flex-col items-center hover:-translate-y-1 max-w-64"
+                >
+                  {/* Header Section */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage
+                        src={t.imageUrl || ""}
+                        alt={t.responseName}
+                      />
+                      <AvatarFallback>
+                        {t.responseName?.[0]?.toUpperCase() || "U"}
+                      </AvatarFallback>
+                    </Avatar>
 
-                      <div className="flex flex-col">
-                        <h3 className="font-semibold text-lg">
-                          {t.responseName || "Anonymous"}
-                        </h3>
-                      </div>
+                    <div className="flex flex-col">
+                      <h3 className="font-semibold text-lg">
+                        {t.responseName || "Anonymous"}
+                      </h3>
                     </div>
-
-                    {/* Message */}
-                    <p className="text-sm leading-relaxed text-foreground/80 mb-4">
-                      {t.responseMessage || "No message provided."}
-                    </p>
                   </div>
-                ))}
-              </section>
-            </InfiniteSlider>
-            <InfiniteSlider speedOnHover={25} gap={16} reverse>
-              <section
-                className="
-        grid
-        grid-cols-1
-        sm:grid-cols-2
-        lg:grid-cols-3
-        xl:grid-cols-4
-        gap-6
-      "
-              >
-                {testimonials.map((t) => (
-                  <div
-                    key={t.id}
-                    className="
-            border rounded shadow-sm
-            bg-card hover:shadow-md
-            transition-all duration-200
-            p-4 flex flex-col items-center
-            hover:-translate-y-1
-            max-w-64
-          "
-                  >
-                    {/* Header Section */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <Avatar className="w-12 h-12">
-                        <AvatarImage
-                          src={t.imageUrl || ""}
-                          alt={t.responseName}
-                        />
-                        <AvatarFallback>
-                          {t.responseName?.[0]?.toUpperCase() || "U"}
-                        </AvatarFallback>
-                      </Avatar>
 
-                      <div className="flex flex-col">
-                        <h3 className="font-semibold text-lg">
-                          {t.responseName || "Anonymous"}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Message */}
-                    <p className="text-sm leading-relaxed text-foreground/80 mb-4">
-                      {t.responseMessage || "No message provided."}
-                    </p>
-                  </div>
-                ))}
-              </section>
-            </InfiniteSlider>
+                  {/* Message */}
+                  <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+                    {t.responseMessage || "No message provided."}
+                  </p>
+                </div>
+              ))}
+            </section>
           </div>
         )}
       </section>

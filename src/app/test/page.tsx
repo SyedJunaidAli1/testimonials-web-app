@@ -1,6 +1,11 @@
+import { EmblaOptionsType } from "embla-carousel";
+import EmblaCarousel from "../Emlba/EmblaCarousel";
+
 const page = () => {
+  const OPTIONS: EmblaOptionsType = { loop: true };
+  const SLIDES = [1,2,3,4,5];
   return (
-    <div className=" max-w-2/4">
+    <div className="max-w-2/4">
       <iframe
         src="https://betterstacks.com/embed/profile/syedjunaidali790"
         width="33%"
@@ -27,6 +32,7 @@ const page = () => {
         width="100%"
         height="350px"
       ></iframe>*/}
+      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
     </div>
   );
 };
