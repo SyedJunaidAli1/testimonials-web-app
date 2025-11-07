@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
@@ -48,21 +49,19 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
   }, [emblaApi]);
 
   return (
-    <div className=" w-full">
-      <div className="max-w-3xl mx-auto [--slide-height:19rem] [--slide-spacing:1rem] [--slide-size:45%]">
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-1)]">
-            {slides.map((index) => (
-              <div
-                className=" [transform:translate3d(0,0,0)] flex-[0_0_var(--slide-size)] min-w-0 [padding-left:var(--slide-spacing)] border-2 rounded-lg m-2"
-                key={index}
-              >
-                <div className="shadow-[inset_0_0_0_0.2rem_var(--detail-medium-contrast)] rounded-[1.8rem] text-[4rem] font-semibold flex items-center justify-center h-[var(--slide-height)] select-none">
-                  <span>{index}</span>
-                </div>
+    <div className="max-w-3xl mx-auto [--slide-height:19rem] [--slide-spacing:1rem] [--slide-size:45%]">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-1)]">
+          {slides.map((index) => (
+            <div
+              className=" [transform:translate3d(0,0,0)] flex-[0_0_var(--slide-size)] min-w-0 [padding-left:var(--slide-spacing)] border-2 rounded-lg m-2"
+              key={index}
+            >
+              <div className="shadow-[inset_0_0_0_0.2rem_var(--detail-medium-contrast)] rounded-[1.8rem] text-[4rem] font-semibold flex items-center justify-center h-[var(--slide-height)] select-none">
+                <span>{index}</span>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

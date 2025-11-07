@@ -42,6 +42,7 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const OPTIONS: EmblaOptionsType = { loop: true };
   const SLIDES = [1, 2, 3, 4, 5];
+
   return (
     <main>
       <section className="flex flex-col items-center justify-center gap-4 px-2 py-8">
@@ -68,8 +69,8 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
           </section>
         ) : (
           <div className="flex flex-col gap-10">
-            <EmblaCarousel slides={SLIDES} options={OPTIONS} />
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <EmblaCarousel slides={SLIDES} options={OPTIONS} />
               {testimonials.map((t) => (
                 <div
                   key={t.id}
