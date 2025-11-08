@@ -41,7 +41,7 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
   }
 
   const OPTIONS: EmblaOptionsType = { loop: true };
-  const SLIDES = [1, 2, 3, 4, 5];
+  const SLIDES = ["1", "2", "3", "4", "5"];
 
   return (
     <main>
@@ -68,41 +68,11 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
             <List size={60} className="text-muted-foreground" />
           </section>
         ) : (
-          <div className="flex flex-col gap-10">
-            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              <EmblaCarousel slides={SLIDES} options={OPTIONS} />
-              {testimonials.map((t) => (
-                <div
-                  key={t.id}
-                  className="border rounded shadow-sm bg-card hover:shadow-md transition-all duration-200 p-4 flex flex-col items-center hover:-translate-y-1 max-w-64"
-                >
-                  {/* Header Section */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <Avatar className="w-12 h-12">
-                      <AvatarImage
-                        src={t.imageUrl || ""}
-                        alt={t.responseName}
-                      />
-                      <AvatarFallback>
-                        {t.responseName?.[0]?.toUpperCase() || "U"}
-                      </AvatarFallback>
-                    </Avatar>
-
-                    <div className="flex flex-col">
-                      <h3 className="font-semibold text-lg">
-                        {t.responseName || "Anonymous"}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <p className="text-sm leading-relaxed text-foreground/80 mb-4">
-                    {t.responseMessage || "No message provided."}
-                  </p>
-                </div>
-              ))}
-            </section>
-          </div>
+          <section>
+            <EmblaCarousel testimonials={testimonials} options={OPTIONS} />
+            <EmblaCarousel testimonials={testimonials} options={OPTIONS} />
+            <EmblaCarousel testimonials={testimonials} options={OPTIONS} />
+          </section>
         )}
       </section>
     </main>
