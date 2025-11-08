@@ -1,5 +1,6 @@
 "use client";
 import EmblaCarousel from "@/app/Emlba/EmblaCarousel";
+import EmblaCarouselReverse from "@/app/Emlba/EmblaCarouselReverse";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -41,7 +42,6 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
   }
 
   const OPTIONS: EmblaOptionsType = { loop: true };
-  const SLIDES = ["1", "2", "3", "4", "5"];
 
   return (
     <main>
@@ -70,7 +70,7 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
         ) : (
           <section>
             <EmblaCarousel testimonials={testimonials} options={OPTIONS} />
-            <EmblaCarousel testimonials={testimonials} options={OPTIONS} />
+            <EmblaCarouselReverse testimonials={testimonials} options={OPTIONS} />
             <EmblaCarousel testimonials={testimonials} options={OPTIONS} />
           </section>
         )}

@@ -19,13 +19,15 @@ type PropType = {
   options?: EmblaOptionsType;
 };
 
-const EmblaCarousel: React.FC<PropType> = ({ testimonials, options }) => {
+const EmblaCarouselReverse: React.FC<PropType> = ({
+  testimonials,
+  options,
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({
-      playOnInit: true,
       stopOnInteraction: false,
       speed: 2,
-      direction: "backward"
+      direction: "forward",
     }),
   ]);
   const [isHovered, setIsHovered] = useState(false);
@@ -111,4 +113,4 @@ const EmblaCarousel: React.FC<PropType> = ({ testimonials, options }) => {
   );
 };
 
-export default EmblaCarousel;
+export default EmblaCarouselReverse;
