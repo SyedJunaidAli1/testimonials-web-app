@@ -1,7 +1,6 @@
 "use server";
 import { db } from "@/db/drizzle";
 import { spaces, testimonials } from "@/db/schema";
-import { revalidatePath } from "next/cache";
 import cloudinary from "./cloudinary";
 import { and, count, eq } from "drizzle-orm";
 import { headers } from "next/headers";
@@ -43,8 +42,6 @@ export async function createTestimonial(formData: FormData) {
       isApproved: formData.get("isApproved") === "true",
       imageUrl: imageUrl, // ✅ stored image URL
     });
-
-    revalidatePath("/dashboard"); // optional
     return { success: true };
   } catch (error) {
     console.error("❌ Failed to create testimonial:", error);
@@ -166,4 +163,14 @@ export async function testimonialData(spaceId: string) {
     .where(eq(testimonials.spaceId, spaceId));
 
   return testimonialsData;
+}
+
+export async function getTestimonialById(id: string) {
+  const result = await db
+    .select()
+    .from(testimonials)
+    .where(eq(testimonials.id, id))
+    .limit(1);
+
+  return result[0] || null;
 }

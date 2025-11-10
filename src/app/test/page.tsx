@@ -1,11 +1,6 @@
-import { EmblaOptionsType } from "embla-carousel";
-import EmblaCarousel from "../Emlba/EmblaCarousel";
-
 const page = () => {
-  const OPTIONS: EmblaOptionsType = { loop: true };
-  const SLIDES = [1,2,3,4,5];
   return (
-    <div className="max-w-2/4">
+    <div className="flex flex-wrap gap-6 items-center justify-center py-10">
       <iframe
         src="https://betterstacks.com/embed/profile/syedjunaidali790"
         width="33%"
@@ -19,7 +14,13 @@ const page = () => {
         scrolling="auto"
       ></iframe>
       <iframe
-        src=" http://localhost:3000/embed/wall?spaceId=28746b2e-3487-41c1-87c3-8c70fcc095b2"
+        src="http://localhost:3000/embed/wall?spaceId=28746b2e-3487-41c1-87c3-8c70fcc095b2"
+        width="33%"
+        height="400px"
+        scrolling="auto"
+      ></iframe>
+      <iframe
+        src="http://localhost:3000/embed/single?id=7fff8002-ca68-4732-b87e-bdc020077fc5"
         width="33%"
         height="400px"
         scrolling="auto"
@@ -32,7 +33,6 @@ const page = () => {
         width="100%"
         height="350px"
       ></iframe>*/}
-      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
     </div>
   );
 };

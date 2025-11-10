@@ -61,7 +61,7 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
   }, [emblaApi]);
 
   return (
-    <div className="mx-auto [--slide-height:13rem] [--slide-spacing:1rem] [--slide-size:60%] sm:[--slide-size:50%] md:[--slide-size:40%] lg:[--slide-size:25%] xl:[--slide-size:20%]">
+    <div className="mx-auto [--slide-height:16rem] [--slide-spacing:1rem] [--slide-size:60%] sm:[--slide-size:50%] md:[--slide-size:40%] lg:[--slide-size:25%] xl:[--slide-size:20%]">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-1)]">
           {testimonials.map((t) => (
@@ -70,7 +70,7 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
               key={t.id}
             >
               <div className="shadow-[inset_0_0_0_0.2rem_var(--detail-medium-contrast)] rounded-[1.8rem] flex items-center justify-center h-[var(--slide-height)] select-none">
-                <section className="px-2 py-4">
+                <section className="px-2 py-4 ">
                   <div className="flex items-center justify-center text-center gap-2">
                     <Avatar className="w-12 h-12">
                       <AvatarImage
@@ -100,9 +100,11 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
                     </div>
                   </div>
 
-                  <p className="text-sm text-center leading-relaxed text-foreground/80 mb-4">
-                    {t.responseMessage || "No message provided."}
-                  </p>
+                  <div className="flex justify-center items-center px-2 py-4">
+                    <p className="text-sm leading-relaxed text-foreground/80 ">
+                      {t.responseMessage || "No message provided."}
+                    </p>
+                  </div>
                 </section>
               </div>
             </div>

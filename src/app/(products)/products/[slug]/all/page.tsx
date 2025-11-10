@@ -24,7 +24,6 @@ import {
   ChevronDownIcon,
   Clipboard,
   Download,
-  Files,
   Gift,
   Heart,
   Inbox,
@@ -58,7 +57,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
       const previousData = queryClient.getQueryData(["testimonials", slug]);
 
       queryClient.setQueryData(["testimonials", slug], (oldData: any) =>
-        oldData.map((t: any) => (t.id === id ? { ...t, Liked } : t))
+        oldData.map((t: any) => (t.id === id ? { ...t, Liked } : t)),
       );
 
       return { previousData };
@@ -106,7 +105,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   };
 
   const testiCount = testimonials?.length ?? 0;
-  
+
   if (testimonialsLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
