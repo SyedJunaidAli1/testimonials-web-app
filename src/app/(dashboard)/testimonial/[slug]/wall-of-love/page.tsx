@@ -1,7 +1,6 @@
 "use client";
 import EmblaCarousel from "@/app/Emlba/EmblaCarousel";
 import EmblaCarouselReverse from "@/app/Emlba/EmblaCarouselReverse";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { getSpaceBySlug } from "@/server/spaces";

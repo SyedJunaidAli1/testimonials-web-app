@@ -39,7 +39,7 @@
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [x] tranfer space feature created
 - [] sent email to user when testi is created
-- [] Embla carousel for testimonials with data fetching
+- [x] Embla carousel for testimonials with data fetching
 - [] Embed single page is remind
 - [] Embed Ui is for copy single and wall of love Ui remained
 - [] slug duplication

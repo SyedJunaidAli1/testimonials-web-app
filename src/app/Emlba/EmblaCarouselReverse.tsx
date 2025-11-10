@@ -26,7 +26,7 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({
       stopOnInteraction: false,
-      speed: 2,
+      speed: 1.5,
       direction: "forward",
     }),
   ]);
@@ -61,7 +61,7 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
   }, [emblaApi]);
 
   return (
-    <div className="max-w-full mx-auto [--slide-height:13rem] [--slide-spacing:1rem] [--slide-size:20%]">
+    <div className="mx-auto [--slide-height:13rem] [--slide-spacing:1rem] [--slide-size:60%] sm:[--slide-size:50%] md:[--slide-size:40%] lg:[--slide-size:25%] xl:[--slide-size:20%]">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-1)]">
           {testimonials.map((t) => (

@@ -25,7 +25,7 @@ const EmblaCarousel: React.FC<PropType> = ({ testimonials, options }) => {
       playOnInit: true,
       stopOnInteraction: false,
       speed: 2,
-      direction: "backward"
+      direction: "backward",
     }),
   ]);
   const [isHovered, setIsHovered] = useState(false);
@@ -59,7 +59,7 @@ const EmblaCarousel: React.FC<PropType> = ({ testimonials, options }) => {
   }, [emblaApi]);
 
   return (
-    <div className="max-w-full mx-auto [--slide-height:13rem] [--slide-spacing:1rem] [--slide-size:20%]">
+    <div className="mx-auto [--slide-height:13rem] [--slide-spacing:1rem] [--slide-size:60%] sm:[--slide-size:50%] md:[--slide-size:40%] lg:[--slide-size:25%] xl:[--slide-size:20%]">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-1)]">
           {testimonials.map((t) => (
@@ -68,8 +68,8 @@ const EmblaCarousel: React.FC<PropType> = ({ testimonials, options }) => {
               key={t.id}
             >
               <div className="shadow-[inset_0_0_0_0.2rem_var(--detail-medium-contrast)] rounded-[1.8rem] flex items-center justify-center h-[var(--slide-height)] select-none">
-                <section className="px-2 py-4">
-                  <div className="flex items-center justify-center text-center gap-2">
+                <section className="px-2 py-4 ">
+                  <div className="flex items-center justify-center text-center gap-2 max-w-fit">
                     <Avatar className="w-12 h-12">
                       <AvatarImage
                         src={t.imageUrl || ""}
