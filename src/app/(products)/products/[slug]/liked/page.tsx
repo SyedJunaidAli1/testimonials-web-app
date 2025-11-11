@@ -33,6 +33,7 @@ import { toast } from "sonner";
 import jsPDF from "jspdf";
 import { SendTextDialog } from "@/app/components/SendEmailDialog";
 import { DuplicateTestimonialDialog } from "@/app/components/DuplicateToOtherSpace";
+import { GetLinkForTestimonial } from "@/app/components/GetLinkForTestimonial";
 
 const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = use(params);
@@ -59,7 +60,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
       const previousData = queryClient.getQueryData(["testimonials", slug]);
 
       queryClient.setQueryData(["testimonials", slug], (oldData: any) =>
-        oldData.map((t: any) => (t.id === id ? { ...t, Liked } : t))
+        oldData.map((t: any) => (t.id === id ? { ...t, Liked } : t)),
       );
 
       return { previousData };
@@ -222,10 +223,7 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                     <Gift className="w-4 h-4 mr-2" />
                     Incentivize
                   </Button>
-                  <Button variant="secondary" size="sm">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Share
-                  </Button>
+                  <GetLinkForTestimonial testimonialId={t.id} />
                   <Button
                     variant="secondary"
                     size="sm"

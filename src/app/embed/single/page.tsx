@@ -18,7 +18,7 @@ export default async function SingleTestimonialEmbed(props: {
 
   return (
     <section className="flex items-center justify-center h-screen">
-      <div className="px-2 py-6 rounded-lg shadow-md max-w-md mx-auto border w-full">
+      <div className="px-2 py-6 rounded-lg shadow-md max-w-md mx-auto w-full">
         <div className="flex flex-col items-center justify-center gap-4 text-center">
           <Image
             src={testimonial.imageUrl || "/placeholder-avatar.png"}

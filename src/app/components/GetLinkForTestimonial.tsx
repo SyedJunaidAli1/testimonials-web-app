@@ -23,7 +23,7 @@ export function GetLinkForTestimonial({
   const [copied, setCopied] = useState(false);
 
   // ✅ Construct the embed URL dynamically
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_SELF_URL || "http://localhost:3000";
   const embedUrl = `${baseUrl}/embed/single?id=${testimonialId}`;
 
   // ✅ Full iframe embed code for copying
@@ -35,13 +35,11 @@ export function GetLinkForTestimonial({
   style={{ border: "none", borderRadius: "10px" }}
 ></iframe>`;
 
-  const handleCopy = async (text: string, type: "link" | "code") => {
+  const handleCopy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      toast.success(
-        type === "code" ? "✅ Embed code copied!" : "✅ Link copied!",
-      );
+      toast.success("✅ Embed code copied!");
       setTimeout(() => setCopied(false), 2000);
     } catch {
       toast.error("❌ Failed to copy");
@@ -55,7 +53,11 @@ export function GetLinkForTestimonial({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" size="sm" className="flex items-center gap-2">
+        <Button
+          variant="secondary"
+          size="sm"
+          className="flex items-center gap-2"
+        >
           <Share2 size={16} /> Share
         </Button>
       </DialogTrigger>

@@ -39,6 +39,13 @@ const page = () => {
         scrolling="auto"
         style={{ border: "none", borderRadius: "10px" }}
       ></iframe>
+      <iframe
+        src="http://localhost:3000/embed/single?id=8809810c-e496-4501-a811-0d5f72cb0700"
+        width="100%"
+        height="400px"
+        scrolling="auto"
+        style={{ border: "none", borderRadius: "10px" }}
+      ></iframe>
     </div>
   );
 };

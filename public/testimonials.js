@@ -10,7 +10,7 @@
   document.body.appendChild(container);
 
   const iframe = document.createElement("iframe");
-  iframe.src = `http://localhost:3000/embed/single?id=${id}`;
+  iframe.src = `${process.env.NEXT_PUBLIC_SELF_URL}/embed/single?id=${id}`;
   iframe.style.width = "100%";
   iframe.style.height = "600px";
   iframe.style.border = "none";
