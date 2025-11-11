@@ -1,5 +1,6 @@
 "use client";
 import { DuplicateTestimonialDialog } from "@/app/components/DuplicateToOtherSpace";
+import { GetLinkForTestimonial } from "@/app/components/GetLinkForTestimonial";
 import { SendTextDialog } from "@/app/components/SendEmailDialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -221,10 +222,9 @@ const Page = ({ params }: { params: Promise<{ slug: string }> }) => {
                       <Gift className="w-4 h-4 mr-2" />
                       Incentivize
                     </Button>
-                    <Button variant="secondary" size="sm">
-                      <Share2 className="w-4 h-4 mr-2" />
-                      Share
-                    </Button>
+
+                    <GetLinkForTestimonial testimonialId={t.id} />
+
                     <Button
                       variant="secondary"
                       size="sm"

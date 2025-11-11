@@ -25,14 +25,20 @@ const page = () => {
         height="400px"
         scrolling="auto"
       ></iframe>
-      {/*<iframe
-        id="testimonialto-embed-text--OcFZGc_gCYgboFJ3jJQ"
-        src="https://embed-v2.testimonial.to/text/-OcFZGc_gCYgboFJ3jJQ"
-        frameborder="2"
-        scrolling="no"
-        width="100%"
-        height="350px"
-      ></iframe>*/}
+      <iframe
+        src="http://localhost:3000/embed/single?id=818bb3fe-4691-43c8-8321-d51242acc364"
+        width="33%"
+        height="300px"
+        scrolling="auto"
+        style={{ border: "none", borderRadius: "10px" }}
+      ></iframe>
+      <iframe
+        src="http://localhost:3000/embed/single?id=dd210e2a-b0a1-4d58-bef6-3ab8a1ee550f"
+        width="33%"
+        height="300px"
+        scrolling="auto"
+        style={{ border: "none", borderRadius: "10px" }}
+      ></iframe>
     </div>
   );
 };
