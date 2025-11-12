@@ -92,7 +92,7 @@ export function GetLinkForTestimonial({
               variant="outline"
               size="sm"
               className="absolute top-2 right-2"
-              onClick={() => handleCopy(embedCode, "code")}
+              onClick={() => handleCopy(embedCode)}
             >
               {copied ? "Copied!" : <Copy size={14} />}
             </Button>

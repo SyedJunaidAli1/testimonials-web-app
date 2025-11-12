@@ -36,12 +36,3 @@ export async function sendEmailToUser({
 
     return { success: true };
 }
-
-
-export async function getSentEmailsForTestimonial(testimonialId: string) {
-  return await db
-    .select()
-    .from(sentEmails)
-    .where(eq(sentEmails.testimonialId, testimonialId))
-    .orderBy(desc(sentEmails.sentAt));
-}
