@@ -3,14 +3,25 @@ import { useEffect, useState } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
+import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+type Testimonial = {
+  id: number;
+  responseName: string;
+  responseMessage: string;
+  responseTitle: string;
+  imageUrl: string;
+  responseStars: number;
+};
 
 type PropType = {
-  slides: number[];
+  testimonials: Testimonial[];
   options?: EmblaOptionsType;
 };
 
 const EmblaCarouselVerticleReverse: React.FC<PropType> = ({
-  slides,
+  testimonials,
   options,
 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y", ...options }, [
@@ -52,16 +63,51 @@ const EmblaCarouselVerticleReverse: React.FC<PropType> = ({
   }, [emblaApi]);
 
   return (
-    <div className="mx-auto w-full [--slide-height:16rem] [--slide-spacing:1rem] [--slide-size:60%] sm:[--slide-size:50%] md:[--slide-size:40%] lg:[--slide-size:25%] xl:[--slide-size:20%]">
+    <div className="mx-auto w-full [--slide-height:16rem] [--slide-spacing:2rem] [--slide-size:20%]">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex flex-col h-screen touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-0.28)]">
-          {slides.map((index) => (
+          {testimonials.map((t) => (
             <div
               className="[transform:translate3d(0,0,0)] flex-[0_0_var(--slide-size)] min-w-0 [padding-left:var(--slide-spacing)] border-2 rounded-lg m-2"
-              key={index}
+              key={t.id}
             >
               <div className="shadow-[inset_0_0_0_0.2rem_var(--detail-medium-contrast)] rounded-[1.8rem] flex items-center justify-center h-[var(--slide-height)] select-none">
-                <span>{index}</span>
+                <section className="px-2 py-4 ">
+                  <div className="flex items-center justify-center text-center gap-2">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage
+                        src={t.imageUrl || ""}
+                        alt={t.responseName}
+                      />
+                      <AvatarFallback>
+                        {t.responseName?.[0]?.toUpperCase() || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div className="flex flex-col">
+                      <h3 className="font-semibold text-lg">
+                        {t.responseName || "Anonymous"}
+                      </h3>
+                      <p>{t.responseTitle}</p>
+                      <div className="flex flex-col items-center gap-3">
+                        <Rating value={t.responseStars} readOnly>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <RatingButton
+                              className="text-yellow-500"
+                              key={index}
+                            />
+                          ))}
+                        </Rating>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center items-center px-2 py-4">
+                    <p className="text-sm leading-relaxed text-foreground/80 ">
+                      {t.responseMessage || "No message provided."}
+                    </p>
+                  </div>
+                </section>
               </div>
             </div>
           ))}
