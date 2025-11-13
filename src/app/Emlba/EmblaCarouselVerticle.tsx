@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type Testimonial = {
   id: number;
@@ -14,20 +14,21 @@ type Testimonial = {
   imageUrl: string;
   responseStars: number;
 };
+
 type PropType = {
   testimonials: Testimonial[];
   options?: EmblaOptionsType;
 };
 
-const EmblaCarouselReverse: React.FC<PropType> = ({
+const EmblaCarouselVerticle: React.FC<PropType> = ({
   testimonials,
   options,
 }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: "y", ...options }, [
     AutoScroll({
+      playOnInit: true,
       stopOnInteraction: false,
-      speed: 1.5,
-      direction: "forward",
+      speed: 1, // base speed
     }),
   ]);
   const [isHovered, setIsHovered] = useState(false);
@@ -61,9 +62,9 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
   }, [emblaApi]);
 
   return (
-    <div className="mx-auto [--slide-height:16rem] [--slide-spacing:1rem] [--slide-size:60%] sm:[--slide-size:50%] md:[--slide-size:40%] lg:[--slide-size:25%] xl:[--slide-size:25%]">
+    <div className="mx-auto w-full [--slide-height:16rem] [--slide-spacing:2rem] [--slide-size:20%]">
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-1)]">
+        <div className="flex flex-col h-screen touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-0.28)]">
           {testimonials.map((t) => (
             <div
               className="[transform:translate3d(0,0,0)] flex-[0_0_var(--slide-size)] min-w-0 [padding-left:var(--slide-spacing)] border-2 rounded-lg m-2"
@@ -82,7 +83,7 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
                       </AvatarFallback>
                     </Avatar>
 
-                    <div className="flex flex-col ">
+                    <div className="flex flex-col">
                       <h3 className="font-semibold text-lg">
                         {t.responseName || "Anonymous"}
                       </h3>
@@ -115,4 +116,4 @@ const EmblaCarouselReverse: React.FC<PropType> = ({
   );
 };
 
-export default EmblaCarouselReverse;
+export default EmblaCarouselVerticle;

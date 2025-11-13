@@ -47,33 +47,33 @@ const page = ({ params }: { params: Promise<{ slug: string }> }) => {
       </section>
 
       <div>
-             {!sentEmails || sentEmails.length === 0 ? (
-               <section className="flex flex-col items-center justify-center px-2 py-6">
-                 <Inbox size={50} className="" />
-                 <p className="text-gray-500 mt-6">No emails found</p>
-               </section>
-             ) : (
-               <div className="max-w-3xl mx-auto grid gap-6">
-                 {sentEmails.map((e) => (
-                   <div
-                     key={e.id}
-                     className="border border-border bg-card/60 backdrop-blur-md rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
-                   >
-                     <h3 className="font-semibold text-lg">{e.subject}</h3>
-                     <p className="text-sm text-muted-foreground mb-2">
-                       To: {e.recipientEmail}
-                     </p>
-                     <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                       {e.content}
-                     </p>
-                     <p className="text-xs text-muted-foreground mt-3">
-                       Sent on {new Date(e.sentAt).toLocaleString()}
-                     </p>
-                   </div>
-                 ))}
-               </div>
-             )}
-           </div>
+        {!sentEmails || sentEmails.length === 0 ? (
+          <section className="flex flex-col items-center justify-center px-2 py-6">
+            <Inbox size={50} className="" />
+            <p className="text-gray-500 mt-6">No emails found</p>
+          </section>
+        ) : (
+          <div className="max-w-3xl mx-auto grid gap-6">
+            {sentEmails.map((e) => (
+              <div
+                key={e.id}
+                className="border border-border bg-card/60 backdrop-blur-md rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
+              >
+                <h3 className="font-semibold text-lg">{e.subject}</h3>
+                <p className="text-sm text-muted-foreground mb-2">
+                  To: {e.recipientEmail}
+                </p>
+                <p className="text-sm whitespace-pre-wrap leading-relaxed">
+                  {e.content}
+                </p>
+                <p className="text-xs text-muted-foreground mt-3">
+                  Sent on {new Date(e.sentAt).toLocaleString()}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </main>
   );
 };

@@ -42,7 +42,8 @@
 - [x] Embla carousel for testimonials with data fetching
 - [] when only one testimonial then i dont want embla i have to implement a single testimonial display
 - [x] Embed single page is remind
-- [] Embed Ui is for copy single and wall of love Ui remained
+- [x] Embed Ui is for copy single and wall of love Ui remained
+- [] need to remove tanstack queries from main pages and make a page fot them
 - [] slug duplication
 - [] verify email fnc
 - [x] dashboard

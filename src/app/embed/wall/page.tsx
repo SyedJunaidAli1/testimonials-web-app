@@ -1,5 +1,8 @@
+import EmblaCarouselVerticle from "@/app/Emlba/EmblaCarouselVerticle";
+import EmblaCarouselVerticleReverse from "@/app/Emlba/EmblaCarouselVerticleReverse";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { testimonialData } from "@/server/testimonials";
+import { EmblaOptionsType } from "embla-carousel";
 
 export default async function WallEmbed(props: {
   searchParams: Promise<{ spaceId: string }>;
@@ -7,11 +10,14 @@ export default async function WallEmbed(props: {
   const { spaceId } = await props.searchParams;
 
   const testimonials = await testimonialData(spaceId);
+  const SLIDE =[1,2,3,4,5,6,7,8,9,10];
+  const OPTIONS: EmblaOptionsType = { loop: true };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4 text-center">Wall of Love ❤️</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="flex p-2">
+      <EmblaCarouselVerticle testimonials={testimonials} options={OPTIONS} />
+      <EmblaCarouselVerticleReverse slides={SLIDE} options={OPTIONS} />
+      {/*<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {testimonials?.map((t: any) => (
           <div
             key={t.id}
@@ -29,7 +35,7 @@ export default async function WallEmbed(props: {
             <p>{t.responseMessage}</p>
           </div>
         ))}
-      </div>
+      </div>*/}
     </div>
   );
 }
