@@ -160,7 +160,9 @@ export async function testimonialData(spaceId: string) {
   const testimonialsData = await db
     .select()
     .from(testimonials)
-    .where(eq(testimonials.spaceId, spaceId));
+    .where(
+      and(eq(testimonials.spaceId, spaceId), eq(testimonials.Liked, true)),
+    );
 
   return testimonialsData;
 }

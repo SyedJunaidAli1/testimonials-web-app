@@ -20,7 +20,7 @@ const page = () => {
         scrolling="no"
       ></iframe>*/}
       <iframe
-        src="http://localhost:3000/embed/wall?spaceId=d210d799-b9bb-4eb5-97e6-2c03544cf952"
+        src="http://localhost:3000/embed/wall?spaceId=28746b2e-3487-41c1-87c3-8c70fcc095b2"
         width="100%"
         height="400px"
         scrolling="no"
