@@ -43,7 +43,7 @@
 - [] when only one testimonial then i dont want embla i have to implement a single testimonial display
 - [x] Embed single page is remind
 - [x] Embed Ui is for copy single and wall of love Ui remained
-- [] in embed testimonial server fetching all testi we want only liked testis fix this
+- [x] in embed testimonial server fetching all testi we want only liked testis fix this
 - [] need to remove tanstack queries from main pages and make a page fot them
 - [] slug duplication
 - [] verify email fnc
