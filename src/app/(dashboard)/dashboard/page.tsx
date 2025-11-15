@@ -12,8 +12,6 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import CreateSpaceDialog from "@/app/components/CreateSpaceDialog";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteSpaces, duplicateSpace, getSpaces } from "@/server/spaces";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -24,55 +22,25 @@ import {
 import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
 import Link from "next/link";
-import { getTestimonialsCount } from "@/server/testimonials";
+import { useCopySpace, useDeleteSpace, useSpaces } from "@/app/queries/spaces";
+import { useTestimonialCount } from "@/app/queries/testimonials";
 
 const Page = () => {
   const {
     data: spaces,
     isLoading: spacesLoading,
     error: spacesError,
-  } = useQuery({
-    queryKey: ["spaces"],
-    queryFn: async () => {
-      return await getSpaces();
-    },
-  });
+  } = useSpaces();
 
   const {
     data: testimonialCount,
     isLoading: testimonialCountLoading,
-    error: testimonialCountError,
-  } = useQuery({
-    queryKey: ["testimonialCount"],
-    queryFn: getTestimonialsCount,
-  });
+    isError: testimonialCountError,
+  } = useTestimonialCount();
 
   const totalSpaces = spaces?.length ?? 0;
-  const queryClient = useQueryClient();
-
-  const { mutate: removeSpace } = useMutation({
-    mutationFn: async (id: string) => await deleteSpaces(id),
-    onSuccess: () => {
-      toast.success("Space deleted");
-      queryClient.invalidateQueries({ queryKey: ["spaces"] });
-    },
-    onError: (err: any) => {
-      toast.error(err.message || "Failed to delete space");
-    },
-  });
-
-  const { mutate: copySpace } = useMutation({
-    mutationFn: async (spaceId: string) => {
-      return await duplicateSpace(spaceId);
-    },
-    onSuccess: () => {
-      toast.success("Space duplicated successfully");
-      queryClient.invalidateQueries({ queryKey: ["spaces"] });
-    },
-    onError: (err: any) => {
-      toast.error(err.message || "Failed to duplicate space");
-    },
-  });
+  const removeSpace = useDeleteSpace();
+  const copySpace = useCopySpace();
 
   if (spacesLoading || testimonialCountLoading)
     return (
@@ -166,7 +134,7 @@ const Page = () => {
                         <LinkIcon />
                         Get the Link
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => copySpace(s.id)}>
+                      <DropdownMenuItem onClick={() => copySpace.mutate(s.id)}>
                         <Files />
                         Duplicate the Space
                       </DropdownMenuItem>
@@ -176,7 +144,9 @@ const Page = () => {
                         <Lock />
                         Disable the Space
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => removeSpace(s.id)}>
+                      <DropdownMenuItem
+                        onClick={() => removeSpace.mutate(s.id)}
+                      >
                         <TriangleAlert /> Delete the Space
                       </DropdownMenuItem>
                     </DropdownMenuContent>

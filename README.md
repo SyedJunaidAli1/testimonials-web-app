@@ -35,7 +35,8 @@
 - [x] product page liked testimonials with schema changes and ui for like and unlike filter it on its tab
 - [x] product page ui (all,liked, request testimonials, route has been made)
 - [x] product page ui (Single tetimonial dialog made but need chande of placeholder pic)
-- [] widget integration for embed on other sites
+- [x] widget integration for embed on other sites
+- [x] embed widget integration for wall of love
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [x] tranfer space feature created
 - [] sent email to user when testi is created
@@ -44,6 +45,7 @@
 - [x] Embed single page is remind
 - [x] Embed Ui is for copy single and wall of love Ui remained
 - [x] in embed testimonial server fetching all testi we want only liked testis fix this
+- [] disable space fnc in dashboard remained
 - [] need to remove tanstack queries from main pages and make a page fot them
 - [] slug duplication
 - [] verify email fnc
