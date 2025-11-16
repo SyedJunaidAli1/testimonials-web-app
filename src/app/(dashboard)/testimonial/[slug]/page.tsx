@@ -1,96 +1,24 @@
-"use client";
-import CreateTestimonialsDialog from "@/app/components/CreateTestimonialsDialog";
-import { Spinner } from "@/components/ui/spinner";
+import { getQueryClient } from "@/app/components/GetQueryClient";
+import TestimonialPanel from "./TestimonialPanel";
 import { getSpaceBySlug } from "@/server/spaces";
-import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
-import { use } from "react";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-export default function Page({
+export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // Unwrap the params Promise
-  const { slug } = use(params);
+  const { slug } = await params;
 
-  const {
-    data: space,
-    isLoading,
-    error,
-  } = useQuery({
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery({
     queryKey: ["spaces", slug],
-    queryFn: async () => {
-      return await getSpaceBySlug(slug);
-    },
+    queryFn: () => getSpaceBySlug(slug),
   });
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen w-screen">
-        <Spinner className="size-10 text-primary" />
-      </div>
-    );
-  }
-
-  if (error || !space) return <p>Space not found</p>;
-
   return (
-    <main
-      className={`flex flex-col items-center h-screen w-full ${
-        space.theme === "dark" ? "bg-black text-white" : "bg-white text-black"
-      }`}
-    >
-      {space.spaceLogo && (
-        <Image
-          src={space.spaceLogo}
-          width={100}
-          height={100}
-          alt="space logo"
-          className="mt-30"
-        />
-      )}
-      <h1
-        className="text-5xl font-bold mt-16"
-        style={{ color: space.customBtnColor }}
-      >
-        {space.headerTitle}
-      </h1>
-      <p className=" text-md mt-6">{space.customMessage}</p>
-      <section className="flex text-left mt-6 flex-col gap-2 mb-10 px-4 py-2">
-        <p className="text-xl font-semibold">QUESTIONS</p>
-        <ul className="list-disc ml-6">
-          {[
-            space.question1,
-            space.question2,
-            space.question3,
-            space.question4,
-            space.question5,
-          ]
-            .filter(Boolean)
-            .map((q, i) => (
-              <li key={i}>{q}</li>
-            ))}
-        </ul>
-      </section>
-      <CreateTestimonialsDialog
-        spaceId={space.id}
-        customBtnColor={space.customBtnColor}
-        spaceLogo={space.spaceLogo}
-        question1={space.question1}
-        question2={space.question2}
-        question3={space.question3}
-        question4={space.question4}
-        question5={space.question5}
-        customMessage={space.customMessage}
-        collectName={space.collectName}
-        collectEmail={space.collectEmail}
-        collectTitle={space.collectTitle}
-        collectStar={space.collectStar}
-        collectAddress={space.collectAddress}
-        collectSocialLink={space.collectSocialLink}
-        theme={space.theme}
-      />
-    </main>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <TestimonialPanel slug={slug} />
+    </HydrationBoundary>
   );
 }

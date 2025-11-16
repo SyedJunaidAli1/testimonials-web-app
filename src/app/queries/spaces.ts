@@ -1,4 +1,9 @@
-import { deleteSpaces, duplicateSpace, getSpaces } from "@/server/spaces";
+import {
+  deleteSpaces,
+  duplicateSpace,
+  getSpaceBySlug,
+  getSpaces,
+} from "@/server/spaces";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -27,7 +32,6 @@ export const useDeleteSpace = () => {
 
 export const useCopySpace = () => {
   const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (spaceId: string) => await duplicateSpace(spaceId),
     onSuccess: () => {
@@ -36,6 +40,15 @@ export const useCopySpace = () => {
     },
     onError: (err: any) => {
       toast.error(err.message || "Failed to duplicate space");
+    },
+  });
+};
+
+export const useSpaceBySlug = (slug: string) => {
+  return useQuery({
+    queryKey: ["spaces", slug],
+    queryFn: async () => {
+      return await getSpaceBySlug(slug);
     },
   });
 };

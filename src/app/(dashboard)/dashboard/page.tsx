@@ -7,7 +7,7 @@ const Page = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["spaces"],
-    queryFn: getSpaces,
+    queryFn: () => getSpaces(),
   });
   return (
     <>

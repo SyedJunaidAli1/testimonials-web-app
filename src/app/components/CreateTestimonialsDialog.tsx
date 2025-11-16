@@ -139,7 +139,7 @@ export default function CreateTestimonialsDialog({
           {collectStar && (
             <div className="flex flex-col items-start gap-2">
               <Label>Rating</Label>
-              <Rating defaultValue={3} onValueChange={setStars}>
+              <Rating defaultValue={5} onValueChange={setStars}>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <RatingButton key={index} className="text-yellow-500" />
                 ))}
