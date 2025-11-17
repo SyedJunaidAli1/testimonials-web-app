@@ -1,6 +1,7 @@
 import {
   deleteSpaces,
   duplicateSpace,
+  getSentEmailsForSpace,
   getSpaceBySlug,
   getSpaces,
 } from "@/server/spaces";
@@ -47,8 +48,13 @@ export const useCopySpace = () => {
 export const useSpaceBySlug = (slug: string) => {
   return useQuery({
     queryKey: ["spaces", slug],
-    queryFn: async () => {
-      return await getSpaceBySlug(slug);
-    },
+    queryFn: async () => await getSpaceBySlug(slug),
+  });
+};
+
+export const useSentEmails = (slug: string) => {
+  return useQuery({
+    queryKey: ["sentEmails", slug],
+    queryFn: async () => await getSentEmailsForSpace(slug),
   });
 };
