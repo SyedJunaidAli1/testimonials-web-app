@@ -45,6 +45,7 @@
 - [x] Embed single page is remind
 - [x] Embed Ui is for copy single and wall of love Ui remained
 - [x] in embed testimonial server fetching all testi we want only liked testis fix this
+- [] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
 - [] disable space fnc in dashboard remained
 - [] need to remove tanstack queries from main pages and make a page fot them
 - [] slug duplication

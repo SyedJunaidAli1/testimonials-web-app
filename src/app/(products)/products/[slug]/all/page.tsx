@@ -29,7 +29,6 @@ import {
   Heart,
   Inbox,
   MessageSquareText,
-  Share2,
   TrashIcon,
 } from "lucide-react";
 import { use } from "react";
