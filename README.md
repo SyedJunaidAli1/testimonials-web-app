@@ -47,6 +47,7 @@
 - [x] in embed testimonial server fetching all testi we want only liked testis fix this
 - [] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
 - [] disable space fnc in dashboard remained
+- [] make incentivize for products page in all and liked pages
 - [] need to remove tanstack queries from main pages and make a page fot them
 - [] slug duplication
 - [] verify email fnc
