@@ -35,7 +35,7 @@ import {
 const LikedPanel = ({ slug }: { slug: string }) => {
   const {
     data: testimonials,
-    isloading,
+    isLoading,
     error,
   } = useGetLikedTestimonials(slug);
 
@@ -44,7 +44,7 @@ const LikedPanel = ({ slug }: { slug: string }) => {
   const { mutate: deleteMutation } = useDeleteTestimonial(slug);
   const { mutate: likeMutation } = useLikeMutaion(slug);
 
-  if (isloading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
         <Spinner className="size-10 text-primary" />
@@ -84,7 +84,7 @@ const LikedPanel = ({ slug }: { slug: string }) => {
               {/* Header */}
               <div className="flex items-center gap-4 mb-3">
                 <Avatar className="w-12 h-12">
-                  <AvatarImage src={t.imageUrl} />
+                  <AvatarImage src={t.imageUrl || ""} />
                   <AvatarFallback>
                     {t.responseName?.[0]?.toUpperCase() || "U"}
                   </AvatarFallback>
@@ -196,8 +196,8 @@ const LikedPanel = ({ slug }: { slug: string }) => {
                       >
                         <SendTextDialog
                           testimonialId={t.id}
-                          recipientEmail={t.responseEmail}
-                          user={t.responseName}
+                          recipientEmail={t.responseEmail || ""}
+                          user={t.responseName || ""}
                         />
                       </DropdownMenuItem>
 

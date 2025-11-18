@@ -1,6 +1,7 @@
 import {
   deleteTestimonials,
   getLikedTestimonials,
+  getTestimonials,
   getTestimonialsCount,
   likeTestimonials,
 } from "@/server/testimonials";
@@ -60,3 +61,10 @@ export const useLikeMutaion = (slug: string) => {
     },
   });
 };
+
+export const useGetTestimonials = (slug: string) => {
+  return useQuery({
+    queryKey: ["testimonials", slug],
+    queryFn: async () => await getTestimonials(slug),
+  });
+}
