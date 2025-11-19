@@ -10,7 +10,7 @@
 - [x] set add spaece success & error toast
 - [x] set limit for space logo
 - [x] setup space three dot dropdown fnc
-- [] make space three dot dropdown options fnc
+- [x] make space three dot dropdown options fnc
 - [x] make space preview for create spaces
 - [x] make add scroll bar for testi preview
 - [x] testimonials preview theme button set it for black and white
@@ -18,7 +18,7 @@
 - [x] createspace when add or remove question it triggers create fnc and it not let us add all the other fields(temp fix for now)
 - [x] Create Space preview part remain
 - [x] Create Space test remmains
-- [] create space space logo square field in DB?
+- [] create space space logo square field in DB?(ask)
 - [x] testimonials dialoge for submiting testis to db
 - [x] change star for createtestidialog
 - [x] server action for testimonials creations
@@ -28,7 +28,7 @@
 - [x] Product page ui changes to make it look better
 - [x] slug for testimonals
 - [x] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
-- [] append unique ID if duplicate slugs
+- [] append unique ID if duplicate slugs(ask)
 - [x] product page ui for all tabs with empty and with data to be made
 - [x] product page ui for all tabs routes and ui to be made
 - [x] product page ui download pdf added for liked (need some improvement and add for all)
@@ -48,7 +48,8 @@
 - [] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
 - [] disable space fnc in dashboard remained
 - [] make incentivize for products page in all and liked pages
-- [] need to remove tanstack queries from main pages and make a page fot them
+- [x] need to remove tanstack queries from main pages and make a page for them
+- [] embed widget wall of love ui
 - [] slug duplication
 - [] verify email fnc
 - [x] dashboard

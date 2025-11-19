@@ -8,7 +8,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const queryClient = getQueryClient();
   queryClient.prefetchQuery({
     queryKey: ["testimonials", slug],
-    queryFn: async () => await useGetTestimonials(slug),
+    queryFn: async () => useGetTestimonials(slug),
   });
 
   return (
