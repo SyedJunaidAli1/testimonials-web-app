@@ -18,7 +18,6 @@
 - [x] createspace when add or remove question it triggers create fnc and it not let us add all the other fields(temp fix for now)
 - [x] Create Space preview part remain
 - [x] Create Space test remmains
-- [] create space space logo square field in DB?(ask)
 - [x] testimonials dialoge for submiting testis to db
 - [x] change star for createtestidialog
 - [x] server action for testimonials creations
@@ -28,7 +27,6 @@
 - [x] Product page ui changes to make it look better
 - [x] slug for testimonals
 - [x] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
-- [] append unique ID if duplicate slugs(ask)
 - [x] product page ui for all tabs with empty and with data to be made
 - [x] product page ui for all tabs routes and ui to be made
 - [x] product page ui download pdf added for liked (need some improvement and add for all)
@@ -39,25 +37,26 @@
 - [x] embed widget integration for wall of love
 - [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
 - [x] tranfer space feature created
-- [] sent email to user when testi is created
 - [x] Embla carousel for testimonials with data fetching
-- [] when only one testimonial then i dont want embla i have to implement a single testimonial display
-- [x] Embed single page is remind
-- [x] Embed Ui is for copy single and wall of love Ui remained
-- [x] in embed testimonial server fetching all testi we want only liked testis fix this
-- [] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
-- [] disable space fnc in dashboard remained
-- [] make incentivize for products page in all and liked pages
 - [x] need to remove tanstack queries from main pages and make a page for them
 - [x] embed widget wall of love ui
+- [x] Embed single page is remind
+- [x] Embed Ui is for copy single and wall of love Ui remained
+- [x] in embed testimonial server fetching all testi we want only liked testis fix
+- [] sent email to user when testi is createda(ask)
+- [] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?(ask)
+- [] disable space fnc in dashboard remained
+- [] make incentivize for products page in all and liked pages
+- [] when only one testimonial then i dont want embla i have to implement a single testimonial display
+- [] append unique ID if duplicate slugs(ask)
+- [] create space space logo square field in DB?(ask)
 - [] profile pic only feature (decide gonna make it or not)
 - [] complete landing page ui
-- [] slug duplication
+- [] slug duplication(ask)
 - [] verify email fnc
 - [x] dashboard
-- [] wall of love
+- [x] wall of love
 - [] nav top
-- [] main ui
 - [] footer
 - [] about
 - [] term
