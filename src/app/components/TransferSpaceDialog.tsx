@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { transferSpaceAction } from "@/server/spaces";
 import { FolderSync } from "lucide-react";
 import { Label } from "@/components/ui/label";

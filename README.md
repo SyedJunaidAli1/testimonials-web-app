@@ -49,7 +49,9 @@
 - [] disable space fnc in dashboard remained
 - [] make incentivize for products page in all and liked pages
 - [x] need to remove tanstack queries from main pages and make a page for them
-- [] embed widget wall of love ui
+- [x] embed widget wall of love ui
+- [] profile pic only feature (decide gonna make it or not)
+- [] complete landing page ui
 - [] slug duplication
 - [] verify email fnc
 - [x] dashboard

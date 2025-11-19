@@ -5,10 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { getSpaceBySlug } from "@/server/spaces";
-import { useQuery } from "@tanstack/react-query";
 import {
   ArrowBigRight,
   BookImage,
@@ -17,13 +14,14 @@ import {
   Inbox,
   Mail,
   MessageCircleHeart,
-  Pen,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import SingleTestimonialDialog from "./SingleTestimonialDialog";
 import { TransferSpaceDialog } from "./TransferSpaceDialog";
+import { useSpaceBySlug } from "../queries/spaces";
+import WallEmbedDialog from "./WallEmbedDialog";
 
 const Sidebar = () => {
   const { slug } = useParams();
@@ -32,11 +30,7 @@ const Sidebar = () => {
     data: space,
     isLoading: spaceLoading,
     error: spaceError,
-  } = useQuery({
-    queryKey: ["spaces", slug],
-    queryFn: async () => await getSpaceBySlug(slug as string),
-    enabled: !!slug, // ✅ only run when slug is defined
-  });
+  } = useSpaceBySlug(slug);
 
   if (spaceLoading) {
     return (
@@ -53,7 +47,7 @@ const Sidebar = () => {
   return (
     <div>
       <main className="flex min-h-screen">
-        <aside className="w-64 border-r border-border p-5 flex flex-col justify-between">
+        <aside className="w-64 border-r border-border py-6 px-4">
           <div>
             {/* Space Info */}
             <div className="flex flex-col items-center text-center gap-2">
@@ -110,8 +104,9 @@ const Sidebar = () => {
                   <AccordionContent>
                     <ul className=" py-2 space-y-2 font-medium text-md">
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <Heart size={20} className="text-primary" />
-                        Wall of Love
+                        <WallEmbedDialog
+                          spaceId={space?.id || "Not available"}
+                        />
                       </li>
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                         <SingleTestimonialDialog />
@@ -172,10 +167,6 @@ const Sidebar = () => {
               </Accordion>
             </nav>
           </div>
-
-          <Button variant="outline">
-            <Pen className="mr-2 size-4" /> Get Widget
-          </Button>
         </aside>
       </main>
     </div>
