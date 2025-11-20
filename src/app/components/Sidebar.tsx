@@ -8,7 +8,7 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import {
   ArrowBigRight,
-  BookImage,
+  CircleUserRound,
   Hand,
   Heart,
   Inbox,
@@ -111,10 +111,12 @@ const Sidebar = () => {
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                         <SingleTestimonialDialog />
                       </li>
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <BookImage size={20} className="text-primary" />
-                        Profile Photo Only
-                      </li>
+                      <Link href={`/products/${slug}/social-proof-avatar`}>
+                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
+                          <CircleUserRound size={20} className="text-primary" />
+                          Social Proof Avatar
+                        </li>
+                      </Link>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>
