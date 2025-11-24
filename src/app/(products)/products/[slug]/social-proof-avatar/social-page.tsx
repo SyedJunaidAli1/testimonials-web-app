@@ -2,8 +2,9 @@
 import { useSpaceBySlug } from "@/app/queries/spaces";
 import { useGetTestimonials } from "@/app/queries/testimonials";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { MessageSquareText } from "lucide-react";
+import { Code, MessageSquareText } from "lucide-react";
 
 const SocialPage = ({ slug }: { slug: string }) => {
   const { data: testimonials, isLoading, error } = useGetTestimonials(slug);
@@ -31,24 +32,31 @@ const SocialPage = ({ slug }: { slug: string }) => {
         </div>
       </header>
 
-      {/* TRUSTED MESSAGE */}
-      <p className="text-lg font-semibold mt-4">
-        {space?.trustedMessage || "100% trusted by users and customers"}
-      </p>
+      <div className="flex flex-col items-center justify-between gap-2">
+        {/* TRUSTED MESSAGE */}
+        <p className="text-lg font-semibold mt-4">
+          {space?.trustedMessage || "100% trusted by users and customers"}
+        </p>
 
-      {/* AVATAR STRIP */}
-      <div className="flex items-center -space-x-3">
-        {testimonials?.slice(0, 12).map((t) => (
-          <Avatar
-            key={t.id}
-            className="ring-2 ring-background h-12 w-12 border border-border shadow-sm"
-          >
-            <AvatarImage src={t.imageUrl || ""} alt={t.responseName} />
-            <AvatarFallback>
-              {t.responseName?.[0]?.toUpperCase() || "U"}
-            </AvatarFallback>
-          </Avatar>
-        ))}
+        {/* AVATAR STRIP */}
+        <div className="flex justify-between  -space-x-3">
+          {testimonials?.slice(0, 12).map((t) => (
+            <Avatar
+              key={t.id}
+              className="ring-2 ring-background h-12 w-12 border border-border shadow-sm"
+            >
+              <AvatarImage src={t.imageUrl || ""} alt={t.responseName} />
+              <AvatarFallback>
+                {t.responseName?.[0]?.toUpperCase() || "U"}
+              </AvatarFallback>
+            </Avatar>
+          ))}
+          <div className="flex items-center pl-8">
+            <Button>
+              <Code /> Get Embed
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );

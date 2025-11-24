@@ -96,7 +96,7 @@ export const spaces = pgTable("spaces", {
 
   trustedMessage: text("trusted_message")
     .notNull()
-    .default("100% trusted by users and customers"),
+    .default("Join 100+ users and customers"),
   // Branding
   theme: text("theme").notNull().default("light"),
   customBtnColor: text("custom_btn_color"),
