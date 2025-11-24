@@ -6,7 +6,7 @@ import ThemeToggle from "./themetoggler";
 const Nav = () => {
   return (
     <main className="max-w-4xl mx-auto px-4">
-      <section className="flex flex-wrap items-center justify-between gap-4 py-4 px-4 border rounded-lg">
+      <section className="flex flex-wrap items-center justify-between py-2 px-3 border rounded-xl mt-4">
         {/* Logo */}
         <img src="/logo" alt="this is logo" className="" />
 

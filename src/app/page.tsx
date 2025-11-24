@@ -43,8 +43,8 @@ export default function Home() {
               className="border-2"
             />
             <BorderBeam
-              duration={8}
-              size={100}
+              duration={14}
+              size={250}
               className="absolute top-0 left-0 h-full"
             />
           </div>

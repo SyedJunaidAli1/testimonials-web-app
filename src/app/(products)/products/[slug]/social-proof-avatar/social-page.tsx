@@ -1,4 +1,5 @@
 "use client";
+import { useSpaceBySlug } from "@/app/queries/spaces";
 import { useGetTestimonials } from "@/app/queries/testimonials";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Spinner } from "@/components/ui/spinner";
@@ -6,6 +7,7 @@ import { MessageSquareText } from "lucide-react";
 
 const SocialPage = ({ slug }: { slug: string }) => {
   const { data: testimonials, isLoading, error } = useGetTestimonials(slug);
+  const { data: space } = useSpaceBySlug(slug);
 
   if (isLoading) {
     return (
@@ -30,8 +32,8 @@ const SocialPage = ({ slug }: { slug: string }) => {
       </header>
 
       {/* TRUSTED MESSAGE */}
-      <p className="text-lg font-semibold mb-4">
-        100% trusted by users and customers
+      <p className="text-lg font-semibold mt-4">
+        {space?.trustedMessage || "100% trusted by users and customers"}
       </p>
 
       {/* AVATAR STRIP */}
