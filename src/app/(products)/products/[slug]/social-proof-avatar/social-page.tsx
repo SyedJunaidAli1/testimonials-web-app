@@ -1,4 +1,5 @@
 "use client";
+import { EditTrustedMessageDialog } from "@/app/components/EditTrustedMessageDialog";
 import SocialProofEmbedDialog from "@/app/components/SocialProofEmbedDialog";
 import { useSpaceBySlug } from "@/app/queries/spaces";
 import { useGetTestimonials } from "@/app/queries/testimonials";
@@ -52,8 +53,13 @@ const SocialPage = ({ slug }: { slug: string }) => {
             </Avatar>
           ))}
         </div>
-        <div className="flex items-center justify-center mt-4">
+        <div className="flex gap-2 items-center justify-center mt-4">
           <SocialProofEmbedDialog spaceId={space?.id || "no space available"} />
+          <EditTrustedMessageDialog
+            spaceId={space?.id}
+            initialValue={space?.trustedMessage}
+            slug={space?.slug}
+          />
         </div>
       </div>
     </section>

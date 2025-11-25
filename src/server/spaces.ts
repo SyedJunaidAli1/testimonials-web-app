@@ -232,3 +232,32 @@ export const getSpaceById = async (id: string) => {
 
   return result[0] || null;
 };
+
+export const updateTrustedMessage = async (
+  spaceId: string,
+  message: string,
+) => {
+  const requestHeaders = await headers();
+  const session = await auth.api.getSession({ headers: requestHeaders });
+
+  if (!session) {
+    return { success: false, message: "Unauthorized" };
+  }
+
+  const spaceOwner = await db
+    .select()
+    .from(spaces)
+    .where(eq(spaces.id, spaceId))
+    .limit(1);
+
+  if (!spaceOwner[0] || spaceOwner[0].userId !== session.user.id) {
+    return { success: false, message: "You don't own this space." };
+  }
+
+  await db
+    .update(spaces)
+    .set({ trustedMessage: message })
+    .where(eq(spaces.id, spaceId));
+
+  return { success: true };
+};
