@@ -2,13 +2,17 @@
 import { EditTrustedMessageDialog } from "@/app/components/EditTrustedMessageDialog";
 import SocialProofEmbedDialog from "@/app/components/SocialProofEmbedDialog";
 import { useSpaceBySlug } from "@/app/queries/spaces";
-import { useGetTestimonials } from "@/app/queries/testimonials";
+import { useGetLikedTestimonials } from "@/app/queries/testimonials";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Spinner } from "@/components/ui/spinner";
 import { MessageSquareText } from "lucide-react";
 
 const SocialPage = ({ slug }: { slug: string }) => {
-  const { data: testimonials, isLoading, error } = useGetTestimonials(slug);
+  const {
+    data: testimonials,
+    isLoading,
+    error,
+  } = useGetLikedTestimonials(slug);
   const { data: space } = useSpaceBySlug(slug);
 
   if (isLoading) {
