@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useTransition } from "react";
 import {
   Dialog,
@@ -33,8 +32,8 @@ export function EditTrustedMessageDialog({
       try {
         await updateTrustedMessage(spaceId, msg);
         queryClient.invalidateQueries({
-               queryKey: ["spaces", slug],   // same key you use in useSpaceBySlug
-             });
+          queryKey: ["spaces", slug], // same key you use in useSpaceBySlug
+        });
         toast.success("Message updated!");
       } catch (err: any) {
         toast.error("Failed to update");
