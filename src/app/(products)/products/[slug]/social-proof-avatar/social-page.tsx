@@ -51,9 +51,9 @@ const SocialPage = ({ slug }: { slug: string }) => {
               </AvatarFallback>
             </Avatar>
           ))}
-          <div className="flex items-center pl-8">
-            <SocialProofEmbedDialog spaceId={space.id} />
-          </div>
+        </div>
+        <div className="flex items-center justify-center mt-4">
+          <SocialProofEmbedDialog spaceId={space?.id || "no space available"} />
         </div>
       </div>
     </section>
