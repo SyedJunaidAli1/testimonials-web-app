@@ -222,3 +222,13 @@ export const getSentEmailsForSpace = async (slug: string) => {
 
   return emails;
 };
+
+export const getSpaceById = async (id: string) => {
+  const result = await db
+    .select()
+    .from(spaces)
+    .where(eq(spaces.id, id))
+    .limit(1);
+
+  return result[0] || null;
+};
