@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 const page = () => {
   return (
     <div className="flex flex-wrap gap-6 items-center justify-center py-10">
@@ -13,12 +15,7 @@ const page = () => {
         height="400px"
         scrolling="auto"
       ></iframe>*/}
-      {/*<iframe
-        src="http://localhost:3000/embed/wall?spaceId=28746b2e-3487-41c1-87c3-8c70fcc095b2"
-        width="100%"
-        height="400px"
-        scrolling="no"
-      ></iframe>*/}
+      
       <iframe
         src="http://localhost:3000/embed/wall?spaceId=28746b2e-3487-41c1-87c3-8c70fcc095b2"
         width="100%"
@@ -26,12 +23,12 @@ const page = () => {
         scrolling="no"
       ></iframe>
       <iframe
-        id="testimonialto-b3f710ea-9bd4-483f-889d-a4ae7aaa088b"
-        src="https://embed-v2.testimonial.to/w/sdasd?id=b3f710ea-9bd4-483f-889d-a4ae7aaa088b"
-        scrolling="no"
+        src="http://localhost:3000/embed/social?spaceId=28746b2e-3487-41c1-87c3-8c70fcc095b2"
         width="100%"
-        height="800px"
+        height="120px"
+        scrolling="no"
       ></iframe>
+      
       {/*<iframe
         src="http://localhost:3000/embed/single?id=7fff8002-ca68-4732-b87e-bdc020077fc5"
         width="33%"

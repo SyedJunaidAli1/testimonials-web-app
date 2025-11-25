@@ -1,10 +1,10 @@
 "use client";
+import SocialProofEmbedDialog from "@/app/components/SocialProofEmbedDialog";
 import { useSpaceBySlug } from "@/app/queries/spaces";
 import { useGetTestimonials } from "@/app/queries/testimonials";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { Code, MessageSquareText } from "lucide-react";
+import { MessageSquareText } from "lucide-react";
 
 const SocialPage = ({ slug }: { slug: string }) => {
   const { data: testimonials, isLoading, error } = useGetTestimonials(slug);
@@ -52,9 +52,7 @@ const SocialPage = ({ slug }: { slug: string }) => {
             </Avatar>
           ))}
           <div className="flex items-center pl-8">
-            <Button>
-              <Code /> Get Embed
-            </Button>
+            <SocialProofEmbedDialog spaceId={space.id} />
           </div>
         </div>
       </div>
