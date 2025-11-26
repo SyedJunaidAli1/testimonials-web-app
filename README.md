@@ -44,7 +44,8 @@
 - [x] Embed Ui is for copy single and wall of love Ui remained
 - [x] in embed testimonial server fetching all testi we want only liked testis fix
 - [x] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
-- [] disable space fnc in dashboard remained
+- [x] disable space fnc in dashboard remained
+- [] disable space fnc verification implementin frontend and server actions
 - [] make incentivize for products page in all and liked pages
 - [] when only one testimonial then i dont want embla i have to implement a single testimonial display
 - [] append unique ID if duplicate slugs(ask)
