@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import { eq, and, inArray } from "drizzle-orm";
 import cloudinary from "./cloudinary";
 import slugify from "slugify";
+import { success } from "better-auth";
 
 export const createSpaces = async (formData: FormData) => {
   const requestheaders = await headers();
@@ -260,4 +261,34 @@ export const updateTrustedMessage = async (
     .where(eq(spaces.id, spaceId));
 
   return { success: true };
+};
+
+export const toggleSpaceStatus = async (spaceId: string) => {
+  const requestHeaders = await headers();
+  const session = await auth.api.getSession({ headers: requestHeaders });
+
+  if (!session) {
+    return { success: false, message: "Unauthorized" };
+  }
+  const space = await db
+    .select()
+    .from(spaces)
+    .where(eq(spaces.id, spaceId))
+    .limit(1);
+
+  if (!space.length) {
+    return { success: false, message: "Space not found." };
+  }
+
+  const disabled = !space[0].disabled;
+  await db
+    .update(spaces)
+    .set({ disabled })
+    .where(eq(spaces.id, spaceId));
+
+  return {
+    success: true,
+    disabled,
+    message: disabled ? "Space disabled" : "Space enabled",
+  };
 };

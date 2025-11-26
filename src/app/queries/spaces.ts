@@ -4,6 +4,7 @@ import {
   getSentEmailsForSpace,
   getSpaceBySlug,
   getSpaces,
+  toggleSpaceStatus,
 } from "@/server/spaces";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -56,5 +57,19 @@ export const useSentEmails = (slug: string) => {
   return useQuery({
     queryKey: ["sentEmails", slug],
     queryFn: async () => await getSentEmailsForSpace(slug),
+  });
+};
+
+export const useToggleSpaceStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (spaceId: string) => await toggleSpaceStatus(spaceId),
+    onSuccess: (res) => {
+      toast.success(res.message);
+      queryClient.invalidateQueries({ queryKey: ["spaces"] });
+    },
+    onError: (err: any) => {
+      toast.error(err.message || "Failed to toggle space status");
+    },
   });
 };

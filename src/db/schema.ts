@@ -78,6 +78,7 @@ export const spaces = pgTable("spaces", {
   spaceLogo: text("spacelogo"),
   headerTitle: text("header_title"),
   customMessage: text("custom_message"),
+  disabled: boolean("disabled").default(false).notNull(),
 
   // Custom questions
   question1: text("question1"),

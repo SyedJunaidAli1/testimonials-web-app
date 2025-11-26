@@ -10,6 +10,7 @@ import {
   Rows4,
   Search,
   TriangleAlert,
+  Unlock,
 } from "lucide-react";
 import CreateSpaceDialog from "@/app/components/CreateSpaceDialog";
 import Image from "next/image";
@@ -23,7 +24,12 @@ import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
 import Link from "next/link";
 import { useTestimonialCount } from "@/app/queries/testimonials";
-import { useCopySpace, useDeleteSpace, useSpaces } from "@/app/queries/spaces";
+import {
+  useCopySpace,
+  useDeleteSpace,
+  useSpaces,
+  useToggleSpaceStatus,
+} from "@/app/queries/spaces";
 
 const DashboardPanel = () => {
   const {
@@ -41,6 +47,7 @@ const DashboardPanel = () => {
   const totalSpaces = spaces?.length ?? 0;
   const removeSpace = useDeleteSpace();
   const copySpace = useCopySpace();
+  const toggleStatus = useToggleSpaceStatus();
 
   if (spacesLoading || testimonialCountLoading)
     return (
@@ -139,10 +146,10 @@ const DashboardPanel = () => {
                         Duplicate the Space
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => console.log("Edit", s.id)}
+                        onClick={() => toggleStatus.mutate(s.id)}
                       >
-                        <Lock />
-                        Disable the Space
+                        {s.disabled ? <Unlock /> : <Lock />}
+                        {s.disabled ? "Enable the Space" : "Disable the Space"}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => removeSpace.mutate(s.id)}
