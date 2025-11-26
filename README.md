@@ -43,15 +43,14 @@
 - [x] Embed single page is remind
 - [x] Embed Ui is for copy single and wall of love Ui remained
 - [x] in embed testimonial server fetching all testi we want only liked testis fix
-- [] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?(ask)
+- [x] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
 - [] disable space fnc in dashboard remained
 - [] make incentivize for products page in all and liked pages
 - [] when only one testimonial then i dont want embla i have to implement a single testimonial display
 - [] append unique ID if duplicate slugs(ask)
-- [] create space space logo square field in DB?(ask)
-- [] profile pic only feature aka social proof avatar (decide gonna make it or not)
-- [] complete landing page ui
 - [] slug duplication(ask)
+- [x] profile pic only feature aka social proof avatar
+- [] complete landing page ui
 - [] verify email fnc
 - [x] dashboard
 - [x] wall of love
