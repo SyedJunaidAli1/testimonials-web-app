@@ -30,6 +30,14 @@ const WolComponent = ({ slug }: { slug: string }) => {
     return <p>Something went wrong while fetching data...</p>;
   }
 
+  if (space?.disabled) {
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <p>Space is disabled</p>
+      </div>
+    );
+  }
+
   const OPTIONS: EmblaOptionsType = { loop: true };
 
   return (

@@ -17,6 +17,14 @@ export default function TestimonialPanel({ slug }: { slug: string }) {
 
   if (error || !space) return <p>Space not found</p>;
 
+  if (space.disabled) {
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <p>Space is disabled</p>
+      </div>
+    );
+  }
+
   return (
     <main
       className={`flex flex-col items-center h-screen w-full ${

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 
 const RequestComponent = ({ slug }: { slug: string }) => {
-  const testimonialLink = `http://localhost:3000/testimonial/${slug}`;
+  const testimonialLink = `${process.env.NEXT_PUBLIC_SELF_URL}/testimonial/${slug}`;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(testimonialLink);

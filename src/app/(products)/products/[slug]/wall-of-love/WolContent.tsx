@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 
 const WolContent = ({ slug }: { slug: string }) => {
-  const wallOfLove = `http://localhost:3000/testimonial/${slug}/wall-of-love`;
+  const wallOfLove = `${process.env.NEXT_PUBLIC_SELF_URL}/testimonial/${slug}/wall-of-love`;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(wallOfLove);

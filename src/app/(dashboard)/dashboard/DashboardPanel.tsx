@@ -148,13 +148,13 @@ const DashboardPanel = () => {
                       <DropdownMenuItem
                         onClick={() => toggleStatus.mutate(s.id)}
                       >
-                        {s.disabled ? <Unlock /> : <Lock />}
+                        {s.disabled ? <Unlock className="text-green-400" /> : <Lock className="text-red-400" />}
                         {s.disabled ? "Enable the Space" : "Disable the Space"}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => removeSpace.mutate(s.id)}
                       >
-                        <TriangleAlert /> Delete the Space
+                        <TriangleAlert className="text-red-500" /> Delete the Space
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
