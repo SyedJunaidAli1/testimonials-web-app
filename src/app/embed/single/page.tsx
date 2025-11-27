@@ -1,6 +1,7 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
+import { getSpaceById } from "@/server/spaces";
 import { getTestimonialById } from "@/server/testimonials";
-import Image from "next/image";
 
 export default async function SingleTestimonialEmbed(props: {
   searchParams: Promise<{ id: string }>;
@@ -15,26 +16,32 @@ export default async function SingleTestimonialEmbed(props: {
       </div>
     );
   }
+  const space = await getSpaceById(testimonial.spaceId);
 
-  // if (space.disabled) {
-  //   return (
-  //     <div className="flex items-center justify-center h-screen w-screen">
-  //       <p>Space is disabled</p>
-  //     </div>
-  //   );
-  // }
+  if (space.disabled) {
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <p>Space is disabled</p>
+      </div>
+    );
+  }
 
   return (
     <section className="flex items-center justify-center h-screen">
       <div className="px-2 py-6 rounded-lg shadow-md max-w-md mx-auto w-full">
         <div className="flex flex-col items-center justify-center gap-4 text-center">
-          <Image
-            src={testimonial.imageUrl || "/placeholder-avatar.png"}
-            alt={testimonial.responseName || "Anonymous"}
-            width={60}
-            height={60}
-            className="rounded-full object-cover"
-          />
+          <Avatar
+            key={testimonial.id}
+            className="ring-2 ring-background h-12 w-12 border border-border shadow-sm object-cover"
+          >
+            <AvatarImage
+              src={testimonial.imageUrl || ""}
+              alt={testimonial.responseName || ""}
+            />
+            <AvatarFallback>
+              {testimonial.responseName?.[0]?.toUpperCase() || "U"}
+            </AvatarFallback>
+          </Avatar>
           <div>
             <h2 className="text-xl font-bold">{testimonial.responseName}</h2>
             {testimonial.responseTitle && (

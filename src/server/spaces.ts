@@ -281,3 +281,13 @@ export const toggleSpaceStatus = async (spaceId: string) => {
     message: disabled ? "Space disabled" : "Space enabled",
   };
 };
+
+export async function getSpaceById(id: string) {
+  const result = await db
+    .select()
+    .from(spaces)
+    .where(eq(spaces.id, id))
+    .limit(1);
+
+  return result[0] || null;
+}

@@ -45,7 +45,8 @@
 - [x] in embed testimonial server fetching all testi we want only liked testis fix
 - [x] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
 - [x] disable space fnc in dashboard remained
-- [] disable space fnc verification implementin frontend and server actions
+- [x] disable space fnc verification implementation frontend
+- [] disable space fnc verification implementation server actions(ask)
 - [] make incentivize for products page in all and liked pages
 - [] when only one testimonial then i dont want embla i have to implement a single testimonial display
 - [] append unique ID if duplicate slugs(ask)
