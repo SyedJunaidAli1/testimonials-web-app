@@ -1,14 +1,25 @@
 import EmblaCarouselVerticle from "@/app/Emlba/EmblaCarouselVerticle";
 import EmblaCarouselVerticleReverse from "@/app/Emlba/EmblaCarouselVerticleReverse";
-import { testimonialData } from "@/server/testimonials";
+import { getSpaceBySlug } from "@/server/spaces";
+import { getLikedTestimonials } from "@/server/testimonials";
 import { EmblaOptionsType } from "embla-carousel";
 
 export default async function WallEmbed(props: {
-  searchParams: Promise<{ spaceId: string }>;
+  searchParams: Promise<{ spaceId: string; slug: string }>;
 }) {
-  const { spaceId } = await props.searchParams;
+  const { slug } = await props.searchParams;
 
-  const testimonials = await testimonialData(spaceId);
+  const space = await getSpaceBySlug(slug);
+
+  const testimonials = await getLikedTestimonials(slug);
+
+  if (space.disabled) {
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <p>Space is disabled</p>
+      </div>
+    );
+  }
 
   const OPTIONS: EmblaOptionsType = { loop: true };
   return (

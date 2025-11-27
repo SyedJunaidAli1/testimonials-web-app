@@ -22,10 +22,10 @@ import { toast } from "sonner";
 import { Copy, ExternalLink, Heart } from "lucide-react";
 
 type WallEmbedDialogProps = {
-  spaceId: string;
+  slug: string;
 };
 
-export default function WallEmbedDialog({ spaceId }: WallEmbedDialogProps) {
+export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
   const [baseUrl, setBaseUrl] = useState<string>("");
   const [width, setWidth] = useState<string>("100%");
   const [height, setHeight] = useState<string>("400px");
@@ -37,8 +37,8 @@ export default function WallEmbedDialog({ spaceId }: WallEmbedDialogProps) {
   }, []);
 
   const embedUrl = useMemo(
-    () => `${baseUrl}/embed/wall?spaceId=${spaceId}`,
-    [baseUrl, spaceId],
+    () => `${baseUrl}/embed/wall?slug=${slug}`,
+    [baseUrl, slug],
   );
 
   const iframeCode = useMemo(

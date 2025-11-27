@@ -58,7 +58,7 @@ const SocialPage = ({ slug }: { slug: string }) => {
           ))}
         </div>
         <div className="flex gap-2 items-center justify-center mt-4">
-          <SocialProofEmbedDialog spaceId={space?.id || "no space available"} />
+          <SocialProofEmbedDialog slug={space?.slug || "no space available"} />
           <EditTrustedMessageDialog
             spaceId={space?.id}
             initialValue={space?.trustedMessage}

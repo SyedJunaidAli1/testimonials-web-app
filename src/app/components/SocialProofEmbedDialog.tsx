@@ -15,9 +15,9 @@ import { Code, Copy, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 
 export default function SocialProofEmbedDialog({
-  spaceId,
+  slug,
 }: {
-  spaceId: string;
+  slug: string;
 }) {
   const [width, setWidth] = useState("100%");
   const [height, setHeight] = useState("120px");
@@ -27,7 +27,7 @@ export default function SocialProofEmbedDialog({
     setBaseUrl(process.env.NEXT_PUBLIC_SELF_URL || window.location.origin);
   }, []);
 
-  const embedUrl = `${baseUrl}/embed/social?spaceId=${spaceId}`;
+  const embedUrl = `${baseUrl}/embed/social?slug=${slug}`;
 
   const iframeCode = `<iframe src="${embedUrl}" width="${width}" height="${height}" style="border:none;border-radius:12px;overflow:hidden;"></iframe>`;
 

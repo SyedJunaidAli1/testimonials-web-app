@@ -68,3 +68,4 @@ export const useGetTestimonials = (slug: string) => {
     queryFn: async () => await getTestimonials(slug),
   });
 }
+

@@ -16,6 +16,14 @@ export default async function SingleTestimonialEmbed(props: {
     );
   }
 
+  // if (space.disabled) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen w-screen">
+  //       <p>Space is disabled</p>
+  //     </div>
+  //   );
+  // }
+
   return (
     <section className="flex items-center justify-center h-screen">
       <div className="px-2 py-6 rounded-lg shadow-md max-w-md mx-auto w-full">

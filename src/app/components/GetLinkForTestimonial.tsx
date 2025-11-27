@@ -23,7 +23,7 @@ export function GetLinkForTestimonial({
   const [copied, setCopied] = useState(false);
 
   // ✅ Construct the embed URL dynamically
-  const baseUrl = process.env.NEXT_PUBLIC_SELF_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_SELF_URL;
   const embedUrl = `${baseUrl}/embed/single?id=${testimonialId}`;
 
   // ✅ Full iframe embed code for copying

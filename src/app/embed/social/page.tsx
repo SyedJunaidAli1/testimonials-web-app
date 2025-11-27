@@ -1,15 +1,23 @@
-import { getSpaceById } from "@/server/spaces";
-import { testimonialData } from "@/server/testimonials";
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getSpaceBySlug } from "@/server/spaces";
+import { getLikedTestimonials } from "@/server/testimonials";
 
 export default async function SocialEmbed(props: {
-  searchParams: Promise<{ spaceId: string }>;
+  searchParams: Promise<{ slug: string }>;
 }) {
-  const { spaceId } = await props.searchParams;
-  
-  const space = await getSpaceById(spaceId);
+  const { slug } = await props.searchParams;
 
-  const testimonials = await testimonialData(spaceId);
+  const space = await getSpaceBySlug(slug);
+
+  const testimonials = await getLikedTestimonials(slug);
+
+  if (space.disabled) {
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <p>Space is disabled</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 w-full h-full flex flex-col items-center">
@@ -21,14 +29,15 @@ export default async function SocialEmbed(props: {
             key={t.id}
             className="w-12 h-12 rounded-full border-2 overflow-hidden"
           >
-            {/* image */}
-            <Image
-              src={t.imageUrl}
-              alt={t.responseName}
-              width={48}
-              height={48}
-              className="w-full h-full object-cover"
-            />
+            <Avatar
+              key={t.id}
+              className="ring-2 ring-background h-12 w-12 border border-border shadow-sm"
+            >
+              <AvatarImage src={t.imageUrl || ""} alt={t.responseName || ""} />
+              <AvatarFallback>
+                {t.responseName?.[0]?.toUpperCase() || "U"}
+              </AvatarFallback>
+            </Avatar>
           </div>
         ))}
       </div>

@@ -6,7 +6,6 @@ import { headers } from "next/headers";
 import { eq, and, inArray } from "drizzle-orm";
 import cloudinary from "./cloudinary";
 import slugify from "slugify";
-import { success } from "better-auth";
 
 export const createSpaces = async (formData: FormData) => {
   const requestheaders = await headers();
@@ -222,16 +221,6 @@ export const getSentEmailsForSpace = async (slug: string) => {
     .where(inArray(sentEmails.testimonialId, testimonialIds));
 
   return emails;
-};
-
-export const getSpaceById = async (id: string) => {
-  const result = await db
-    .select()
-    .from(spaces)
-    .where(eq(spaces.id, id))
-    .limit(1);
-
-  return result[0] || null;
 };
 
 export const updateTrustedMessage = async (
