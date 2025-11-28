@@ -47,13 +47,14 @@
 - [x] disable space fnc in dashboard remained
 - [x] disable space fnc verification implementation frontend
 - [] disable space fnc verification implementation server actions(ask)
-- [] make incentivize for products page in all and liked pages
+- [x] this feature removed incentivize for products page in all and liked pages
 - [] when only one testimonial then i dont want embla i have to implement a single testimonial display
 - [] append unique ID if duplicate slugs(ask)
 - [] slug duplication(ask)
 - [x] profile pic only feature aka social proof avatar
 - [] complete landing page ui
 - [] verify email fnc
+- [] Full theme override according to user preferences from db
 - [x] dashboard
 - [x] wall of love
 - [] nav top
