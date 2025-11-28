@@ -151,10 +151,6 @@ const LikedPanel = ({ slug }: { slug: string }) => {
                 </div>
 
                 <div className="flex gap-2 flex-wrap">
-                  <Button variant="secondary" size="sm">
-                    <Gift className="w-4 h-4 mr-2" />
-                    Incentivize
-                  </Button>
                   <GetLinkForTestimonial testimonialId={t.id} />
                   <Button
                     variant="secondary"
