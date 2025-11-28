@@ -13,7 +13,6 @@ import {
   Unlock,
 } from "lucide-react";
 import CreateSpaceDialog from "@/app/components/CreateSpaceDialog";
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,6 +29,7 @@ import {
   useSpaces,
   useToggleSpaceStatus,
 } from "@/app/queries/spaces";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const DashboardPanel = () => {
   const {
@@ -108,13 +108,11 @@ const DashboardPanel = () => {
               >
                 <div className="flex justify-between items-center">
                   <Link href={`/products/${s.slug}`}>
-                    <div className="flex gap-2 items-center">
-                      <Image
-                        width={45}
-                        height={45}
-                        alt="spacelogo"
-                        src={s.spaceLogo}
-                      />
+                    <div className="flex gap-2 items-center w-20 h-20">
+                      <Avatar className="w-16 h-16 border">
+                        <AvatarImage src={s.spaceLogo} alt={s.spacename} />
+                        <AvatarFallback>{s.spacename[0]}</AvatarFallback>
+                      </Avatar>
                       <p className="text-lg font-semibold">{s.spacename}</p>
                     </div>
                   </Link>
@@ -148,19 +146,21 @@ const DashboardPanel = () => {
                       <DropdownMenuItem
                         onClick={() => toggleStatus.mutate(s.id)}
                       >
-                        {s.disabled ? <Unlock className="text-green-400" /> : <Lock className="text-red-400" />}
+                        {s.disabled ? (
+                          <Unlock className="text-green-400" />
+                        ) : (
+                          <Lock className="text-red-400" />
+                        )}
                         {s.disabled ? "Enable the Space" : "Disable the Space"}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => removeSpace.mutate(s.id)}
                       >
-                        <TriangleAlert className="text-red-500" /> Delete the Space
+                        <TriangleAlert className="text-red-500" /> Delete the
+                        Space
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                </div>
-                <div className="flex items-center mt-2 text-left">
-                  <p className="text-2xl">{s.used ?? 0}</p>
                 </div>
               </li>
             ))}
