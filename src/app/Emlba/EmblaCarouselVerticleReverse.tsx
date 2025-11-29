@@ -63,7 +63,7 @@ const EmblaCarouselVerticleReverse: React.FC<PropType> = ({
   }, [emblaApi]);
 
   return (
-    <div className="mx-auto w-full [--slide-height:16rem] [--slide-spacing:2rem] [--slide-size:20%]">
+    <div className="mx-auto w-full [--slide-height:16rem] lg:[--slide-height:22rem] [--slide-spacing:2rem] [--slide-size:20%]">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex flex-col h-screen touch-pan-y touch-pinch-zoom [margin-left:calc(var(--slide-spacing)*-0.28)]">
           {testimonials.map((t) => (
