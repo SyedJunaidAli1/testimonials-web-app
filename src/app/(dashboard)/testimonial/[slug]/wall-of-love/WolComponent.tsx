@@ -65,7 +65,7 @@ const WolComponent = ({ slug }: { slug: string }) => {
             </p>
             <List size={60} className="text-muted-foreground" />
           </section>
-        ) : testimonials.length === 4 ? (
+        ) : testimonials.length < 5 ? (
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-10 px-4">
             {testimonials.map((testimonial) => (
               <div
@@ -92,27 +92,6 @@ const WolComponent = ({ slug }: { slug: string }) => {
                 <p className="text-sm leading-relaxed text-foreground/80 max-w-xs">
                   {testimonial.responseMessage}
                 </p>
-              </div>
-            ))}
-          </section>
-        ) : testimonials.length === 4 ? (
-          <section className="flex items-center justify-center py-10">
-            {testimonials.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="flex flex-col items-center justify-center"
-              >
-                <p className="text-xl font-medium mb-3">
-                  {testimonial.responseName}
-                </p>
-                <p className="text-base font-normal mb-3">
-                  {testimonial.responseMessage}
-                </p>
-                <img
-                  className="text-sm font-light mb-3"
-                  src={testimonial.imageUrl}
-                  alt={testimonial.responseName}
-                />
               </div>
             ))}
           </section>
