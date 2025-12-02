@@ -91,6 +91,8 @@ const Landing = () => {
               className="absolute top-0 left-0 h-full"
             />
           </motion.div>
+
+          <div className="bg-muted/30 pt-20"></div>
         </section>
       </main>
     </>
