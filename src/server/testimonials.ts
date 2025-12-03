@@ -50,25 +50,21 @@ export async function createTestimonial(formData: FormData) {
 }
 
 export async function getLikedTestimonials(slug: string) {
-  // Step 1: find the space by slug
   const space = await db
-    .select({ id: spaces.id })
+    .select({ id: spaces.id, disabled: spaces.disabled })
     .from(spaces)
     .where(eq(spaces.slug, slug))
     .limit(1);
 
-  if (!space.length) {
-    throw new Error("Space not found");
-  }
+  if (!space.length) return [];
 
-  // Step 2: fetch testimonials for that space
-  const spaceId = space[0].id;
+  if (space[0].disabled) return []; // or throw, but empty array keeps UI safe
 
   return await db
     .select()
     .from(testimonials)
     .where(
-      and(eq(testimonials.spaceId, spaceId), eq(testimonials.Liked, true)),
+      and(eq(testimonials.spaceId, space[0].id), eq(testimonials.Liked, true)),
     );
 }
 

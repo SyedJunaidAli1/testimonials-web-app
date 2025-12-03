@@ -27,16 +27,15 @@ const WolComponent = ({ slug }: { slug: string }) => {
     );
   }
 
-  if (error) {
-    return <p>Something went wrong while fetching data...</p>;
-  }
-
   if (space?.disabled) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
-        <p>Space is disabled</p>
+        <p className="text-lg">🚫 This space is currently disabled</p>
       </div>
     );
+  }
+  if (error) {
+    return <p>Something went wrong while fetching data...</p>;
   }
 
   const OPTIONS: EmblaOptionsType = { loop: true };
@@ -67,7 +66,7 @@ const WolComponent = ({ slug }: { slug: string }) => {
           </section>
         ) : testimonials.length < 5 ? (
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-10 px-4">
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial: any) => (
               <div
                 key={testimonial.id}
                 className="flex flex-col items-center text-center border border-border rounded-xl shadow-sm p-6 hover:shadow-md transition-all"

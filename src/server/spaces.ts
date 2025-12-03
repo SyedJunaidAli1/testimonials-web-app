@@ -154,9 +154,15 @@ export const duplicateSpace = async (spaceId: string) => {
 export const getSpaceBySlug = async (slug: string) => {
   if (!slug) throw new Error("Missing slug");
 
-  const [Space] = await db.select().from(spaces).where(eq(spaces.slug, slug));
+  const [space] = await db.select().from(spaces).where(eq(spaces.slug, slug));
 
-  return Space || null;
+  if (!space) throw null;
+
+  if (space.disabled) {
+    return { ...space, disabled: true };
+  }
+
+  return space;
 };
 
 export const transferSpaceAction = async ({
@@ -270,10 +276,7 @@ export const toggleSpaceStatus = async (spaceId: string) => {
   }
 
   const disabled = !space[0].disabled;
-  await db
-    .update(spaces)
-    .set({ disabled })
-    .where(eq(spaces.id, spaceId));
+  await db.update(spaces).set({ disabled }).where(eq(spaces.id, spaceId));
 
   return {
     success: true,
