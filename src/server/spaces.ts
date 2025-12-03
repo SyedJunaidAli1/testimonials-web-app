@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import { eq, and, inArray } from "drizzle-orm";
 import cloudinary from "./cloudinary";
 import slugify from "slugify";
+import { v4 as uuid } from "uuid";
 
 export const createSpaces = async (formData: FormData) => {
   const requestheaders = await headers();
@@ -130,25 +131,62 @@ export const duplicateSpace = async (spaceId: string) => {
     throw new Error("Unauthorized");
   }
 
+  // 1. Fetch original space
   const space = await db.query.spaces.findFirst({
     where: (s, { eq }) => eq(s.id, spaceId),
   });
 
-  if (!space) {
-    throw new Error("Space not found");
-  }
+  if (!space) throw new Error("Space not found");
 
+  // 2. Create a clean, unique slug using slugify
+  const newSlug = slugify(`${space.spacename} ${uuid().slice(0, 3)}`, {
+    lower: true,
+    strict: true,
+    trim: true,
+  });
+
+  // 3. Duplicate the space
   const { id, createdAt, updatedAt, ...rest } = space;
 
-  const newSpace = await db
+  const [newSpace] = await db
     .insert(spaces)
     .values({
       ...rest,
-      spacename: `${space.spacename}`,
+      spacename: `${space.spacename} (copy)`,
+      slug: newSlug,
+      disabled: false,        // reset if needed
+      createdAt: new Date(),
+      updatedAt: new Date(),
     })
-    .returning();
+    .returning({ id: spaces.id });
 
-  return newSpace[0];
+  // 4. Fetch all testimonials of old space
+  const oldTestimonials = await db
+    .select()
+    .from(testimonials)
+    .where(eq(testimonials.spaceId, spaceId));
+
+  // 5. Duplicate testimonials
+  if (oldTestimonials.length > 0) {
+    const testimonialClones = oldTestimonials.map((t) => {
+      const { id: oldId, createdAt, updatedAt, ...restT } = t;
+
+      return {
+        ...restT,
+        spaceId: newSpace.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+    });
+
+    await db.insert(testimonials).values(testimonialClones);
+  }
+
+  return {
+    success: true,
+    newSpaceId: newSpace.id,
+    slug: newSlug,
+  };
 };
 
 export const getSpaceBySlug = async (slug: string) => {

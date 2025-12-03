@@ -49,8 +49,8 @@
 - [x] disable space fnc verification implementation server actions(ask)
 - [x] this feature removed incentivize for products page in all and liked pages
 - [x] when only one testimonial then i dont want embla i have to implement a single testimonial display
-- [] append unique ID if duplicate slugs(ask)
-- [] slug duplication(ask)
+- [x] append unique ID if duplicate slugs(ask)
+- [x] slug duplication(ask)
 - [x] profile pic only feature aka social proof avatar
 - [] complete landing page ui
 - [] verify email fnc
