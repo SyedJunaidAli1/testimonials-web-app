@@ -14,7 +14,7 @@ export default async function SocialEmbed(props: {
   if (space.disabled) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
-        <p>Space is disabled</p>
+        <p className="text-lg">🚫 This space is currently disabled</p>
       </div>
     );
   }

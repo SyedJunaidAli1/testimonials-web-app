@@ -154,10 +154,20 @@ export async function getTestimonialsCount() {
 
 export async function getTestimonialById(id: string) {
   const result = await db
-    .select()
+    .select({
+      testimonial: testimonials,
+      disabled: spaces.disabled,
+    })
     .from(testimonials)
+    .innerJoin(spaces, eq(testimonials.spaceId, spaces.id))
     .where(eq(testimonials.id, id))
     .limit(1);
 
-  return result[0] || null;
+  if (!result.length) return null;
+
+  const { testimonial, disabled } = result[0];
+
+  if (disabled) return { disabled: true }; // ⛔ block disabled spaces
+
+  return testimonial;
 }

@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Rating, RatingButton } from "@/components/ui/shadcn-io/rating";
-import { getSpaceById } from "@/server/spaces";
 import { getTestimonialById } from "@/server/testimonials";
 
 export default async function SingleTestimonialEmbed(props: {
@@ -16,12 +15,11 @@ export default async function SingleTestimonialEmbed(props: {
       </div>
     );
   }
-  const space = await getSpaceById(testimonial.spaceId);
 
-  if (space.disabled) {
+  if (testimonial.disabled) {
     return (
       <div className="flex items-center justify-center h-screen w-screen">
-        <p>Space is disabled</p>
+        <p className="text-lg">🚫 This space is currently disabled</p>
       </div>
     );
   }
