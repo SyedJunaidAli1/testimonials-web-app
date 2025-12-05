@@ -13,13 +13,11 @@ import { toast } from "sonner";
 import { Share2, Copy, ExternalLink } from "lucide-react";
 import { useState } from "react";
 
-type GetLinkForTestimonialProps = {
+type SingleEmbedDialogProps = {
   testimonialId: string;
 };
 
-export function GetLinkForTestimonial({
-  testimonialId,
-}: GetLinkForTestimonialProps) {
+export function SingleEmbedDialog({ testimonialId }: SingleEmbedDialogProps) {
   const [copied, setCopied] = useState(false);
 
   // ✅ Construct the embed URL dynamically

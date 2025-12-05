@@ -18,7 +18,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import SingleTestimonialDialog from "./SingleTestimonialDialog";
 import { TransferSpaceDialog } from "./TransferSpaceDialog";
 import { useSpaceBySlug } from "../queries/spaces";
 import WallEmbedDialog from "./WallEmbedDialog";
@@ -104,13 +103,9 @@ const Sidebar = () => {
                   <AccordionContent>
                     <ul className=" py-2 space-y-2 font-medium text-md">
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <WallEmbedDialog
-                          slug={space?.slug || ""}
-                        />
+                        <WallEmbedDialog slug={space?.slug || ""} />
                       </li>
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <SingleTestimonialDialog />
-                      </li>
+
                       <Link href={`/products/${slug}/social-proof-avatar`}>
                         <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                           <CircleUserRound size={20} className="text-primary" />

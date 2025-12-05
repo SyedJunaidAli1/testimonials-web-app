@@ -54,7 +54,10 @@
 - [x] profile pic only feature aka social proof avatar
 - [] complete landing page ui
 - [] verify email fnc
+- [] google outh fnc
 - [] Full theme override according to user preferences from db
+- [] optimize dashboard for mobile view
+- [x] dashboard single embed remove dialog embed widgets
 - [x] dashboard
 - [x] wall of love
 - [] nav top

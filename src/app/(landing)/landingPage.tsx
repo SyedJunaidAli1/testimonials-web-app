@@ -92,7 +92,76 @@ const Landing = () => {
             />
           </motion.div>
 
-          <div className="bg-muted/30 pt-20"></div>
+          <section className="bg-muted/30 pt-20">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+                Wall of{" "}
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  {" "}
+                  love
+                </span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                {`A glimpse of what’s possible with just a few clicks.`}
+              </p>
+            </motion.div>
+            <motion.div
+              className="mt-12 px-10"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.1,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+              whileHover={{
+                scale: 1.02,
+                y: -8,
+                transition: {
+                  duration: 0.3,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                },
+              }}
+              whileTap={{
+                scale: 0.98,
+                transition: {
+                  duration: 0.1,
+                },
+              }}
+            >
+              <iframe
+                src="http://localhost:3000/embed/wall?slug=test"
+                width="100%"
+                height="600px"
+                scrolling="auto"
+                style={{
+                  border: "2px solid",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                }}
+                loading="lazy"
+              ></iframe>
+            </motion.div>
+          </section>
+
+          <section className="py-10 bg-muted/60 mt-20 max-w-3xl mx-auto rounded-lg">
+            <div className="px-4 sm:px-6 lg:px-8">
+              <h3>Try our sample embed code</h3>
+              <p>Embed the wall of love to your website in few seconds.</p>
+              <input
+                type="text"
+                placeholder="Enter your embed code here"
+                className="border  rounded-md px-4 py-2 w-full"
+              />
+              <Button className="mt-4">Embed</Button>
+            </div>
+          </section>
         </section>
       </main>
     </>

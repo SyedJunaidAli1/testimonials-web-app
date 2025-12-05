@@ -1,7 +1,7 @@
 "use client";
 import { DuplicateTestimonialDialog } from "@/app/components/DuplicateToOtherSpace";
-import { GetLinkForTestimonial } from "@/app/components/GetLinkForTestimonial";
 import { SendTextDialog } from "@/app/components/SendEmailDialog";
+import { SingleEmbedDialog } from "@/app/components/SingleEmbedDialog";
 import {
   useDeleteTestimonial,
   useGetTestimonials,
@@ -24,7 +24,6 @@ import {
   ChevronDownIcon,
   Clipboard,
   Download,
-  Gift,
   Heart,
   Inbox,
   MessageSquareText,
@@ -154,7 +153,7 @@ const AllPanel = ({ slug }: { slug: string }) => {
                   </div>
 
                   <div className="flex gap-2 flex-wrap">
-                    <GetLinkForTestimonial testimonialId={t.id} />
+                    <SingleEmbedDialog testimonialId={t.id} />
 
                     <Button
                       variant="secondary"
