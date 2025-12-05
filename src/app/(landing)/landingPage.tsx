@@ -167,10 +167,11 @@ const Landing = () => {
               <Textarea
                 readOnly
                 value={embedCode}
-                className="border rounded-md px-4 py-2 w-full"
+                className="border rounded-md px-4 py-3 w-full font-mono text-sm"
               />
               <div className="flex gap-2">
                 <Button
+                  type="button"
                   className="mt-4"
                   onClick={(e) => {
                     e.preventDefault();
@@ -180,7 +181,7 @@ const Landing = () => {
                       .then(() => {
                         toast.success("Copied to clipboard");
                       })
-                      .catch((error) => {
+                      .catch(() => {
                         toast.error("Failed to copy");
                       });
                   }}
@@ -188,7 +189,9 @@ const Landing = () => {
                   <Copy /> Copy this code
                 </Button>
                 <Link href={embedUrl}>
-                  <Button className="mt-4">Live Demo</Button>
+                  <Button className="mt-4" type="button">
+                    Live Demo
+                  </Button>
                 </Link>
               </div>
             </div>
