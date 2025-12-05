@@ -16,11 +16,14 @@ const ThemeToggle = () => {
 
   return (
     <Button
-      className="min-w-10 min-h-10"
       variant="ghost"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
-      {theme === "light" ? <Moon /> : <Sun />}
+      {theme === "light" ? (
+        <Moon className="size-6" />
+      ) : (
+        <Sun className="size-6" />
+      )}
     </Button>
   );
 };

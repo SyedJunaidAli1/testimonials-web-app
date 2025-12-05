@@ -1,15 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import ThemeToggle from "./themetoggler";
+import ThemeToggle from "@/app/components/themetoggler";
 import { Dock, DockIcon } from "@/components/ui/dock";
-import { GithubSolid } from "../icons/githhub-solid-icon";
+import { GithubSolid } from "@/app/icons/githhub-solid-icon";
 import Image from "next/image";
 
 const Nav = () => {
   return (
-    <main className="max-w-4xl mx-auto px-4">
-      <section className="flex flex-wrap items-center justify-between py-2 px-3 border rounded-xl mt-4">
+    <main className="max-w-4xl mx-auto px-4 mt-4">
+      <section className="flex flex-wrap items-center justify-between py-2 px-3 border rounded-xl">
         {/* Logo */}
         <Image
           src="/image-holder.png"
@@ -19,17 +19,23 @@ const Nav = () => {
         />
 
         {/* Buttons */}
-        <div className="flex flex-wrap gap-2 items-center justify-center">
-          <Dock>
-            <DockIcon>
-              <GithubSolid fontSize={30} />
-            </DockIcon>
-          </Dock>
-          <Button variant="link">Wall of Love</Button>
-          <Button variant="link">Features</Button>
-          <ThemeToggle />
+        <div className="flex flex-wrap gap-2 items-center justify-center text-center">
+          <div className="relative">
+            <Dock direction="middle" className="mt-0">
+              <DockIcon>
+                <Link href="https://github.com/SyedJunaidAli1/testimonials-web-app">
+                  <Button variant="ghost">
+                    <GithubSolid className="size-6" />
+                  </Button>
+                </Link>
+              </DockIcon>
+              <DockIcon>
+                <ThemeToggle />
+              </DockIcon>
+            </Dock>
+          </div>
           <Link href="/signup">
-            <Button variant="outline">Signup</Button>
+            <Button>Signup</Button>
           </Link>
         </div>
       </section>
