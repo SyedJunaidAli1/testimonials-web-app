@@ -2,17 +2,23 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Copy } from "lucide-react";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
 import Nav from "@/app/components/Nav";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 const Landing = () => {
+  const baseUrl = process.env.NEXT_PUBLIC_SELF_URL;
+  const embedUrl = `${baseUrl}/embed/wall?slug=test`;
+  const embedCode = `<iframe src="${embedUrl}" width="100%" height="400px" scrolling="auto" style="border:none;border-radius:8px;overflow:hidden" loading="lazy"></iframe>`;
   return (
     <>
       <main className="min-h-screen bg-background">
         <Nav />
         <section className="relative overflow-hidden py-20 sm:py-32">
+          {/*HeroVideoDialog section*/}
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <motion.h1
@@ -92,6 +98,7 @@ const Landing = () => {
             />
           </motion.div>
 
+          {/*Wall of love*/}
           <section className="bg-muted/30 pt-20">
             <motion.div
               className="text-center mb-12"
@@ -136,7 +143,7 @@ const Landing = () => {
               }}
             >
               <iframe
-                src="http://localhost:3000/embed/wall?slug=test"
+                src={embedUrl}
                 width="100%"
                 height="600px"
                 scrolling="auto"
@@ -150,16 +157,40 @@ const Landing = () => {
             </motion.div>
           </section>
 
+          {/*Sample section*/}
           <section className="py-10 bg-muted/60 mt-20 max-w-3xl mx-auto rounded-lg">
             <div className="px-4 sm:px-6 lg:px-8">
-              <h3>Try our sample embed code</h3>
-              <p>Embed the wall of love to your website in few seconds.</p>
-              <input
-                type="text"
-                placeholder="Enter your embed code here"
-                className="border  rounded-md px-4 py-2 w-full"
+              <h3 className="text-lg leading-8">Try our sample embed code</h3>
+              <p className="leading-8 pb-2">
+                Embed the wall of love to your website in few seconds.
+              </p>
+              <Textarea
+                readOnly
+                value={embedCode}
+                className="border rounded-md px-4 py-2 w-full"
               />
-              <Button className="mt-4">Embed</Button>
+              <div className="flex gap-2">
+                <Button
+                  className="mt-4"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigator.clipboard
+                      .writeText(embedCode)
+                      .then(() => {
+                        toast.success("Copied to clipboard");
+                      })
+                      .catch((error) => {
+                        toast.error("Failed to copy");
+                      });
+                  }}
+                >
+                  <Copy /> Copy this code
+                </Button>
+                <Link href={embedUrl}>
+                  <Button className="mt-4">Live Demo</Button>
+                </Link>
+              </div>
             </div>
           </section>
         </section>

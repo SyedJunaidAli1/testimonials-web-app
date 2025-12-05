@@ -30,7 +30,8 @@ export function SingleEmbedDialog({ testimonialId }: SingleEmbedDialogProps) {
   width="100%"
   height="400px"
   scrolling="auto"
-  style={{ border: "none", borderRadius: "10px" }}
+  style="border:none;border-radius:8px;overflow:hidden"
+  loading="lazy"
 ></iframe>`;
 
   const handleCopy = async (text: string) => {
