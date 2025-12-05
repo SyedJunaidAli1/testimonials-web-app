@@ -158,8 +158,14 @@ const Landing = () => {
           </section>
 
           {/*Sample section*/}
-          <section className="py-10 bg-muted/60 mt-20 max-w-3xl mx-auto rounded-lg">
-            <div className="px-4 sm:px-6 lg:px-8">
+          <section className="py-10 bg-muted/60 mt-20 max-w-3xl mx-auto rounded-lg relative">
+            <motion.div
+              className="px-4 sm:px-6 lg:px-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <h3 className="text-lg leading-8">Try our sample embed code</h3>
               <p className="leading-8 pb-2">
                 Embed the wall of love to your website in few seconds.
@@ -194,7 +200,12 @@ const Landing = () => {
                   </Button>
                 </Link>
               </div>
-            </div>
+            </motion.div>
+            <BorderBeam
+              duration={10}
+              size={120}
+              className="absolute top-0 left-0 h-full"
+            />
           </section>
         </section>
       </main>
