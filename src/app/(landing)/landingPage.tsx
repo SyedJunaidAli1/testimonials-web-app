@@ -8,6 +8,7 @@ import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
 import Nav from "@/app/components/Nav";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const Landing = () => {
   const baseUrl = process.env.NEXT_PUBLIC_SELF_URL;
@@ -158,7 +159,7 @@ const Landing = () => {
           </section>
 
           {/*Sample section*/}
-          <section className="py-10 bg-muted/60 mt-20 max-w-3xl mx-auto rounded-lg relative">
+          <section className="py-10 bg-muted/60 my-20 max-w-3xl mx-auto rounded-lg relative">
             <motion.div
               className="px-4 sm:px-6 lg:px-8"
               initial={{ opacity: 0, y: 20 }}
@@ -206,6 +207,83 @@ const Landing = () => {
               size={120}
               className="absolute top-0 left-0 h-full"
             />
+          </section>
+
+          {/*Features*/}
+          <section className="bg-muted/30 py-16">
+            <motion.div
+              className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-3xl sm:text-4xl font-bold text-center tracking-tight mb-10">
+                Collect and display testimonials in one effortless workflow
+              </h3>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                {/* TEXT SECTION */}
+                <div className="max-w-xl space-y-4">
+                  <p className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Quick to set up
+                  </p>
+
+                  <p className="text-4xl font-bold tracking-tight leading-tight">
+                    Your all-in-one dashboard
+                  </p>
+
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    Create a dedicated dashboard for your business. Easily share
+                    the page link anywhere — email, websites, social platforms.
+                    The entire setup takes less than two minutes.
+                  </p>
+
+                  <div className="pt-2">
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Manage spaces & testimonials effortlessly</li>
+                      <li>• Approve or reject entries instantly</li>
+                      <li>• Generate embed widgets with one click</li>
+                      <li>• Track activity and Download testimonials</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* IMAGE */}
+                <motion.div
+                  className="flex justify-center"
+                  initial={{ opacity: 0, y: -50, scale: 0.9 }}
+                  animate={{ opacity: 1, y: -0, scale: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  whileHover={{
+                    scale: 1.06,
+                    y: 16,
+                    transition: {
+                      duration: 0.3,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    },
+                  }}
+                  whileTap={{
+                    scale: 0.98,
+                    transition: {
+                      duration: 0.1,
+                    },
+                  }}
+                >
+                  <Image
+                    src="/dashboard.png"
+                    alt="dashboard"
+                    width={800}
+                    height={800}
+                    className="rounded-xl border shadow-xl"
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
           </section>
         </section>
       </main>
