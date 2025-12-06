@@ -100,7 +100,7 @@ const Landing = () => {
           </motion.div>
 
           {/*Wall of love*/}
-          <section className="bg-muted/30 pt-20">
+          <section className="bg-muted/30 pt-20 mb-20">
             <motion.div
               className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ const Landing = () => {
           </section>
 
           {/*Sample section*/}
-          <section className="py-10 bg-muted/60 my-20 max-w-3xl mx-auto rounded-lg relative">
+          <section className="py-10 bg-muted/60 mb-20 max-w-3xl mx-auto rounded-lg relative">
             <motion.div
               className="px-4 sm:px-6 lg:px-8"
               initial={{ opacity: 0, y: 20 }}
@@ -210,7 +210,7 @@ const Landing = () => {
           </section>
 
           {/*Features*/}
-          <section className="bg-muted/30 py-16">
+          <section className="bg-muted/30 py-16 mb-20 ">
             <motion.div
               className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -285,6 +285,8 @@ const Landing = () => {
               </div>
             </motion.div>
           </section>
+
+          <section className="bg-muted/60 py-16 mb-20"></section>
         </section>
       </main>
     </>
