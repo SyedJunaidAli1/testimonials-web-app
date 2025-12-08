@@ -286,7 +286,93 @@ const Landing = () => {
             </motion.div>
           </section>
 
-          <section className="bg-muted/60 py-16 mb-20"></section>
+          <section className="bg-muted/60 py-16 mb-20">
+            <motion.div
+              className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-3xl sm:text-4xl font-bold text-center tracking-tight mb-10">
+                Your entire testimonial email history — perfectly organized
+              </h3>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                {/* IMAGE */}
+                <motion.div
+                  className="flex justify-center"
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  animate={{ opacity: 1, y: -0, scale: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  whileHover={{
+                    scale: 1.06,
+                    y: -16,
+                    transition: {
+                      duration: 0.3,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    },
+                  }}
+                  whileTap={{
+                    scale: 0.98,
+                    transition: {
+                      duration: 0.3,
+                    },
+                  }}
+                >
+                  <Image
+                    src="/sentemail.png"
+                    alt="sent email"
+                    width={800}
+                    height={800}
+                    className="rounded-xl border shadow-xl"
+                  />
+                </motion.div>
+
+                {/* TEXT SECTION */}
+                <div className="max-w-xl space-y-4">
+                  <p className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Track every email your system sends
+                  </p>
+
+                  <p className="text-4xl font-bold tracking-tight leading-tight">
+                    View all outbound messages in one place — subjects,
+                    recipients, and timestamps. Stay organized and never lose
+                    track of your communication history.
+                  </p>
+
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    No need to switch tools or check external inboxes. Every
+                    email your space sends is stored, organized, and reachable
+                    — all in one place.
+                  </p>
+
+                  <div className="pt-2">
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>
+                        • Monitor all testimonial request emails in real time
+                      </li>
+                      <li>
+                        • Keep a history of every message your space has sent
+                      </li>
+                      <li>
+                        • View subjects, recipients, and delivery details
+                        instantly
+                      </li>
+                      <li>
+                        • No external inbox. No confusion. Every message sent by
+                        your space lives in your dashboard — automatically.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </section>
         </section>
       </main>
     </>

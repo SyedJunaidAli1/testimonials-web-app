@@ -15,7 +15,6 @@ import {
   ChevronDownIcon,
   Clipboard,
   Download,
-  Gift,
   Heart,
   Inbox,
   MessageSquareText,
@@ -24,7 +23,7 @@ import {
 import { toast } from "sonner";
 import { SendTextDialog } from "@/app/components/SendEmailDialog";
 import { DuplicateTestimonialDialog } from "@/app/components/DuplicateToOtherSpace";
-import { GetLinkForTestimonial } from "@/app/components/GetLinkForTestimonial";
+import { SingleEmbedDialog } from "@/app/components/SingleEmbedDialog";
 import { downloadSingleTestimonialPDF } from "@/lib/utilities/pdffnc";
 import {
   useDeleteTestimonial,
@@ -151,7 +150,7 @@ const LikedPanel = ({ slug }: { slug: string }) => {
                 </div>
 
                 <div className="flex gap-2 flex-wrap">
-                  <GetLinkForTestimonial testimonialId={t.id} />
+                  <SingleEmbedDialog testimonialId={t.id} />
                   <Button
                     variant="secondary"
                     size="sm"
