@@ -223,6 +223,40 @@ const Landing = () => {
               </h3>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                {/* IMAGE */}
+                <motion.div
+                  className="flex justify-center"
+                  initial={{ opacity: 0, y: -50, scale: 0.9 }}
+                  animate={{ opacity: 1, y: -0, scale: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  whileHover={{
+                    scale: 1.06,
+                    y: 16,
+                    transition: {
+                      duration: 0.3,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    },
+                  }}
+                  whileTap={{
+                    scale: 0.98,
+                    transition: {
+                      duration: 0.1,
+                    },
+                  }}
+                >
+                  <Image
+                    src="/testimonial.png"
+                    alt="testimonial"
+                    width={800}
+                    height={800}
+                    className="rounded-xl border shadow-xl"
+                  />
+                </motion.div>
+
                 {/* TEXT SECTION */}
                 <div className="max-w-xl space-y-4">
                   <p className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -261,40 +295,6 @@ const Landing = () => {
                     </ul>
                   </div>
                 </div>
-
-                {/* IMAGE */}
-                <motion.div
-                  className="flex justify-center"
-                  initial={{ opacity: 0, y: -50, scale: 0.9 }}
-                  animate={{ opacity: 1, y: -0, scale: 1 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.3,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                  whileHover={{
-                    scale: 1.06,
-                    y: 16,
-                    transition: {
-                      duration: 0.3,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                    },
-                  }}
-                  whileTap={{
-                    scale: 0.98,
-                    transition: {
-                      duration: 0.1,
-                    },
-                  }}
-                >
-                  <Image
-                    src="/testimonial.png"
-                    alt="testimonial"
-                    width={800}
-                    height={800}
-                    className="rounded-xl border shadow-xl"
-                  />
-                </motion.div>
               </div>
             </motion.div>
           </section>
@@ -459,6 +459,86 @@ const Landing = () => {
                     </ul>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          </section>
+
+          <section className="bg-muted/30 py-16 mb-20 ">
+            <motion.div
+              className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-3xl sm:text-4xl font-bold text-center tracking-tight mb-10">
+                Collect Social Proof Avatar
+              </h3>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                {/* TEXT SECTION */}
+                <div className="max-w-xl space-y-4">
+                  <p className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Show Trust at a Glance
+                  </p>
+
+                  <p className="text-4xl font-bold tracking-tight leading-tight">
+                    Visual Proof of Happy Customers
+                  </p>
+
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    Showcase real customer faces instantly. Add a live
+                    social-proof avatar strip to your site with a single embed —
+                    no coding, no setup needed.
+                  </p>
+
+                  <div className="pt-2">
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Display real customer photos instantly</li>
+                      <li>
+                        • Auto-syncs with new testimonials in your dashboard
+                      </li>
+                      <li>
+                        • Embed the avatar strip anywhere with one copy-paste
+                      </li>
+                      <li>• Lightweight, fast, and works on all devices</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* IMAGE */}
+                <motion.div
+                  className="flex justify-center"
+                  initial={{ opacity: 0, y: -50, scale: 0.9 }}
+                  animate={{ opacity: 1, y: -0, scale: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  whileHover={{
+                    scale: 1.06,
+                    y: 16,
+                    transition: {
+                      duration: 0.3,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    },
+                  }}
+                  whileTap={{
+                    scale: 0.98,
+                    transition: {
+                      duration: 0.1,
+                    },
+                  }}
+                >
+                  <Image
+                    src="/social.png"
+                    alt="socialproof"
+                    width={800}
+                    height={800}
+                    className="rounded-xl border shadow-xl"
+                  />
+                </motion.div>
               </div>
             </motion.div>
           </section>
