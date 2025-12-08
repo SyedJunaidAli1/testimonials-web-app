@@ -219,6 +219,95 @@ const Landing = () => {
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-3xl sm:text-4xl font-bold text-center tracking-tight mb-10">
+                A dedicated landing page
+              </h3>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                {/* TEXT SECTION */}
+                <div className="max-w-xl space-y-4">
+                  <p className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Collect feedback without friction
+                  </p>
+
+                  <p className="text-4xl font-bold tracking-tight leading-tight">
+                    Create a dedicated landing page for your business. Share the
+                    page link easily via email, social media, or even SMS. Setup
+                    can be done in two minutes.
+                  </p>
+
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    Launch a dedicated testimonial page for your business.
+                    Easily distribute the link across any channel and gather
+                    real customer feedback in under two minutes.
+                  </p>
+
+                  <div className="pt-2">
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>
+                        • Collect high-quality testimonials with a clean,
+                        distraction-free form
+                      </li>
+                      <li>• Customize questions to match your brand's voice</li>
+                      <li>
+                        • Automatically organize submissions in your dashboard
+                      </li>
+                      <li>
+                        • Showcase testimonials using beautiful embed widgets
+                      </li>
+                      <li>
+                        • Build trust with real customer feedback displayed
+                        instantly
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* IMAGE */}
+                <motion.div
+                  className="flex justify-center"
+                  initial={{ opacity: 0, y: -50, scale: 0.9 }}
+                  animate={{ opacity: 1, y: -0, scale: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  whileHover={{
+                    scale: 1.06,
+                    y: 16,
+                    transition: {
+                      duration: 0.3,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    },
+                  }}
+                  whileTap={{
+                    scale: 0.98,
+                    transition: {
+                      duration: 0.1,
+                    },
+                  }}
+                >
+                  <Image
+                    src="/testimonial.png"
+                    alt="testimonial"
+                    width={800}
+                    height={800}
+                    className="rounded-xl border shadow-xl"
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          </section>
+
+          <section className="bg-muted/30 py-16 mb-20 ">
+            <motion.div
+              className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-3xl sm:text-4xl font-bold text-center tracking-tight mb-10">
                 Collect and display testimonials in one effortless workflow
               </h3>
 
@@ -347,8 +436,8 @@ const Landing = () => {
 
                   <p className="text-base text-muted-foreground leading-relaxed">
                     No need to switch tools or check external inboxes. Every
-                    email your space sends is stored, organized, and reachable
-                    — all in one place.
+                    email your space sends is stored, organized, and reachable —
+                    all in one place.
                   </p>
 
                   <div className="pt-2">

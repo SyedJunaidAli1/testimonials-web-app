@@ -52,6 +52,7 @@
 - [x] append unique ID if duplicate slugs(ask)
 - [x] slug duplication(ask)
 - [x] profile pic only feature aka social proof avatar
+- [] dont show sent email on all and liked pages if email is not in 
 - [] complete landing page ui
 - [] verify email fnc
 - [] google outh fnc

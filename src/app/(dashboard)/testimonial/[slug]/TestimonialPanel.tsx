@@ -41,7 +41,7 @@ export default function TestimonialPanel({ slug }: { slug: string }) {
         />
       )}
       <h1
-        className="text-5xl font-bold mt-16"
+        className="text-5xl font-bold mt-16 text-center leading-14"
         style={{ color: space.customBtnColor }}
       >
         {space.headerTitle}
