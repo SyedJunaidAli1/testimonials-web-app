@@ -9,7 +9,6 @@ import { Spinner } from "@/components/ui/spinner";
 import {
   ArrowBigRight,
   CircleUserRound,
-  Hand,
   Heart,
   Inbox,
   Mail,
@@ -148,10 +147,6 @@ const Sidebar = () => {
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="py-2 space-y-2 font-medium text-md">
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <Hand size={20} className="text-primary" />
-                        Reorder in Wall of Love
-                      </li>
                       <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
                         <TransferSpaceDialog
                           spaceId={space?.id}
