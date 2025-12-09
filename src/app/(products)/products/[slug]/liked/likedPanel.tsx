@@ -183,18 +183,20 @@ const LikedPanel = ({ slug }: { slug: string }) => {
                       >
                         <Clipboard className="mr-2 h-4 w-4" /> Copy text
                       </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                      >
-                        <SendTextDialog
-                          testimonialId={t.id}
-                          recipientEmail={t.responseEmail || ""}
-                          user={t.responseName || ""}
-                        />
-                      </DropdownMenuItem>
+                      {t.responseEmail && (
+                        <DropdownMenuItem
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }}
+                        >
+                          <SendTextDialog
+                            testimonialId={t.id}
+                            recipientEmail={t.responseEmail || ""}
+                            user={t.responseName || ""}
+                          />
+                        </DropdownMenuItem>
+                      )}
 
                       <DropdownMenuItem
                         onClick={(e) => {
