@@ -18,7 +18,7 @@ const Landing = () => {
     <>
       <main className="min-h-screen bg-background">
         <Nav />
-        <section className="relative overflow-hidden py-20 sm:py-32">
+        <section className="relative overflow-hidden pt-20 sm:pt-32">
           {/*HeroVideoDialog section*/}
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
@@ -100,7 +100,7 @@ const Landing = () => {
           </motion.div>
 
           {/*Wall of love*/}
-          <section className="bg-muted/30 pt-20 mb-20">
+          <section className="bg-muted/30 pt-20 mb-12">
             <motion.div
               className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ const Landing = () => {
           </section>
 
           {/*Sample section*/}
-          <section className="py-10 bg-muted/60 mb-20 max-w-3xl mx-auto rounded-lg relative">
+          <section className="py-10 bg-muted/60 mb-16 max-w-3xl mx-auto rounded-lg relative">
             <motion.div
               className="px-4 sm:px-6 lg:px-8"
               initial={{ opacity: 0, y: 20 }}
@@ -210,7 +210,7 @@ const Landing = () => {
           </section>
 
           {/*Features*/}
-          <section className="bg-muted/30 py-16 mb-20 ">
+          <section className="bg-muted/30 py-16">
             <motion.div
               className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -299,7 +299,7 @@ const Landing = () => {
             </motion.div>
           </section>
 
-          <section className="bg-muted/30 py-16 mb-20 ">
+          <section className="bg-muted/60 py-16">
             <motion.div
               className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -375,7 +375,7 @@ const Landing = () => {
             </motion.div>
           </section>
 
-          <section className="bg-muted/60 py-16 mb-20">
+          <section className="bg-muted/30 py-16">
             <motion.div
               className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -463,7 +463,7 @@ const Landing = () => {
             </motion.div>
           </section>
 
-          <section className="bg-muted/30 py-16 mb-20 ">
+          <section className="bg-muted/60 py-16">
             <motion.div
               className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
