@@ -53,7 +53,8 @@
 - [x] slug duplication(ask)
 - [x] profile pic only feature aka social proof avatar
 - [x] dont show sent email in all and liked pages if email is not in db
-- [] complete landing page ui
+- [x] complete landing page ui
+- [] add meta data for the pages
 - [] verify email fnc
 - [] google outh fnc
 - [] Full theme override according to user preferences from db
@@ -61,8 +62,8 @@
 - [x] dashboard single embed remove dialog embed widgets
 - [x] dashboard
 - [x] wall of love
-- [] nav top
-- [] footer
-- [] about
-- [] term
-- [] policy
+- [x] nav top
+- [x] footer
+- [x] about
+- [x] term
+- [x] policy
