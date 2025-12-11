@@ -2,8 +2,11 @@ import { GithubSolid } from "@/app/icons/githhub-solid-icon";
 import { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {};
-
+export const metadata: Metadata = {
+  title: "About - YourAppName",
+  description:
+    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+};
 const Page = () => {
   return (
     <>

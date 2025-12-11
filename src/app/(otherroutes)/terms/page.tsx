@@ -1,7 +1,11 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {};
+export const metadata: Metadata = {
+  title: "Terms of Use - YourAppName",
+  description:
+    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+};
 const page = () => {
   return (
     <>
