@@ -1,6 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getSpaceBySlug } from "@/server/spaces";
 import { getLikedTestimonials } from "@/server/testimonials";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SocialProofAvatarEmbed - Yourappname",
+  description:
+    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+};
 
 export default async function SocialEmbed(props: {
   searchParams: Promise<{ slug: string }>;

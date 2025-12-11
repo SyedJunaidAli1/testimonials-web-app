@@ -3,6 +3,13 @@ import EmblaCarouselVerticleReverse from "@/app/Emlba/EmblaCarouselVerticleRever
 import { getSpaceBySlug } from "@/server/spaces";
 import { getLikedTestimonials } from "@/server/testimonials";
 import { EmblaOptionsType } from "embla-carousel";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "WallofLoveEmbeds - YourAppName",
+  description:
+    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+};
 
 export default async function WallEmbed(props: {
   searchParams: Promise<{ spaceId: string; slug: string }>;

@@ -3,6 +3,12 @@ import LikedPanel from "./likedPanel";
 import { useGetLikedTestimonials } from "@/app/queries/testimonials";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
+export const metadata: Metadata = {
+  title: "Liked - Yourappname",
+  description:
+    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+};
+
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const queryClient = getQueryClient();

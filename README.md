@@ -54,7 +54,7 @@
 - [x] profile pic only feature aka social proof avatar
 - [x] dont show sent email in all and liked pages if email is not in db
 - [x] complete landing page ui
-- [] add meta data for the pages
+- [x] add meta data for the pages(app name is not finalized)
 - [] verify email fnc
 - [] google outh fnc
 - [] Full theme override according to user preferences from db
