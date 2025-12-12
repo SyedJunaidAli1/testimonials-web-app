@@ -2,10 +2,18 @@
 import CreateTestimonialsDialog from "@/app/components/CreateTestimonialsDialog";
 import { useSpaceBySlug } from "@/app/queries/spaces";
 import { Spinner } from "@/components/ui/spinner";
+import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function TestimonialPanel({ slug }: { slug: string }) {
   const { data: space, isLoading, error } = useSpaceBySlug(slug);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    if (space?.theme === "dark") setTheme("dark");
+    if (space?.theme === "light") setTheme("light");
+  }, [space, setTheme]);
 
   if (isLoading) {
     return (
@@ -26,11 +34,7 @@ export default function TestimonialPanel({ slug }: { slug: string }) {
   }
 
   return (
-    <main
-      className={`flex flex-col items-center h-screen w-full ${
-        space.theme === "dark" ? "bg-black text-white" : "bg-white text-black"
-      }`}
-    >
+    <main className="flex flex-col items-center h-screen w-full ">
       {space.spaceLogo && (
         <Image
           src={space.spaceLogo}
