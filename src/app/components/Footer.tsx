@@ -117,7 +117,7 @@ export default function Footer() {
           className="md:self-end text-sm text-gray-500 dark:text-gray-400 space-y-2 md:text-right"
         >
           <p>
-            © {new Date().getFullYear()} **Wall of Love**. All rights reserved.
+            © {new Date().getFullYear()} Testimonia. All rights reserved.
           </p>
           <p className="max-w-xs md:ml-auto">
             Built with care for founders, creators, and teams who love feedback.
