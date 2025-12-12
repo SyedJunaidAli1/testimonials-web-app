@@ -5,9 +5,9 @@ import { useSpaceBySlug } from "@/app/queries/spaces";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Wall of Love - YourAppName",
+  title: "Wall of Love - Testimonia",
   description:
-    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+    "Testimonia helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
 };
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {

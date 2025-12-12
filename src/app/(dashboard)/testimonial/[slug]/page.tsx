@@ -5,7 +5,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Share Your Feedback - YourAppName",
+  title: "Share Your Feedback - Testimonia",
   description:
     "Submit your testimonial and share your honest experience. Your feedback helps businesses build trust and improve their services.",
 };

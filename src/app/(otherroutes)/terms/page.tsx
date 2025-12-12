@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Use - YourAppName",
+  title: "Terms of Use - Testimonia",
   description:
-    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+    "Testimonia helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
 };
 const page = () => {
   return (
@@ -15,7 +15,7 @@ const page = () => {
             <h1 className="text-3xl sm:text-4xl font-bold">Terms of Use</h1>
             <p className="mt-2 text-sm">
               By using this app, you agree to the terms below. These terms exist
-              to keep Wall of Love fair, safe, and enjoyable for everyone.
+              to keep Testimonia fair, safe, and enjoyable for everyone.
             </p>
           </header>
 
@@ -23,7 +23,7 @@ const page = () => {
           <div>
             <h2 className="text-lg font-medium">1. Using the Service</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Wall of Love allows you to collect, manage, and display
+              Testimonia allows you to collect, manage, and display
               testimonials and social proof. You agree to use the app only for
               legal, ethical, and respectful purposes. Do not upload harmful,
               abusive, illegal, or malicious content.
@@ -75,7 +75,7 @@ const page = () => {
           <div>
             <h2 className="text-lg font-medium">5. Open Source Contribution</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Wall of Love is open source. By contributing code, ideas, or
+              Testimonia is open source. By contributing code, ideas, or
               fixes, you agree that your contributions may be used in the
               project under the repository’s license.
             </p>

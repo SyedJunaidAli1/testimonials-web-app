@@ -4,9 +4,9 @@ import { getTestimonialById } from "@/server/testimonials";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SingleTestimonialEmbed - Yourappname",
+  title: "SingleTestimonialEmbed - Testimonia",
   description:
-    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+    "Testimonia helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
 };
 
 export default async function SingleTestimonialEmbed(props: {

@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YourAppName — Collect, Manage & Showcase Testimonials Effortlessly",
+  title: "Testimonia — Collect, Manage & Showcase Testimonials Effortlessly",
   description:
-    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+    "Testimonia helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
 };
 
 export default function RootLayout({

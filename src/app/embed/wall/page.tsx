@@ -6,9 +6,9 @@ import { EmblaOptionsType } from "embla-carousel";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "WallofLoveEmbeds - YourAppName",
+  title: "WallofLoveEmbeds - Testimonia",
   description:
-    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+    "Testimonia helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
 };
 
 export default async function WallEmbed(props: {

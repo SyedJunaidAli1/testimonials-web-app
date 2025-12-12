@@ -3,9 +3,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About - YourAppName",
+  title: "About - Testimonia",
   description:
-    "YourAppName helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+    "Testimonia helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
 };
 const Page = () => {
   return (
@@ -14,7 +14,7 @@ const Page = () => {
         <main className="flex flex-col items-start justify-center gap-8">
           <header className="w-full">
             <h1 className="text-3xl sm:text-4xl font-bold">
-              About Wall of Love
+              About Testimonia
             </h1>
             <p className="mt-2 text-sm">
               An open-source testimonial engine that helps creators, startups,
@@ -26,7 +26,7 @@ const Page = () => {
           <div>
             <h2 className="text-lg font-medium">What this app does</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Wall of Love makes it effortless to gather feedback and turn it
+              Testimonia makes it effortless to gather feedback and turn it
               into polished testimonial sections, shareable pages, and
               embeddable widgets. Whether you're building a landing page, SaaS,
               portfolio, or shop — you can collect testimonials, approve them,
