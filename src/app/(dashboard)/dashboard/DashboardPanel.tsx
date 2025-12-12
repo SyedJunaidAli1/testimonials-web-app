@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Ellipsis,
   Files,
@@ -8,7 +7,6 @@ import {
   Link as LinkIcon,
   Lock,
   Rows4,
-  Search,
   TriangleAlert,
   Unlock,
 } from "lucide-react";
@@ -60,104 +58,125 @@ const DashboardPanel = () => {
 
   return (
     <>
-      <main className="flex flex-col h-screen items-center pt-20">
-        <section className="w-full max-w-5xl mt-10">
-          <h2 className="text-2xl font-bold text-left py-4">Overview</h2>
-          <div className="flex gap-6">
-            <div className="bg-primary border border-border w-[22rem] h-[8rem] px-4 py-4 rounded-lg">
-              <div className="flex justify-between">
-                <p className="text-left text-lg font-semibold">Total Text</p>
+      <main className="flex flex-col min-h-screen items-center pt-20 px-4">
+        {/* === OVERVIEW === */}
+        <section className="w-full max-w-5xl mt-4 sm:mt-10">
+          <h2 className="text-2xl font-bold py-4">Overview</h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {/* Total Text */}
+            <div className="bg-primary border border-border rounded-lg px-4 py-5 h-auto sm:h-32 flex flex-col justify-between">
+              <div className="flex justify-between items-center">
+                <p className="text-lg font-semibold">Total Text</p>
                 <FileText />
               </div>
-              <div className="flex gap-2 items-center mt-4 text-left">
-                <p className="text-2xl ">{testimonialCount} /</p>
-                <span className="font-semibold text-3xl">∞</span>
+              <div className="flex gap-2 items-center mt-2 sm:mt-4">
+                <p className="text-3xl font-bold">{testimonialCount}</p>
+                <span className="text-3xl font-semibold opacity-80">∞</span>
               </div>
             </div>
-            <div className="bg-primary border border-border w-[22rem] h-[8rem] px-4 py-4 rounded-lg">
-              <div className="flex justify-between">
-                <p className="text-left text-lg font-semibold">Total Spaces</p>
+
+            {/* Total Spaces */}
+            <div className="bg-primary border border-border rounded-lg px-4 py-5 h-auto sm:h-32 flex flex-col justify-between">
+              <div className="flex justify-between items-center">
+                <p className="text-lg font-semibold">Total Spaces</p>
                 <FolderOpen />
               </div>
-              <div className="flex gap-2 items-center mt-4 text-left">
-                <p className="text-2xl ">{totalSpaces} /</p>
-                <span className="font-semibold text-3xl">∞</span>
+              <div className="flex gap-2 items-center mt-2 sm:mt-4">
+                <p className="text-3xl font-bold">{totalSpaces}</p>
+                <span className="text-3xl font-semibold opacity-80">∞</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="w-full max-w-5xl mt-10">
+        {/* === SPACES LIST === */}
+        <section className="w-full max-w-5xl mt-12">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-left py-4">Spaces</h2>
+            <h2 className="text-2xl font-bold py-4">Spaces</h2>
+
             <div className="flex gap-2">
-              <Button>
-                <Search />
-                Search
-              </Button>
               <CreateSpaceDialog />
             </div>
           </div>
-          {/* 3-column grid that stays responsive */}
-          <ul className="mt-6 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
-            {/* Example item – duplicate / map this <li> for every record you fetch */}
+
+          {/* GRID — AUTO FIT ON RESPONSIVE */}
+          <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {spaces?.map((s: any) => (
               <li
                 key={s.id}
-                className="bg-primary border border-border w-80 h-30 px-4 py-4 rounded-lg list-none"
+                className="bg-primary border border-border rounded-lg px-4 py-4 shadow-sm hover:shadow-md transition-all"
               >
-                <div className="flex justify-between items-center">
-                  <Link href={`/products/${s.slug}`}>
-                    <div className="flex gap-2 items-center w-20 h-20">
-                      <Avatar className="w-16 h-16 border">
-                        <AvatarImage src={s.spaceLogo} alt={s.spacename} />
-                        <AvatarFallback>{s.spacename[0]}</AvatarFallback>
-                      </Avatar>
-                      <p className="text-lg font-semibold">{s.spacename}</p>
-                    </div>
+                {/* Top Row */}
+                <div className="flex justify-between items-start gap-3">
+                  <Link
+                    href={`/products/${s.slug}`}
+                    className="flex items-center gap-3 w-full"
+                  >
+                    {/* Avatar */}
+                    <Avatar className="w-14 h-14 border shadow bg-background shrink-0">
+                      <AvatarImage src={s.spaceLogo} alt={s.spacename} />
+                      <AvatarFallback>{s.spacename[0]}</AvatarFallback>
+                    </Avatar>
+
+                    {/* Name */}
+                    <p className="text-lg font-semibold line-clamp-2">
+                      {s.spacename}
+                    </p>
                   </Link>
+
+                  {/* Dropdown Menu */}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <button className="p-1 rounded-sm hover:bg-blue-800">
-                        <Ellipsis size={26} />
+                      <button className="p-1 rounded-sm hover:bg-blue-800 transition">
+                        <Ellipsis size={22} />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
+
+                    <DropdownMenuContent align="end" className="min-w-45">
                       <Link href={`/products/${s.slug}`}>
                         <DropdownMenuItem>
                           <Rows4 />
                           Manage testimonials
                         </DropdownMenuItem>
                       </Link>
+
                       <DropdownMenuItem
                         onClick={() => {
                           const url = `${window.location.origin}/testimonial/${s.slug}`;
                           navigator.clipboard.writeText(url);
-                          toast.success("✅ Link copied to clipboard!");
+                          toast.success("Link copied!");
                         }}
                       >
                         <LinkIcon />
                         Get the Link
                       </DropdownMenuItem>
+
                       <DropdownMenuItem onClick={() => copySpace.mutate(s.id)}>
                         <Files />
-                        Duplicate the Space
+                        Duplicate Space
                       </DropdownMenuItem>
+
                       <DropdownMenuItem
                         onClick={() => toggleStatus.mutate(s.id)}
                       >
                         {s.disabled ? (
-                          <Unlock className="text-green-400" />
+                          <>
+                            <Unlock className="text-green-400" />
+                            Enable Space
+                          </>
                         ) : (
-                          <Lock className="text-red-400" />
+                          <>
+                            <Lock className="text-red-400" />
+                            Disable Space
+                          </>
                         )}
-                        {s.disabled ? "Enable the Space" : "Disable the Space"}
                       </DropdownMenuItem>
+
                       <DropdownMenuItem
                         onClick={() => removeSpace.mutate(s.id)}
                       >
-                        <TriangleAlert className="text-red-500" /> Delete the
-                        Space
+                        <TriangleAlert className="text-red-500" /> Delete Space
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
