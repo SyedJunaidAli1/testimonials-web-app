@@ -56,7 +56,7 @@ const LikedPanel = ({ slug }: { slug: string }) => {
   }
 
   return (
-    <section className="flex-1 p-8">
+    <section className="flex-1 py-8">
       <header className="flex justify-between items-center border-b pb-4 mb-6">
         <div className="flex gap-3 items-center">
           <MessageSquareText className="text-primary" />
@@ -74,11 +74,11 @@ const LikedPanel = ({ slug }: { slug: string }) => {
           <p className="text-gray-500 mt-6">No Liked testimonials found</p>
         </section>
       ) : (
-        <div className="max-w-4xl mx-auto grid gap-6">
+        <div className="max-w-full mx-auto grid gap-6 ">
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="border border-border bg-card/60 backdrop-blur-md rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
+              className="border border-border bg-card/60 backdrop-blur-md rounded-2xl px-3 py-4 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
             >
               {/* Header */}
               <div className="flex items-center gap-4 mb-3">

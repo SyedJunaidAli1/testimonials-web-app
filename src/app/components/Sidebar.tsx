@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +13,8 @@ import {
   Heart,
   Inbox,
   Mail,
+  Menu,
+  X,
   MessageCircleHeart,
 } from "lucide-react";
 import Image from "next/image";
@@ -20,15 +23,20 @@ import { useParams } from "next/navigation";
 import { TransferSpaceDialog } from "./TransferSpaceDialog";
 import { useSpaceBySlug } from "../queries/spaces";
 import WallEmbedDialog from "./WallEmbedDialog";
+import { Button } from "@/components/ui/button";
 
 const Sidebar = () => {
   const { slug } = useParams();
+  const [open, setOpen] = useState(false);
 
   const {
     data: space,
     isLoading: spaceLoading,
     error: spaceError,
   } = useSpaceBySlug(slug);
+
+  // Close sidebar on navigation
+  const close = () => setOpen(false);
 
   if (spaceLoading) {
     return (
@@ -38,129 +46,168 @@ const Sidebar = () => {
     );
   }
 
-  if (spaceError) {
-    return <p>Something went wrong while fetching data...</p>;
-  }
+  if (spaceError) return <p>Something went wrong...</p>;
 
   return (
-    <div>
-      <main className="flex min-h-screen">
-        <aside className="w-64 border-r border-border py-6 px-4">
-          <div>
-            {/* Space Info */}
-            <div className="flex flex-col items-center text-center gap-2">
-              <Image
-                src={space?.spaceLogo}
-                width={70}
-                height={70}
-                alt="space logo"
-                className="rounded-full object-cover"
-              />
-              <p className="text-lg font-semibold">{space?.spacename}</p>
-            </div>
+    <div className="relative">
+      {/* MOBILE TOGGLE BUTTON */}
+      <Button
+        onClick={() => setOpen(true)}
+        variant="outline"
+        className="lg:hidden fixed top-4 left-4 z-40 p-2"
+      >
+        <Menu size={22} />
+      </Button>
 
-            {/* Navigation */}
-            <nav className="mt-8 flex flex-col gap-3">
-              <Accordion type="multiple">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="font-semibold text-xl">
-                    Inbox
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className=" py-2 space-y-2 font-medium text-md">
-                      <Link href={`/products/${slug}/all`}>
-                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                          <Inbox size={20} className="text-primary" />
-                          All
-                        </li>
-                      </Link>
-                      <Link href={`/products/${slug}/liked`}>
-                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                          <MessageCircleHeart
-                            size={20}
-                            className="text-primary"
-                          />
-                          Liked
-                        </li>
-                      </Link>
-                      <Link href={`/products/${slug}/emails`}>
-                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                          <Mail size={20} className="text-primary" />
-                          Sent email
-                        </li>
-                      </Link>
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+      {/* OVERLAY FOR MOBILE */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+          onClick={close}
+        />
+      )}
 
-              <Accordion type="multiple">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="font-semibold text-xl">
-                    Embed Widgets
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className=" py-2 space-y-2 font-medium text-md">
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <WallEmbedDialog slug={space?.slug || ""} />
-                      </li>
+      {/* SIDEBAR */}
+      <aside
+        className={`
+          fixed lg:static top-0 left-0 h-full lg:h-screen w-64
+          bg-background border-r border-border py-6 px-4 z-40
+          transform transition-transform duration-300 ease-in-out
+          ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+        `}
+      >
+        {/* CLOSE BUTTON (Mobile Only) */}
+        <Button
+          onClick={close}
+          variant="outline"
+          className="lg:hidden absolute top-4 right-4"
+        >
+          <X size={22} />
+        </Button>
 
-                      <Link href={`/products/${slug}/social-proof-avatar`}>
-                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                          <CircleUserRound size={20} className="text-primary" />
-                          Social Proof Avatar
-                        </li>
-                      </Link>
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+        {/* Space Info */}
+        <div className="flex flex-col items-center text-center gap-2 mt-10 lg:mt-0">
+          <Image
+            src={space?.spaceLogo}
+            width={70}
+            height={70}
+            alt="space logo"
+            className="rounded-full object-cover"
+          />
+          <p className="text-lg font-semibold">{space.spacename}</p>
+        </div>
 
-              <Accordion type="multiple">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="font-semibold text-xl">
-                    Pages
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className=" py-2 space-y-2 font-medium text-md">
-                      <Link href={`/products/${slug}/request-testimonials`}>
-                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                          <ArrowBigRight size={20} className="text-primary" />
-                          Request testimonials
-                        </li>
-                      </Link>
-                      <Link href={`/products/${slug}/wall-of-love`}>
-                        <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                          <Heart size={20} className="text-primary" />
-                          Wall of Love
-                        </li>
-                      </Link>
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+        {/* Navigation */}
+        <nav className="mt-8 flex flex-col gap-3">
+          {/* Inbox */}
+          <Accordion type="multiple">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="font-semibold text-xl">
+                Inbox
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="py-2 space-y-2 font-medium text-md">
+                  <Link href={`/products/${slug}/all`} onClick={close}>
+                    <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2">
+                      <Inbox size={20} className="text-primary" /> All
+                    </li>
+                  </Link>
 
-              <Accordion type="multiple">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="font-semibold text-xl">
-                    Space settings
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="py-2 space-y-2 font-medium text-md">
-                      <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2 cursor-pointer transition-colors">
-                        <TransferSpaceDialog
-                          spaceId={space?.id}
-                          userId={space?.userId}
-                        />
-                      </li>
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </nav>
-          </div>
-        </aside>
-      </main>
+                  <Link href={`/products/${slug}/liked`} onClick={close}>
+                    <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2">
+                      <MessageCircleHeart size={20} className="text-primary" />
+                      Liked
+                    </li>
+                  </Link>
+
+                  <Link href={`/products/${slug}/emails`} onClick={close}>
+                    <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2">
+                      <Mail size={20} className="text-primary" /> Sent email
+                    </li>
+                  </Link>
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+
+          {/* Embed */}
+          <Accordion type="multiple">
+            <AccordionItem value="item-embed">
+              <AccordionTrigger className="font-semibold text-xl">
+                Embed Widgets
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="py-2 space-y-2 font-medium text-md">
+                  <li
+                    onClick={close}
+                    className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2"
+                  >
+                    <WallEmbedDialog slug={space?.slug || ""} />
+                  </li>
+
+                  <Link
+                    href={`/products/${slug}/social-proof-avatar`}
+                    onClick={close}
+                  >
+                    <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2">
+                      <CircleUserRound size={20} className="text-primary" />
+                      Social Proof Avatar
+                    </li>
+                  </Link>
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+
+          {/* Pages */}
+          <Accordion type="multiple">
+            <AccordionItem value="item-pages">
+              <AccordionTrigger className="font-semibold text-xl">
+                Pages
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="py-2 space-y-2 font-medium text-md">
+                  <Link
+                    href={`/products/${slug}/request-testimonials`}
+                    onClick={close}
+                  >
+                    <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2">
+                      <ArrowBigRight size={20} className="text-primary" />
+                      Request testimonials
+                    </li>
+                  </Link>
+
+                  <Link href={`/products/${slug}/wall-of-love`} onClick={close}>
+                    <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2">
+                      <Heart size={20} className="text-primary" />
+                      Wall of Love
+                    </li>
+                  </Link>
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+
+          {/* Settings */}
+          <Accordion type="multiple">
+            <AccordionItem value="item-settings">
+              <AccordionTrigger className="font-semibold text-xl">
+                Space settings
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="py-2 space-y-2 font-medium text-md">
+                  <li className="flex gap-2 items-center hover:bg-muted rounded-md px-3 py-2">
+                    <TransferSpaceDialog
+                      spaceId={space.id}
+                      userId={space.userId}
+                    />
+                  </li>
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </nav>
+      </aside>
     </div>
   );
 };

@@ -23,8 +23,8 @@ const EmailContainer = ({ slug }: { slug: string }) => {
   return (
     <main>
       {/* === Main content === */}
-      <section className="flex-1 p-8">
-        <header className="flex justify-between items-center border-b pb-4 mb-6">
+      <section className="flex-1 py-8">
+        <header className="flex justify-between items-center border-b pb-4">
           <div className="flex gap-3 items-center">
             <Mails className="text-primary" />
             <div>
@@ -42,7 +42,7 @@ const EmailContainer = ({ slug }: { slug: string }) => {
             <p className="text-gray-500 mt-6">No emails found</p>
           </section>
         ) : (
-          <div className="max-w-3xl mx-auto grid gap-6">
+          <div className="max-w-f mx-auto grid gap-6">
             {sentEmails.map((e) => (
               <div
                 key={e.id}
