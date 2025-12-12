@@ -14,7 +14,7 @@ const RequestComponent = ({ slug }: { slug: string }) => {
 
   return (
     <section>
-      <h2 className="font-bold text-3xl leading-12">Request Testimonials</h2>
+      <h2 className="font-bold text-3xl leading-12 mt-6">Request Testimonials</h2>
       <p className="font-medium text-gray-400 mb-4">
         Share this link with your clients or customers to request testimonials
       </p>

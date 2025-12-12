@@ -14,7 +14,7 @@ const WolContent = ({ slug }: { slug: string }) => {
 
   return (
     <section>
-      <h2 className="font-bold text-3xl leading-12">Wall of Love</h2>
+      <h2 className="font-bold text-3xl leading-12 mt-6">Wall of Love</h2>
       <p className="font-medium text-gray-400 mb-4">
         View and share your Wall of Love
       </p>

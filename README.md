@@ -58,7 +58,8 @@
 - [] verify email fnc
 - [] google outh fnc
 - [] Full theme override according to user preferences from db
-- [] optimize dashboard for mobile view
+- [x] optimize dashboard for mobile view
+- [x] optimize createspacedialog, walloflovedialog, testiwol mobile vie
 - [x] dashboard single embed remove dialog embed widgets
 - [x] dashboard
 - [x] wall of love

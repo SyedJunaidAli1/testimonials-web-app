@@ -39,12 +39,12 @@ const SocialPage = ({ slug }: { slug: string }) => {
 
       <div className="flex flex-col items-center justify-between gap-2">
         {/* TRUSTED MESSAGE */}
-        <p className="text-lg font-semibold mt-4">
+        <p className="text-lg font-semibold text-center mt-4">
           {space?.trustedMessage || "100% trusted by users and customers"}
         </p>
 
         {/* AVATAR STRIP */}
-        <div className="flex justify-between  -space-x-3">
+        <div className="flex justify-between -space-x-3">
           {testimonials?.slice(0, 12).map((t) => (
             <Avatar
               key={t.id}
