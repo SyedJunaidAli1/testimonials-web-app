@@ -1,6 +1,6 @@
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Pen } from "lucide-react";
-import Image from "next/image";
 
 // Preview component
 export function TestimonialsPreview({
@@ -27,13 +27,9 @@ export function TestimonialsPreview({
       {/* Logo */}
       <div className="flex items-center gap-2 mb-4">
         {spaceLogo ? (
-          <Image
-            src={spaceLogo}
-            alt="Preview logo"
-            width={50}
-            height={50}
-            className="rounded-full"
-          />
+          <Avatar className="w-18 h-18 border shadow bg-background">
+            <AvatarImage src={spaceLogo || ""} alt="space logo" />
+          </Avatar>
         ) : (
           <div className="w-12 h-12 bg-gray-200 rounded-full" />
         )}

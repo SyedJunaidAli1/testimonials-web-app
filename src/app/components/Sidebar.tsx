@@ -17,13 +17,13 @@ import {
   X,
   MessageCircleHeart,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { TransferSpaceDialog } from "./TransferSpaceDialog";
 import { useSpaceBySlug } from "../queries/spaces";
 import WallEmbedDialog from "./WallEmbedDialog";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Sidebar = () => {
   const { slug } = useParams();
@@ -87,14 +87,13 @@ const Sidebar = () => {
 
         {/* Space Info */}
         <div className="flex flex-col items-center text-center gap-2 mt-10 lg:mt-0">
-          <Image
-            src={space?.spaceLogo}
-            width={70}
-            height={70}
-            alt="space logo"
-            className="rounded-full object-cover"
-          />
-          <p className="text-lg font-semibold">{space.spacename}</p>
+          <Avatar className="w-26 h-26 border shadow bg-background shrink-0">
+            <AvatarImage src={space?.spaceLogo || ""} alt="space logo" />
+            <AvatarFallback>
+              {space?.spacename?.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          <p className="text-lg font-semibold">{space?.spacename || ""}</p>
         </div>
 
         {/* Navigation */}
