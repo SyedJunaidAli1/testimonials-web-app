@@ -56,7 +56,6 @@ export default function CreateSpaceDialog() {
   const [collectStar, setCollectStar] = useState(true);
   const [theme, setTheme] = useState("light");
   const [spaceLogo, setSpaceLogo] = useState<string | null>(null);
-
   const [themeColor, setThemeColor] = useState("#8e51ff"); // primary default
 
   const queryClient = useQueryClient();

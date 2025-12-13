@@ -328,7 +328,7 @@ export const toggleSpaceStatus = async (spaceId: string) => {
   };
 };
 
-export async function getSpaceById(id: string) {
+export const getSpaceById = async (id: string) => {
   const result = await db
     .select()
     .from(spaces)

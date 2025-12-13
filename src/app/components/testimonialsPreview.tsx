@@ -20,7 +20,7 @@ export function TestimonialsPreview({
 }) {
   return (
     <div
-      className={`p-4 rounded-lg min-h-[300px] w-full ${
+      className={`p-4 rounded-lg min-h-75 w-full ${
         theme === "dark" ? "bg-black" : "bg-white"
       }`}
     >
