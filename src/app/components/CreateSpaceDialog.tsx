@@ -56,7 +56,7 @@ export default function CreateSpaceDialog() {
   const [collectStar, setCollectStar] = useState(true);
   const [theme, setTheme] = useState("light");
   const [spaceLogo, setSpaceLogo] = useState<string | null>(null);
-  const [isSquare, setIsSquare] = useState(false);
+
   const [themeColor, setThemeColor] = useState("#8e51ff"); // primary default
 
   const queryClient = useQueryClient();
@@ -143,13 +143,30 @@ export default function CreateSpaceDialog() {
 
     // append file
     const fileInput = document.getElementById(
-      "logo-upload"
+      "logo-upload",
     ) as HTMLInputElement;
     if (fileInput?.files?.[0]) {
       fd.append("spaceLogo", fileInput.files[0]);
     }
 
     mutation.mutate(fd);
+  };
+
+  const handleColorChange = (color: string) => {
+    try {
+      if (Array.isArray(color)) {
+        //rgba array -> hex string
+        const [r, g, b, a = 1] = color;
+        const colorObj = Color.rgb(r, g, b, a);
+        setThemeColor(colorObj.hex());
+      } else {
+        //Any other color formet
+        const colorObj = Color(color);
+        setThemeColor(colorObj.hex());
+      }
+    } catch (error) {
+      console.error("Color conversion error:", error);
+    }
   };
 
   return (
@@ -159,267 +176,252 @@ export default function CreateSpaceDialog() {
           <Plus /> Create a new space
         </Button>
       </DialogTrigger>
-      <DialogContent className="flex justify-center gap-2 min-w-4xl max-h-[90vh] overflow-y-auto">
-        {/* left side */}
-        <div className="flex flex-col gap-4">
-          <DialogHeader>
-            <DialogTitle>Create Space</DialogTitle>
-          </DialogHeader>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-            className="flex flex-col gap-2"
-          >
-            {mutation.isError && (
-              <p className="text-sm text-red-500">
-                {mutation.error?.message || "Something went wrong"}
-              </p>
-            )}
-            <Input
-              placeholder="Space name"
-              value={spacename}
-              onChange={(e) => setSpacename(e.target.value)}
-              required
-            />
-            {/* Space Logo Upload */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Space Logo</label>
 
-              <div
-                className={`relative w-24 h-24 border flex items-center justify-center overflow-hidden ${
-                  isSquare ? "rounded-md" : "rounded-full"
-                }`}
-              >
-                {spaceLogo ? (
-                  <Image
-                    src={spaceLogo}
-                    alt="Space logo"
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <Image
-                    src="/image-holder.png"
-                    height={50}
-                    width={50}
-                    alt="no logo"
-                  />
-                )}
-              </div>
+      <DialogContent
+        className="
+          max-w-full lg:max-w-5xl
+          w-full
+          max-h-[90vh]
+          overflow-y-auto
+          p-4 sm:p-6
+        "
+      >
+        <div className="flex flex-col lg:flex-row gap-6 w-full">
+          {/* LEFT SIDE — FORM */}
+          <div className="flex-1 flex flex-col gap-4">
+            <DialogHeader>
+              <DialogTitle>Create Space</DialogTitle>
+            </DialogHeader>
 
-              <div className="flex gap-2 mt-2">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() =>
-                    document.getElementById("logo-upload")?.click()
-                  }
-                >
-                  {spaceLogo ? "Change" : "Upload"} Logo
-                </Button>
-                {spaceLogo && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    onClick={() => setSpaceLogo(null)}
-                  >
-                    Remove
-                  </Button>
-                )}
-              </div>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              className="flex flex-col gap-4"
+            >
+              {mutation.isError && (
+                <p className="text-sm text-red-500">
+                  {mutation.error?.message || "Something went wrong"}
+                </p>
+              )}
 
-              <input
-                id="logo-upload"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleFileChange}
+              {/* Space name */}
+              <Input
+                placeholder="Space name"
+                value={spacename}
+                onChange={(e) => setSpacename(e.target.value)}
+                required
               />
 
-              {/* Shape toggle */}
-              <div className="flex items-center gap-2 mt-2">
+              {/* Space Logo */}
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-medium">Space Logo</label>
+
+                <div className="relative w-24 h-24 border flex items-center justify-center overflow-hidden rounded-full">
+                  {spaceLogo ? (
+                    <Image
+                      src={spaceLogo}
+                      alt="Space logo"
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src="/image-holder.png"
+                      height={50}
+                      width={50}
+                      alt="no logo"
+                    />
+                  )}
+                </div>
+
+                <div className="flex gap-2 mt-2">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() =>
+                      document.getElementById("logo-upload")?.click()
+                    }
+                  >
+                    {spaceLogo ? "Change" : "Upload"} Logo
+                  </Button>
+
+                  {spaceLogo && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      onClick={() => setSpaceLogo(null)}
+                    >
+                      Remove
+                    </Button>
+                  )}
+                </div>
+
                 <input
-                  type="checkbox"
-                  id="square-check"
-                  checked={isSquare}
-                  onChange={(e) => setIsSquare(e.target.checked)}
-                  className="h-4 w-4"
+                  id="logo-upload"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleFileChange}
                 />
-                <label htmlFor="square-check" className="text-sm">
-                  Use square logo
-                </label>
               </div>
-            </div>
-            <Input
-              placeholder="Header title"
-              value={headerTitle}
-              onChange={(e) => setHeaderTitle(e.target.value)}
-              required
-            />
-            <Textarea
-              placeholder="Your custom message"
-              value={customMessage}
-              onChange={(e) => setCustomMessage(e.target.value)}
-              required
-            />
-            {/* Dynamic Questions */}
-            <div className="flex flex-col gap-3">
-              <p className="text-sm font-medium">Questions</p>
-              {questions.map((q, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 border rounded-md p-2"
-                >
-                  <GripVertical className="w-4 h-4 text-muted-foreground" />
-                  <Input
-                    value={q}
-                    onChange={(e) => handleChangeQuestion(i, e.target.value)}
-                    placeholder={`Question ${i + 1}`}
-                    maxLength={100}
-                  />
-                  <span className="text-xs text-muted-foreground whitespace-nowrap">
-                    {q.length}/100
-                  </span>
+
+              {/* Header title */}
+              <Input
+                placeholder="Header title"
+                value={headerTitle}
+                onChange={(e) => setHeaderTitle(e.target.value)}
+                required
+              />
+
+              {/* Custom message */}
+              <Textarea
+                placeholder="Your custom message"
+                value={customMessage}
+                onChange={(e) => setCustomMessage(e.target.value)}
+                required
+              />
+
+              {/* Questions */}
+              <div className="flex flex-col gap-3">
+                <p className="text-sm font-medium">Questions</p>
+
+                {questions.map((q, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 border rounded-md p-2"
+                  >
+                    <GripVertical className="w-4 h-4 text-muted-foreground" />
+                    <Input
+                      value={q}
+                      onChange={(e) => handleChangeQuestion(i, e.target.value)}
+                      placeholder={`Question ${i + 1}`}
+                      maxLength={100}
+                    />
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">
+                      {q.length}/100
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleRemoveQuestion(i)}
+                    >
+                      <Trash className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ))}
+
+                {questions.length < 5 && (
                   <Button
                     variant="ghost"
-                    size="icon"
-                    onClick={() => handleRemoveQuestion(i)}
+                    className="flex items-center gap-1 self-start"
+                    onClick={handleAddQuestion}
                   >
-                    <Trash className="w-4 h-4" />
+                    <Plus className="w-4 h-4" /> Add one (up to 5)
                   </Button>
-                </div>
-              ))}
+                )}
+              </div>
 
-              {questions.length < 5 && (
-                <Button
-                  variant="ghost"
-                  className="flex items-center gap-1 self-start"
-                  onClick={handleAddQuestion}
-                >
-                  <Plus className="w-4 h-4" /> Add one (up to 5)
-                </Button>
-              )}
-            </div>
-            {/* Toggles */}
-            <div className="flex flex-row items-center justify-center gap-2">
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>Data collection options</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col gap-3 p-2">
-                      <div className="flex justify-between items-center">
-                        <span>Name</span>
-                        <Switch
-                          checked={collectName}
-                          onCheckedChange={setCollectName}
-                        />
+              {/* Toggles */}
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                {/* Data options */}
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>Data collection options</AccordionTrigger>
+                    <AccordionContent>
+                      <div className="flex flex-col gap-3 p-2">
+                        {[
+                          ["Name", collectName, setCollectName],
+                          ["Email", collectEmail, setCollectEmail],
+                          ["Title, company", collectTitle, setCollectTitle],
+                          [
+                            "Social link",
+                            collectSocialLink,
+                            setCollectSocialLink,
+                          ],
+                          ["Address", collectAddress, setCollectAddress],
+                        ].map(([label, value, fn], i) => (
+                          <div
+                            key={i}
+                            className="flex justify-between items-center"
+                          >
+                            <span>{label}</span>
+                            <Switch
+                              checked={value as boolean}
+                              onCheckedChange={fn as any}
+                            />
+                          </div>
+                        ))}
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span>Email</span>
-                        <Switch
-                          checked={collectEmail}
-                          onCheckedChange={setCollectEmail}
-                        />
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span>Title, company</span>
-                        <Switch
-                          checked={collectTitle}
-                          onCheckedChange={setCollectTitle}
-                        />
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span>Social link</span>
-                        <Switch
-                          checked={collectSocialLink}
-                          onCheckedChange={setCollectSocialLink}
-                        />
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span>Address</span>
-                        <Switch
-                          checked={collectAddress}
-                          onCheckedChange={setCollectAddress}
-                        />
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-              <p className="flex flex-col gap-2">
-                Collect star
-                <Switch
-                  checked={collectStar}
-                  onCheckedChange={setCollectStar}
-                />
-              </p>
-              <p className="flex flex-col gap-2">
-                Choose theme
-                <Switch
-                  checked={theme === "dark"}
-                  onCheckedChange={handleThemeToggle}
-                />
-              </p>
-            </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
 
-            {/* Theme Color Picker */}
-            <ColorPicker
-              onChange={(color) => {
-                try {
-                  if (Array.isArray(color)) {
-                    // Convert RGBA array to hex
-                    const [r, g, b, a = 1] = color;
-                    const colorObj = Color.rgb(r, g, b, a);
-                    setThemeColor(colorObj.hex());
-                  } else {
-                    // Handle other formats
-                    const colorObj = Color(color);
-                    setThemeColor(colorObj.hex());
-                  }
-                } catch (error) {
-                  console.error("Color conversion error:", error);
-                }
-              }}
-              className="max-w-sm h-70 rounded-md border bg-background p-4 shadow-sm"
-            >
-              <ColorPickerSelection />
-              <div className="flex items-center gap-4">
-                <ColorPickerEyeDropper />
-                <div className="grid w-full gap-1">
-                  <ColorPickerHue />
-                  <ColorPickerAlpha />
+                {/* Quick toggles */}
+                <div className="flex flex-col gap-3">
+                  <label className="flex items-center gap-2">
+                    Collect star
+                    <Switch
+                      checked={collectStar}
+                      onCheckedChange={setCollectStar}
+                    />
+                  </label>
+
+                  <label className="flex items-center gap-2">
+                    Dark theme
+                    <Switch
+                      checked={theme === "dark"}
+                      onCheckedChange={handleThemeToggle}
+                    />
+                  </label>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <ColorPickerOutput />
-                <ColorPickerFormat />
-              </div>
-            </ColorPicker>
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={mutation.isPending}
-            >
-              {mutation.isPending ? "Creating..." : "Create"}
-            </Button>
-          </form>
-        </div>
 
-        {/* Right side */}
-        <div className="flex flex-col gap-2 bg-muted rounded-lg p-4 border-2">
-          <p className="border-2 bg-primary rounded-lg px-2 py-1 text-center">
-            Live Preview - Testimonials Page
-          </p>
-          <TestimonialsPreview
-            customMessage={customMessage}
-            headerTitle={headerTitle}
-            questions={questions}
-            spaceLogo={spaceLogo}
-            themeColor={themeColor}
-            theme={theme}
-          />
+              {/* Color Picker */}
+              <ColorPicker
+                onChange={handleColorChange}
+                className="max-w-sm h-70 rounded-md border bg-background p-4 shadow-sm"
+              >
+                <ColorPickerSelection />
+                <div className="flex items-center gap-4">
+                  <ColorPickerEyeDropper />
+                  <div className="grid w-full gap-1">
+                    <ColorPickerHue />
+                    <ColorPickerAlpha />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ColorPickerOutput />
+                  <ColorPickerFormat />
+                </div>
+              </ColorPicker>
+
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={mutation.isPending}
+              >
+                {mutation.isPending ? "Creating..." : "Create"}
+              </Button>
+            </form>
+          </div>
+
+          {/* RIGHT SIDE — PREVIEW */}
+          <div className="w-full lg:w-[45%] flex flex-col gap-4 bg-muted rounded-lg p-4 border">
+            <p className="border bg-primary text-center rounded-lg px-2 py-1">
+              Live Preview - Testimonials Page
+            </p>
+
+            <TestimonialsPreview
+              customMessage={customMessage}
+              headerTitle={headerTitle}
+              questions={questions}
+              spaceLogo={spaceLogo}
+              themeColor={themeColor}
+              theme={theme}
+            />
+          </div>
         </div>
       </DialogContent>
     </Dialog>

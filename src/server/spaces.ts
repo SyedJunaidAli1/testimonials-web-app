@@ -57,7 +57,12 @@ export const createSpaces = async (formData: FormData) => {
     logoUrl = upload.secure_url;
   }
 
-  const slug = slugify(spacename, { lower: true, strict: true });
+  const baseSlug = slugify(spacename, {
+    lower: true,
+    strict: true,
+    trim: true,
+  });
+  const slug = `${baseSlug}-${uuid().slice(0, 3)}`;
 
   await db.insert(spaces).values({
     userId: session.user.id,
@@ -154,7 +159,7 @@ export const duplicateSpace = async (spaceId: string) => {
       ...rest,
       spacename: `${space.spacename} (copy)`,
       slug: newSlug,
-      disabled: false,        // reset if needed
+      disabled: false, // reset if needed
       createdAt: new Date(),
       updatedAt: new Date(),
     })

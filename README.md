@@ -60,6 +60,8 @@
 - [x] Full theme override according to user preferences from db(this works but if i want to set it specific then i have to do it manually)
 - [x] optimize dashboard for mobile view
 - [] optimize createspacedialog, walloflovedialog, testiwol, requesttestimonialsdialog scroll changes mobile view
+- [x] creating a new space add 3 digit random number for slug 
+- [] product page and collect testi page and createsapcedialog live preview logo fix them to be a circle
 - [x] dashboard single embed remove dialog embed widgets
 - [x] dashboard
 - [x] wall of love
