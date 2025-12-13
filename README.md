@@ -55,13 +55,12 @@
 - [x] dont show sent email in all and liked pages if email is not in db
 - [x] complete landing page ui
 - [x] add meta data for the pages(app name is not finalized)
-- [] verify email fnc
-- [] google outh fnc
+- [x] google outh fnc
 - [x] Full theme override according to user preferences from db(this works but if i want to set it specific then i have to do it manually)
 - [x] optimize dashboard for mobile view
 - [x] optimize createspacedialog, walloflovedialog, testiwol, requesttestimonialsdialog scroll changes mobile view
 - [x] creating a new space add 3 digit random number for slug 
-- [] product page and collect testi page and createsapcedialog live preview logo fix them to be a circle
+- [x] product page and collect testi page and createsapcedialog live preview logo fix them to be a circle
 - [x] dashboard single embed remove dialog embed widgets
 - [x] dashboard
 - [x] wall of love
@@ -70,3 +69,4 @@
 - [x] about
 - [x] term
 - [x] policy
+- [] add logo for testimonia and landing page video and placeholder
