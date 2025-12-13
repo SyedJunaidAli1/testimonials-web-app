@@ -25,7 +25,7 @@ type WallEmbedDialogProps = {
   slug: string;
 };
 
-export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
+export default function WallEmbedDialog({ slug }: WallEmbedDialogProps) {
   const [baseUrl, setBaseUrl] = useState<string>("");
   const [width, setWidth] = useState<string>("100%");
   const [height, setHeight] = useState<string>("400px");
@@ -64,23 +64,23 @@ export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
 
   return (
     <Dialog>
-      <DialogTrigger className="flex gap-2 items-center justify-center ">
+      <DialogTrigger className="flex gap-2 items-center justify-center">
         <Heart size={20} className="text-primary" />
-        Wall of Love
+        <span className="text-sm sm:text-base">Wall of Love</span>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="sm:max-w-2x lg:max-w-3xl">
         <DialogHeader>
           <DialogTitle>Share Wall of Love</DialogTitle>
           <p className="text-sm text-muted-foreground">
-            Copy embed code or preview the widget. Customize width and height
-            before copying.
+            Customize size, preview live, and copy the embed code.
           </p>
         </DialogHeader>
 
         {/* Controls */}
-        <div className="mt-4 grid gap-3">
-          <div className="flex gap-2">
+        <div className="mt-4">
+          {/* Inputs */}
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1">
               <label className="text-xs text-muted-foreground">Width</label>
               <Input
@@ -89,7 +89,8 @@ export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
                 placeholder="100% or 600px"
               />
             </div>
-            <div className="w-32">
+
+            <div className="flex-1 sm:max-w-30">
               <label className="text-xs text-muted-foreground">Height</label>
               <Input
                 value={height}
@@ -98,26 +99,26 @@ export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
               />
             </div>
 
-            <div className="w-40">
-              <label className="text-xs text-muted-foreground">
-                Quick sizes
-              </label>
+            <div className="flex-1 sm:max-w-40">
+              <label className="text-xs text-muted-foreground">Presets</label>
               <Select
                 onValueChange={(v) => {
                   if (v === "small") {
-                    setWidth("90%");
+                    setWidth("100%");
                     setHeight("300px");
-                  } else if (v === "medium") {
+                  }
+                  if (v === "medium") {
                     setWidth("100%");
                     setHeight("400px");
-                  } else if (v === "large") {
+                  }
+                  if (v === "large") {
                     setWidth("100%");
                     setHeight("600px");
                   }
                 }}
               >
-                <SelectTrigger className="w-full h-10">
-                  <SelectValue placeholder="Preset" />
+                <SelectTrigger className="max-h-10 w-full">
+                  <SelectValue placeholder="Choose" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="small">Small</SelectItem>
@@ -128,9 +129,9 @@ export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
             </div>
           </div>
 
-          {/* Live preview */}
-          <div className="mt-2">
-            <div className="flex items-center justify-between mb-2">
+          {/* Live Preview */}
+          <div>
+            <div className="flex items-center justify-between my-2">
               <p className="text-sm font-medium">Live preview</p>
               <div className="flex gap-2">
                 <Button
@@ -150,30 +151,29 @@ export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
               </div>
             </div>
 
-            <div className="border border-border rounded-md overflow-hidden">
+            <div className="border rounded-md overflow-hidden w-full">
               <iframe
                 src={embedUrl}
                 title="Wall of Love preview"
+                className="w-full"
                 style={{
-                  width: width,
-                  height: height,
+                  height,
                   border: "none",
                   borderRadius: 8,
-                  overflow: "hidden",
                 }}
                 loading="lazy"
               />
             </div>
           </div>
 
-          {/* Embed code */}
-          <div className="mt-3">
-            <p className="text-sm font-medium mb-1">Iframe embed</p>
+          {/* Embed Code */}
+          <div>
+            <p className="text-sm font-medium mb-1">Iframe embed code</p>
             <div className="relative">
               <Textarea
                 readOnly
                 value={iframeCode}
-                className="font-mono text-xs resize-none h-[96px]"
+                className="font-mono text-xs resize-none h-28 pr-20"
               />
               <Button
                 variant="outline"
@@ -188,9 +188,9 @@ export default function WallEmbedDialog({  slug }: WallEmbedDialogProps) {
         </div>
 
         <DialogFooter>
-          <div className="text-sm text-muted-foreground flex flex-col w-full">
+          <div className="text-sm text-muted-foreground flex flex-col w-full items-center">
             <span>Embed URL:</span>
-            <span className="font-mono mt-1">{embedUrl}</span>
+            <span className="font-mono">{embedUrl}</span>{" "}
           </div>
         </DialogFooter>
       </DialogContent>

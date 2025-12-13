@@ -56,7 +56,7 @@ const WolComponent = ({ slug }: { slug: string }) => {
         </div>
       </section>
 
-      <section className="p-6">
+      <section className="lg:px-3 sm:px-0">
         {!testimonials || testimonials.length === 0 ? (
           <section className="flex flex-col items-center justify-center px-2 py-10 text-center">
             <p className="text-xl font-medium mb-3">

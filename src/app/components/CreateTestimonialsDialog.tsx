@@ -101,19 +101,19 @@ export default function CreateTestimonialsDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-64" style={{ background: customBtnColor }}>
+        <Button size={"lg"} style={{ background: customBtnColor }}>
           <Pen /> Submit Testimonial
         </Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
+      <DialogContent className="w-[95vw] sm:max-w-lg lg:max-w-lg max-h-[90vh] overflow-y-auto px-2 py-3">
+        <DialogHeader className="sticky top-0 z-10 bg-background px-4 py-3 border-b">
           <DialogTitle>Write text testimonial to</DialogTitle>
           <DialogDescription>
             Share your feedback for this space
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 px-2 py-4">
+        <form onSubmit={handleSubmit} className="space-y-2 px-2 py-4">
           {spaceLogo && (
             <div>
               <Avatar>
@@ -123,7 +123,7 @@ export default function CreateTestimonialsDialog({
             </div>
           )}
           {[question1, question2, question3, question4, question5].some(
-            Boolean
+            Boolean,
           ) && (
             <div>
               <Label>Questions</Label>
