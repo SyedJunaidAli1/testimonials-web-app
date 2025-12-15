@@ -1,18 +1,47 @@
-import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
 
-export async function proxy(request: NextRequest) {
-  const session = await auth.api.getSession({
-    headers: await headers()
-  })
+const authPaths = ["/login", "/signup", "/forgot-password", "/reset-password"];
 
-  if (!session) {
+const publicPaths = [
+  "/terms",
+  "/about",
+  "/privacy",
+  "/contact",
+  "/embed",
+  "/testimonial",
+];
+
+const protectedPaths = ["/dashboard", "/product"];
+
+export function proxy(request: NextRequest) {
+  const sessionCookie = getSessionCookie(request);
+  const { pathname } = request.nextUrl;
+
+  // Logged-in user trying to access auth pages
+  if (sessionCookie && authPaths.some((path) => pathname.startsWith(path))) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+  // Accessible for everyone
+  if (publicPaths.some((path) => pathname.startsWith(path))) {
+    return NextResponse.next();
+  }
+
+  // Not logged-in user trying to access protected pages
+  if (
+    !sessionCookie &&
+    protectedPaths.some((path) => pathname.startsWith(path))
+  ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
   return NextResponse.next();
 }
+
 export const config = {
-  runtime: "nodejs",
-  matcher: ["/dashboard"], // Apply proxy to specific routes
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+  ],
 };
