@@ -69,4 +69,7 @@
 - [x] about
 - [x] term
 - [x] policy
-- [] add logo for testimonia and landing page video and placeholder
+- [x] add logo for testimonia and
+- [] landing page video and placeholder
+- [] add middleware/proxy for authentication check
+- [] email for password reset and Change password
