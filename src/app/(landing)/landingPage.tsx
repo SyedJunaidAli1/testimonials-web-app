@@ -80,14 +80,16 @@ const Landing = () => {
               transition={{ duration: 0.6, delay: 0.89 }}
             >
               <HeroVideoDialog
-                videoSrc="/mvp.jpg"
-                thumbnailSrc="/mvp.jpg"
+                videoSrc="/mvp.png"
+                thumbnailSrc="/mvp.png"
+                animationStyle="top-in-bottom-out"
                 thumbnailAlt="Product demo video"
                 className="max-w-6xl block dark:hidden"
               />
               <HeroVideoDialog
-                videoSrc="/mvp.jpg"
-                thumbnailSrc="/mvp.jpg"
+                videoSrc="/mvp.png"
+                thumbnailSrc="/mvp.png"
+                animationStyle="top-in-bottom-out"
                 thumbnailAlt="Product demo video"
                 className="max-w-6xl hidden dark:block"
               />
@@ -100,7 +102,7 @@ const Landing = () => {
           </motion.div>
 
           {/*Wall of love*/}
-          <section className="bg-muted/30 pt-20 mb-12">
+          <section className="bg-muted/30 pt-16 mb-12">
             <motion.div
               className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
