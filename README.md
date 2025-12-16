@@ -70,6 +70,6 @@
 - [x] term
 - [x] policy
 - [x] add logo for testimonia and
-- [x] landing page ytvideo and placeholder(yt video remmains)
-- [x] add middleware/proxy for authentication check (need to check how is it working)
-- [] email for password reset and Change password
+- [] landing page ytvideo and placeholder(yt video remmains)
+- [] add middleware/proxy for authentication check (need to check why is it not working)
+- [x] email for password reset and Change password
