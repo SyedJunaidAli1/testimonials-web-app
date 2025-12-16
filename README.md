@@ -71,5 +71,5 @@
 - [x] policy
 - [x] add logo for testimonia and
 - [] landing page ytvideo and placeholder
-- [] add middleware/proxy for authentication check (need to check how is it working)
+- [x] add middleware/proxy for authentication check (need to check how is it working)
 - [] email for password reset and Change password
