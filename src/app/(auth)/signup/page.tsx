@@ -1,5 +1,13 @@
 import { GalleryVerticalEnd } from "lucide-react";
 import { SignupForm } from "@/components/signup-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Signup - Testimonia",
+  description:
+    "Testimonia helps creators and businesses collect testimonials, manage social proof, and embed beautiful widgets on any website. Simple, fast, and privacy-friendly.",
+};
+
 
 export default function Page() {
   return (
