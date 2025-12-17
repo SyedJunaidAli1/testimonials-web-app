@@ -80,14 +80,14 @@ const Landing = () => {
               transition={{ duration: 0.6, delay: 0.89 }}
             >
               <HeroVideoDialog
-                videoSrc="/mvp.png"
+                videoSrc="https://www.youtube.com/embed/jKfN1UgNVNw?si=2HsSMWiHRfhJWHd9"
                 thumbnailSrc="/mvp.png"
                 animationStyle="top-in-bottom-out"
                 thumbnailAlt="Product demo video"
                 className="max-w-6xl block dark:hidden"
               />
               <HeroVideoDialog
-                videoSrc="/mvp.png"
+                videoSrc="https://www.youtube.com/embed/jKfN1UgNVNw?si=2HsSMWiHRfhJWHd9"
                 thumbnailSrc="/mvp.png"
                 animationStyle="top-in-bottom-out"
                 thumbnailAlt="Product demo video"

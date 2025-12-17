@@ -82,7 +82,7 @@ export default function Footer() {
         <motion.div variants={itemVariants} className="space-y-3 max-w-sm">
           <p className="flex items-center gap-2 text-lg font-extrabold tracking-tight text-primary dark:text-white">
             <Heart className="w-5 h-5 fill-primary text-primary" />
-            Wall of Love
+            Testimonia
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-normal">
             Collect testimonials, showcase social proof, and embed them anywhere
@@ -116,9 +116,7 @@ export default function Footer() {
           variants={itemVariants}
           className="md:self-end text-sm text-gray-500 dark:text-gray-400 space-y-2 md:text-right"
         >
-          <p>
-            © {new Date().getFullYear()} Testimonia. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} Testimonia. All rights reserved.</p>
           <p className="max-w-xs md:ml-auto">
             Built with care for founders, creators, and teams who love feedback.
           </p>

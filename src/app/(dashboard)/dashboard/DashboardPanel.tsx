@@ -54,7 +54,12 @@ const DashboardPanel = () => {
       </div>
     );
 
-  if (spacesError || testimonialCountError) return <p>Something went wrong</p>;
+  if (spacesError || testimonialCountError)
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <p>Something went wrong</p>
+      </div>
+    );
 
   return (
     <>
