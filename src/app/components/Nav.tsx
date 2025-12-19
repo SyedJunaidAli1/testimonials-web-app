@@ -11,7 +11,7 @@ const Nav = () => {
     <main className="max-w-4xl mx-auto px-4 mt-4">
       <section className="flex flex-wrap items-center justify-between py-2 px-3 border rounded-xl">
         {/* Logo */}
-        <Image src="/logo.png" alt="logo" width={50} height={50} />
+        <Image loading="lazy" src="/logo.png" alt="logo" width={50} height={50} />
 
         {/* Buttons */}
         <div className="flex flex-wrap gap-2 items-center justify-center text-center">
