@@ -1,36 +1,12 @@
-// import { NextRequest, NextResponse } from "next/server";
-
-
-// export function middleware(request: NextRequest) {
-//   const { pathname } = request.nextUrl;
-
-//   // Redirect /about → /
-//   if (pathname === "/about") {
-//     return NextResponse.redirect(new URL("/", request.url));
-//   }
-//   if (pathname === "/dashboard") {
-//     return NextResponse.redirect(new URL("/", request.url));
-//   }
-
-
-//   return NextResponse.next();
-// }
-
-// export const config = {
-//   matcher: ["/about", "/dashboard"],
-// };
-
-
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "@/lib/auth";
+import { getSessionCookie } from "better-auth/cookies";
 
 const authPaths = ["/login", "/signup", "/forgot-password", "/reset-password"];
 const protectedPaths = ["/dashboard", "/product"];
 
-export default async function middleware(request: NextRequest) {
-  const session = await auth.api.getSession({headers: request.headers});
-  console.log(session);
+export default function middleware(request: NextRequest) {
+  const session = getSessionCookie(request);
   const { pathname } = request.nextUrl;
 
   // 🚫 Not logged in → trying to access protected routes
