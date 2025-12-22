@@ -1,75 +1,240 @@
-#todo
+Testimonia
 
-- [x] starting point for the app
-- [x] theme Toggle addded
-- [x] login and signin page made
-- [x] forgot-password page
-- [x] reset-password page
-- [x] Create Space set cloudinary for space logo storage
-- [x] tanstack Query added
-- [x] set add spaece success & error toast
-- [x] set limit for space logo
-- [x] setup space three dot dropdown fnc
-- [x] make space three dot dropdown options fnc
-- [x] make space preview for create spaces
-- [x] make add scroll bar for testi preview
-- [x] testimonials preview theme button set it for black and white
-- [x] Change color picker with shadcn component
-- [x] createspace when add or remove question it triggers create fnc and it not let us add all the other fields(temp fix for now)
-- [x] Create Space preview part remain
-- [x] Create Space test remmains
-- [x] testimonials dialoge for submiting testis to db
-- [x] change star for createtestidialog
-- [x] server action for testimonials creations
-- [x] server action for testimonials creations add image for pfp
-- [x] Manage space page
-- [x] repalce react spinner with shad spinner
-- [x] Product page ui changes to make it look better
-- [x] slug for testimonals
-- [x] slug for product page added but somechanges needed in testimonials schema for match slugs to fetching data from db
-- [x] product page ui for all tabs with empty and with data to be made
-- [x] product page ui for all tabs routes and ui to be made
-- [x] product page ui download pdf added for liked (need some improvement and add for all)
-- [x] product page liked testimonials with schema changes and ui for like and unlike filter it on its tab
-- [x] product page ui (all,liked, request testimonials, route has been made)
-- [x] product page ui (Single tetimonial dialog made but need chande of placeholder pic)
-- [x] widget integration for embed on other sites
-- [x] embed widget integration for wall of love
-- [x] server action for testimonials creations some bugs like isapproved it not working in and stars default value is not saving
-- [x] tranfer space feature created
-- [x] Embla carousel for testimonials with data fetching
-- [x] need to remove tanstack queries from main pages and make a page for them
-- [x] embed widget wall of love ui
-- [x] Embed single page is remind
-- [x] Embed Ui is for copy single and wall of love Ui remained
-- [x] in embed testimonial server fetching all testi we want only liked testis fix
-- [x] ask what to use for ssr + csr tanstack Query hydration use queries or direct server action?
-- [x] disable space fnc in dashboard remained
-- [x] disable space fnc verification implementation frontend
-- [x] disable space fnc verification implementation server actions(ask)
-- [x] this feature removed incentivize for products page in all and liked pages
-- [x] when only one testimonial then i dont want embla i have to implement a single testimonial display
-- [x] append unique ID if duplicate slugs(ask)
-- [x] slug duplication(ask)
-- [x] profile pic only feature aka social proof avatar
-- [x] dont show sent email in all and liked pages if email is not in db
-- [x] complete landing page ui
-- [x] add meta data for the pages(app name is not finalized)
-- [x] google outh fnc
-- [x] Full theme override according to user preferences from db(this works but if i want to set it specific then i have to do it manually)
-- [x] optimize dashboard for mobile view
-- [x] optimize createspacedialog, walloflovedialog, testiwol, requesttestimonialsdialog scroll changes mobile view
-- [x] creating a new space add 3 digit random number for slug 
-- [x] product page and collect testi page and createsapcedialog live preview logo fix them to be a circle
-- [x] dashboard single embed remove dialog embed widgets
-- [x] dashboard
-- [x] wall of love
-- [x] nav top
-- [x] footer
-- [x] about
-- [x] term
-- [x] policy
-- [x] add logo for testimonia and
-- [x] landing page ytvideo and placeholder(yt video remmains)
-- [] add middleware/proxy for authentication check (need to check why is it not working)
-- [x] email for password reset and Change password
+Testimonia is an open-source platform to collect, manage, and showcase testimonials from your users — all in one place.
+
+Create branded testimonial pages, collect feedback through a shareable link, moderate responses, and embed testimonials anywhere on your website using clean, script-free widgets.
+
+✨ Features
+🧩 Spaces
+
+Create multiple spaces for different products or projects
+
+Custom branding (logo, theme, accent colors)
+
+Enable or disable spaces instantly
+
+📝 Testimonial Collection
+
+Share a public link to collect testimonials
+
+Ask up to 5 custom questions
+
+Optional fields:
+
+Name
+
+Email
+
+Title / company
+
+Social link
+
+Address
+
+Star rating
+
+Image upload support
+
+✅ Moderation
+
+Approve or reject testimonials
+
+Like testimonials to feature them publicly
+
+Disable testimonials without deleting them
+
+💌 Email Requests
+
+Send testimonial requests via email
+
+Track sent emails
+
+Built-in password reset & email verification emails
+
+🧱 Embed Widgets
+
+Wall of Love (carousel or grid)
+
+Single Testimonial
+
+Social Proof Avatar Strip
+
+Fully iframe-based (no scripts required)
+
+Custom width & height
+
+Safe to embed anywhere
+
+🔐 Authentication
+
+Email + password authentication (BetterAuth)
+
+Password reset & email verification
+
+Secure session handling
+
+⚡ Modern Stack
+
+Next.js App Router
+
+TanStack Query
+
+Drizzle ORM + Neon
+
+Tailwind CSS + shadcn/ui
+
+Resend (emails)
+
+Cloudinary (image uploads)
+
+🖼️ Widgets Preview
+Wall of Love
+
+Display multiple testimonials in a beautiful scrolling or grid layout.
+
+Single Testimonial
+
+Embed a single testimonial anywhere on your site.
+
+Social Proof Avatars
+
+Show trusted user faces with a short message like:
+
+“Trusted by 1,000+ users worldwide”
+
+🚀 Getting Started
+1️⃣ Clone the repository
+git clone https://github.com/your-username/testimonia.git
+cd testimonia
+
+2️⃣ Install dependencies
+bun install
+# or
+npm install
+
+3️⃣ Environment variables
+
+Create a .env file:
+
+# Database
+DATABASE_URL=
+
+# Better Auth
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+
+# Public base URL
+NEXT_PUBLIC_SELF_URL=http://localhost:3000
+
+# Resend
+RESEND_API_KEY=
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+# Google OAuth
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+4️⃣ Run the app
+bun dev
+# or
+npm run dev
+
+📦 Project Structure
+app/
+ ├─ (auth)
+ ├─ (dashboard)
+ ├─ (landing)
+ ├─ (otherroutes)
+ ├─ (products)/products/[slug]
+ ├─ api/auth/[...all]
+ ├─ components
+ ├─ embed
+ ├─ Embla
+ ├─ icons
+ ├─ queries
+ ├─ globals.css
+ ├─ layout.tsx
+ ├─ page.tsx
+
+Route Groups
+
+(auth) → login, signup, reset password
+
+(dashboard) → authenticated user dashboard
+
+(landing) → marketing & SEO pages
+
+(otherroutes) → terms, privacy, about, contact
+
+(products)/products/[slug] → space-specific routes
+
+Embed Routes
+embed/
+ ├─ wall
+ ├─ social
+ ├─ single
+
+
+Public
+
+iframe-only
+
+No script injection
+
+Automatically respects space.disabled
+
+🔒 Privacy & Security
+
+We do not sell or share user data
+
+Testimonials are public only after approval
+
+Spaces can be disabled instantly
+
+Passwords are securely handled
+
+Tokens expire automatically
+
+🧪 Status
+
+Testimonia is actively developed and evolving.
+Breaking changes may occur in early versions.
+
+🛣️ Roadmap
+
+🌍 i18n support
+
+📊 Embed analytics
+
+🧵 Video testimonials
+
+🎨 More embed themes
+
+🧩 Web Components support
+
+🛡️ Rate limiting & spam protection
+
+🤝 Contributing
+
+Contributions are welcome!
+
+Fork the repository
+
+Create a feature branch
+
+Submit a PR with a clear description
+
+Found a bug or have an idea? Open an issue.
+
+📄 License
+
+MIT License
+
+💬 Feedback
+
+Testimonia is built with real-world usage in mind.
+If you’re using it (or planning to), your feedback truly matters.
