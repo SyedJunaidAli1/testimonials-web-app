@@ -5,7 +5,7 @@ import { getSessionCookie } from "better-auth/cookies";
 const authPaths = ["/login", "/signup", "/forgot-password", "/reset-password"];
 const protectedPaths = ["/dashboard", "/product"];
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const session = getSessionCookie(request);
   const { pathname } = request.nextUrl;
 

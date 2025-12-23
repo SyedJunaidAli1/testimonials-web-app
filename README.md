@@ -7,96 +7,96 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 ✨ Features
 🧩 Spaces
 
-Create multiple spaces for different products or projects
+· Create multiple spaces for different products or projects
 
-Custom branding (logo, theme, accent colors)
+· Custom branding (logo, theme, accent colors)
 
-Enable or disable spaces instantly
+· Enable or disable spaces instantly
 
 📝 Testimonial Collection
 
-Share a public link to collect testimonials
+· Share a public link to collect testimonials
 
-Ask up to 5 custom questions
+· Ask up to 5 custom questions
 
-Optional fields:
+· Optional fields:
 
-Name
+   · Name
 
-Email
+   · Email
 
-Title / company
+   · Title / company
 
-Social link
+   · Social link
 
-Address
+   · Address
 
-Star rating
+   · Star rating
 
-Image upload support
+   · Image upload support
 
 ✅ Moderation
 
-Approve or reject testimonials
+· Approve or reject testimonials
 
-Like testimonials to feature them publicly
+· Like testimonials to feature them publicly
 
-Disable testimonials without deleting them
+· Disable testimonials without deleting them
 
 💌 Email Requests
 
-Send testimonial requests via email
+· Send testimonial requests via email
 
-Track sent emails
+· Track sent emails
 
-Built-in password reset & email verification emails
+· Built-in password reset & email verification emails
 
 🧱 Embed Widgets
 
-Wall of Love (carousel or grid)
+· Wall of Love
 
-Single Testimonial
+· Single Testimonial
 
-Social Proof Avatar Strip
+· Social Proof Avatar Strip
 
-Fully iframe-based (no scripts required)
+· Fully iframe-based (no scripts required)
 
-Custom width & height
+· Custom width & height
 
-Safe to embed anywhere
+· Safe to embed anywhere
 
 🔐 Authentication
 
-Email + password authentication (BetterAuth)
+· Email + password authentication (BetterAuth)
 
-Password reset & email verification
+· Password reset & email verification
 
-Secure session handling
+· Secure session handling
 
 ⚡ Modern Stack
 
-Next.js App Router
+· Next.js App Router
 
-TanStack Query
+· TanStack Query
 
-Drizzle ORM + Neon
+· Drizzle ORM + Neon
 
-Tailwind CSS + shadcn/ui
+· Tailwind CSS + shadcn/ui
 
-Resend (emails)
+· Resend (emails)
 
-Cloudinary (image uploads)
+· Cloudinary (image uploads)
 
 🖼️ Widgets Preview
-Wall of Love
+🟦 Wall of Love
 
 Display multiple testimonials in a beautiful scrolling or grid layout.
 
-Single Testimonial
+⭐ Single Testimonial
 
 Embed a single testimonial anywhere on your site.
 
-Social Proof Avatars
+👥 Social Proof Avatars
 
 Show trusted user faces with a short message like:
 
@@ -108,8 +108,11 @@ git clone https://github.com/SyedJunaidAli1/Testimonia.git
 cd testimonia
 
 2️⃣ Install dependencies
+
 bun install
-# or
+
+or
+
 npm install
 
 3️⃣ Environment variables
@@ -117,48 +120,56 @@ npm install
 Create a .env file:
 
 # Database
+
 DATABASE_URL=
 
 # Better Auth
+
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=http://localhost:3000
 
 # Public base URL
+
 NEXT_PUBLIC_SELF_URL=http://localhost:3000
 
 # Resend
+
 RESEND_API_KEY=
 
 # Cloudinary
+
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 
 # Google OAuth
+
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 
 4️⃣ Run the app
 bun dev
-# or
+
+or
+
 npm run dev
 
 📦 Project Structure
 app/
- ├─ (auth)
- ├─ (dashboard)
- ├─ (landing)
- ├─ (otherroutes)
- ├─ (products)/products/[slug]
- ├─ api/auth/[...all]
- ├─ components
- ├─ embed
- ├─ Embla
- ├─ icons
- ├─ queries
- ├─ globals.css
- ├─ layout.tsx
- ├─ page.tsx
+├─ (auth)
+├─ (dashboard)
+├─ (landing)
+├─ (otherroutes)
+├─ (products)/products/[slug]
+├─ api/auth/[...all]
+├─ components
+├─ embed
+├─ Embla
+├─ icons
+├─ queries
+├─ globals.css
+├─ layout.tsx
+└─ page.tsx
 
 Route Groups
 
@@ -172,12 +183,11 @@ Route Groups
 
 (products)/products/[slug] → space-specific routes
 
-Embed Routes
+📁 Embed Routes
 embed/
- ├─ wall
- ├─ social
- ├─ single
-
+├─ wall
+├─ social
+└─ single
 
 Public
 
@@ -237,4 +247,4 @@ MIT License
 💬 Feedback
 
 Testimonia is built with real-world usage in mind.
-If you’re using it (or planning to), your feedback truly matters.
+If you’re using it (or planning to), your feedback truly matters ❤️
