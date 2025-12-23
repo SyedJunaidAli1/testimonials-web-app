@@ -104,7 +104,7 @@ Show trusted user faces with a short message like:
 
 🚀 Getting Started
 1️⃣ Clone the repository
-git clone https://github.com/your-username/testimonia.git
+git clone https://github.com/SyedJunaidAli1/Testimonia.git
 cd testimonia
 
 2️⃣ Install dependencies
