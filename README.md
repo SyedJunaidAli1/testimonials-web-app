@@ -5,6 +5,7 @@ Testimonia is an open-source platform to collect, manage, and showcase testimoni
 Create branded testimonial pages, collect feedback through a shareable link, moderate responses, and embed testimonials anywhere on your website using clean, script-free widgets.
 
 ## ✨ Features
+
 ## 🧩 Spaces
 
 · Create multiple spaces for different products or projects
@@ -13,7 +14,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Enable or disable spaces instantly
 
- ## 📝 Testimonial Collection
+## 📝 Testimonial Collection
 
 · Share a public link to collect testimonials
 
@@ -21,21 +22,21 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Optional fields:
 
-   · Name
+· Name
 
-   · Email
+· Email
 
-   · Title / company
+· Title / company
 
-   · Social link
+· Social link
 
-   · Address
+· Address
 
-   · Star rating
+· Star rating
 
-   · Image upload support
+· Image upload support
 
- ## ✅ Moderation
+## ✅ Moderation
 
 · Approve or reject testimonials
 
@@ -43,7 +44,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Disable testimonials without deleting them
 
- ## 💌 Email Requests
+## 💌 Email Requests
 
 · Send testimonial requests via email
 
@@ -88,6 +89,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 · Cloudinary (image uploads)
 
 ## 🖼️ Widgets Preview
+
 ## 🟦 Wall of Love
 
 Display multiple testimonials in a beautiful scrolling or grid layout.
@@ -102,12 +104,16 @@ Show trusted user faces with a short message like:
 
 “Trusted by 1,000+ users worldwide”
 
-### 🚀 Getting Started
-1️⃣ Clone the repository
+## 🚀 Getting Started
+
+## 1️⃣ Clone the repository
+
+```
 git clone https://github.com/SyedJunaidAli1/Testimonia.git
 cd testimonia
+```
 
-2️⃣ Install dependencies
+## 2️⃣ Install dependencies
 
 bun install
 
@@ -115,79 +121,93 @@ or
 
 npm install
 
+```
+
 3️⃣ Environment variables
 
 Create a .env file:
 
 ## Database
 
+```
+
 DATABASE_URL=
 
+```
+
 ## Better Auth
+
+```
 
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=http://localhost:3000
 
+```
+
 ## Public base URL
+
+```
 
 NEXT_PUBLIC_SELF_URL=http://localhost:3000
 
+```
+
 ## Resend
 
-RESEND_API_KEY=
+```
+
+RESEND_API_KEY=```
 
 ## Cloudinary
+
+````
 
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 
+```
 ## Google OAuth
+
+```
 
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 
+```
+
 4️⃣ Run the app
+```
+
 bun dev
 
 or
 
 npm run dev
 
-📦 Project Structure
+```
+
+##📦 Project Structure
+
+```
+
 app/
-├─ (auth)
-├─ (dashboard)
-├─ (landing)
-├─ (otherroutes)
-├─ (products)/products/[slug]
-├─ api/auth/[...all]
-├─ components
-├─ embed
-├─ Embla
-├─ icons
-├─ queries
-├─ globals.css
-├─ layout.tsx
-└─ page.tsx
+├─ (auth) # authentication routes
+├─ (dashboard) # authenticated user dashboard
+├─ (landing) # marketing & SEO pages
+├─ (otherroutes) # terms, privacy, about, contact
+├─ (products)/products/[slug] # space-specific routes
+├─ api/auth/[...all] # authentication API routes
+├─ components # reusable UI components
+├─ embed # embed routes
+├─ Embla # carousel library
+├─ icons # SVG icons
+├─ queries # tanstack queries
+├─ globals.css # global styles
+├─ layout.tsx # layout component
+└─ page.tsx # root page component
 
-Route Groups
-
-(auth) → login, signup, reset password
-
-(dashboard) → authenticated user dashboard
-
-(landing) → marketing & SEO pages
-
-(otherroutes) → terms, privacy, about, contact
-
-(products)/products/[slug] → space-specific routes
-
-📁 Embed Routes
-embed/
-├─ wall
-├─ social
-└─ single
+```
 
 Public
 
@@ -248,3 +268,5 @@ MIT License
 
 Testimonia is built with real-world usage in mind.
 If you’re using it (or planning to), your feedback truly matters ❤️
+```
+````
