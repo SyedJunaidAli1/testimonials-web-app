@@ -115,12 +115,10 @@ cd testimonia
 
 ## 2️⃣ Install dependencies
 
+```
 bun install
-
 or
-
 npm install
-
 ```
 
 3️⃣ Environment variables
@@ -130,67 +128,54 @@ Create a .env file:
 ## Database
 
 ```
-
 DATABASE_URL=
-
 ```
 
 ## Better Auth
 
 ```
-
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=http://localhost:3000
-
 ```
 
 ## Public base URL
 
 ```
-
 NEXT_PUBLIC_SELF_URL=http://localhost:3000
-
 ```
 
 ## Resend
 
 ```
-
-RESEND_API_KEY=```
+RESEND_API_KEY=
+```
 
 ## Cloudinary
 
-````
-
+```
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
-
 ```
+
 ## Google OAuth
 
 ```
-
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
-
 ```
 
 4️⃣ Run the app
+
 ```
-
 bun dev
-
 or
-
 npm run dev
-
 ```
 
 ##📦 Project Structure
 
 ```
-
 app/
 ├─ (auth) # authentication routes
 ├─ (dashboard) # authenticated user dashboard
@@ -206,7 +191,6 @@ app/
 ├─ globals.css # global styles
 ├─ layout.tsx # layout component
 └─ page.tsx # root page component
-
 ```
 
 Public
@@ -267,6 +251,4 @@ MIT License
 ## 💬 Feedback
 
 Testimonia is built with real-world usage in mind.
-If you’re using it (or planning to), your feedback truly matters ❤️
-```
-````
+If you’re using it (or planning to), your feedback truly matters ❤
