@@ -1,11 +1,11 @@
-Testimonia
+# Testimonia
 
 Testimonia is an open-source platform to collect, manage, and showcase testimonials from your users — all in one place.
 
 Create branded testimonial pages, collect feedback through a shareable link, moderate responses, and embed testimonials anywhere on your website using clean, script-free widgets.
 
-✨ Features
-🧩 Spaces
+## ✨ Features
+## 🧩 Spaces
 
 · Create multiple spaces for different products or projects
 
@@ -13,7 +13,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Enable or disable spaces instantly
 
-📝 Testimonial Collection
+ ## 📝 Testimonial Collection
 
 · Share a public link to collect testimonials
 
@@ -35,7 +35,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
    · Image upload support
 
-✅ Moderation
+ ## ✅ Moderation
 
 · Approve or reject testimonials
 
@@ -43,7 +43,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Disable testimonials without deleting them
 
-💌 Email Requests
+ ## 💌 Email Requests
 
 · Send testimonial requests via email
 
@@ -51,7 +51,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Built-in password reset & email verification emails
 
-🧱 Embed Widgets
+## 🧱 Embed Widgets
 
 · Wall of Love
 
@@ -65,7 +65,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Safe to embed anywhere
 
-🔐 Authentication
+## 🔐 Authentication
 
 · Email + password authentication (BetterAuth)
 
@@ -73,7 +73,7 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Secure session handling
 
-⚡ Modern Stack
+## ⚡ Modern Stack
 
 · Next.js App Router
 
@@ -87,22 +87,22 @@ Create branded testimonial pages, collect feedback through a shareable link, mod
 
 · Cloudinary (image uploads)
 
-🖼️ Widgets Preview
-🟦 Wall of Love
+## 🖼️ Widgets Preview
+## 🟦 Wall of Love
 
 Display multiple testimonials in a beautiful scrolling or grid layout.
 
-⭐ Single Testimonial
+## ⭐ Single Testimonial
 
 Embed a single testimonial anywhere on your site.
 
-👥 Social Proof Avatars
+## 👥 Social Proof Avatars
 
 Show trusted user faces with a short message like:
 
 “Trusted by 1,000+ users worldwide”
 
-🚀 Getting Started
+### 🚀 Getting Started
 1️⃣ Clone the repository
 git clone https://github.com/SyedJunaidAli1/Testimonia.git
 cd testimonia
@@ -119,30 +119,30 @@ npm install
 
 Create a .env file:
 
-# Database
+## Database
 
 DATABASE_URL=
 
-# Better Auth
+## Better Auth
 
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=http://localhost:3000
 
-# Public base URL
+## Public base URL
 
 NEXT_PUBLIC_SELF_URL=http://localhost:3000
 
-# Resend
+## Resend
 
 RESEND_API_KEY=
 
-# Cloudinary
+## Cloudinary
 
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 
-# Google OAuth
+## Google OAuth
 
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
@@ -197,7 +197,7 @@ No script injection
 
 Automatically respects space.disabled
 
-🔒 Privacy & Security
+## 🔒 Privacy & Security
 
 We do not sell or share user data
 
@@ -209,7 +209,7 @@ Passwords are securely handled
 
 Tokens expire automatically
 
-🧪 Status
+## 🧪 Status
 
 Testimonia is actively developed and evolving.
 Breaking changes may occur in early versions.
@@ -240,11 +240,11 @@ Submit a PR with a clear description
 
 Found a bug or have an idea? Open an issue.
 
-📄 License
+## 📄 License
 
 MIT License
 
-💬 Feedback
+## 💬 Feedback
 
 Testimonia is built with real-world usage in mind.
 If you’re using it (or planning to), your feedback truly matters ❤️
